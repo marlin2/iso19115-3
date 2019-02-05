@@ -481,9 +481,9 @@
 			</tab>
 			-->
 
-      <tab id="acquisitionInfo" mode="flat" displayIfRecord="count(/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialRepresentationType/mcc:MD_SpatialRepresentationTypeCode[@codeListValue='grid']) > 0">
+      <tab id="acquisitionInfo" mode="flat" displayIfRecord="count(mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialRepresentationType/mcc:MD_SpatialRepresentationTypeCode[@codeListValue='grid']) > 0">
         <section name=" ">
-          <field xpath="/mdb:MD_Metadata/mdb:acquisitionInfo"/>
+          <field xpath="/mdb:MD_Metadata/mdb:acquisitionInformation"/>
 				</section>
 			</tab>
          

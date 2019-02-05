@@ -5,6 +5,7 @@
   xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
   xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
   xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
+  xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/1.0"
   xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
   xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/1.0"
   xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
@@ -36,7 +37,7 @@
       </mdb:name>
     </mdb:MD_MetadataScope>
   </mdb:metadataScope>
-	<mdb:contact xlink:href="local://subtemplate?uuid=urn:delwp-contacts:11&amp;process=cit:role/cit:CI_RoleCode/@codeListValue~author"/>
+	<mdb:contact xlink:href="local://xml.metadata.get?uuid=urn:delwp-contacts:11&amp;process=cit:role/cit:CI_RoleCode/@codeListValue~author"/>
   <mdb:metadataStandard>
     <cit:CI_Citation>
       <cit:title>
@@ -84,8 +85,10 @@
                    <gco:CharacterString>Link to be added by administrator</gco:CharacterString>
                 </mcc:code>
                 <mcc:codeSpace>
-                   <gco:CharacterString>delwp-dataSetURI</gco:CharacterString>                                                                                                  </mcc:codeSpace>
-          </mcc:MD_Identifier>
+                   <gco:CharacterString>delwp-dataSetURI</gco:CharacterString>
+                </mcc:codeSpace>
+             </mcc:MD_Identifier>
+          </cit:identifier>
 		<cit:series>
 			<cit:CI_Series>
         <!-- Remove name field until picklist can be applied with it 
@@ -108,7 +111,7 @@
       <mri:status>
         <mcc:MD_ProgressCode codeList="codeListLocation#MD_ProgressCode" codeListValue=""/>
       </mri:status>
-			<mri:pointOfContact xlink:href="local://subtemplate?uuid=urn:delwp-contacts:11&amp;process=cit:role/cit:CI_RoleCode/@codeListValue~pointOfContact"/>
+			<mri:pointOfContact xlink:href="local://xml.metadata.get?uuid=urn:delwp-contacts:11&amp;process=cit:role/cit:CI_RoleCode/@codeListValue~pointOfContact"/>
       <mri:spatialRepresentationType>
         <mcc:MD_SpatialRepresentationTypeCode codeList="codeListLocation#MD_SpatialRepresentationTypeCode"
           codeListValue="grid"/>

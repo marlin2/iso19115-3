@@ -31,7 +31,7 @@
   <metadataConstraints>Md. constraints</metadataConstraints>
   <metadataMaintenance>Md. maintenance</metadataMaintenance>
   <applicationSchemaInfo>Schema info</applicationSchemaInfo>
-  <acquisitionInformation>Acquisition info</acquisitionInformation>
+  <acquisitionInfo>Acquisition Info</acquisitionInfo>
 
 
   <add-resource-id>Compute resource identifier</add-resource-id>

@@ -17,7 +17,7 @@
       </mdb:name>
     </mdb:MD_MetadataScope>
   </mdb:metadataScope>
-	<mdb:contact xlink:href="local://subtemplate?uuid=urn:delwp-contacts:11&amp;process=cit:role/cit:CI_RoleCode/@codeListValue~author"/>
+	<mdb:contact xlink:href="local://xml.metadata.get?uuid=urn:delwp-contacts:11&amp;process=cit:role/cit:CI_RoleCode/@codeListValue~author"/>
 	<mdb:metadataStandard>
     <cit:CI_Citation>
       <cit:title>
@@ -64,7 +64,7 @@
       <mri:abstract>
         <gco:CharacterString></gco:CharacterString>
       </mri:abstract>
-			<mri:pointOfContact xlink:href="local://subtemplate?uuid=urn:delwp-contacts:11&amp;process=cit:role/cit:CI_RoleCode/@codeListValue~pointOfContact"/>
+			<mri:pointOfContact xlink:href="local://xml.metadata.get?uuid=urn:delwp-contacts:11&amp;process=cit:role/cit:CI_RoleCode/@codeListValue~pointOfContact"/>
       <mri:topicCategory>
         <mri:MD_TopicCategoryCode>geoscientificInformation</mri:MD_TopicCategoryCode>
       </mri:topicCategory>
