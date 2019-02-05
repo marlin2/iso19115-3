@@ -64,6 +64,7 @@
     <xsl:param name="labels" select="$labels" required="no"/>
 
     <xsl:variable name="name" select="concat(@prefix, ':', @name)"/>
+    <xsl:message>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS <xsl:copy-of select="$viewConfig"/></xsl:message>
     <xsl:variable name="flatModeException"
                   select="gn-fn-metadata:isFieldFlatModeException($viewConfig, $name)"/>
 
