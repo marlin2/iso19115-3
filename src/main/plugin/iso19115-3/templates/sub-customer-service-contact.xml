@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cit:CI_Responsibility xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
-                       xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/1.0"
+                       xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
                        uuid="urn:delwp-contacts:11"
                        title="Contact: DELWP Customer Service">
    <cit:role>

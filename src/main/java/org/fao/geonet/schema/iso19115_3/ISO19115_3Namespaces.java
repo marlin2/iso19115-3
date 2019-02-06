@@ -11,7 +11,7 @@ public class ISO19115_3Namespaces {
                     "http://standards.iso.org/iso/19115/-3/gco/1.0");
     public static final Namespace MDB =
             Namespace.getNamespace("mdb",
-                    "http://standards.iso.org/iso/19115/-3/mdb/1.0");
+                    "http://standards.iso.org/iso/19115/-3/mdb/2.0");
     public static final Namespace MRI =
             Namespace.getNamespace("mri",
                     "http://standards.iso.org/iso/19115/-3/mri/1.0");
@@ -23,10 +23,10 @@ public class ISO19115_3Namespaces {
             "http://standards.iso.org/iso/19115/-3/gex/1.0");
     public static final Namespace MRC =
             Namespace.getNamespace("mrc",
-                    "http://standards.iso.org/iso/19115/-3/mrc/1.0");
+                    "http://standards.iso.org/iso/19115/-3/mrc/2.0");
     public static final Namespace MRL =
             Namespace.getNamespace("mrl",
-                    "http://standards.iso.org/iso/19115/-3/mrl/1.0");
+                    "http://standards.iso.org/iso/19115/-3/mrl/2.0");
     public static final Namespace LAN =
             Namespace.getNamespace("lan",
                     "http://standards.iso.org/iso/19115/-3/lan/1.0");

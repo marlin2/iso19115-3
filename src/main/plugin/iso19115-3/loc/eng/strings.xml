@@ -28,10 +28,10 @@
   <referenceSystemInfo>Ref. system</referenceSystemInfo>
   <contentInfo>Content</contentInfo>
   <portrayalCatalogueInfo>Portrayal</portrayalCatalogueInfo>
-  <metadataConstraints>Md. constraints</metadataConstraints>
-  <metadataMaintenance>Md. maintenance</metadataMaintenance>
+  <metadataMaintenance>Metadata Maintenance</metadataMaintenance>
   <applicationSchemaInfo>Schema info</applicationSchemaInfo>
   <acquisitionInfo>Acquisition Info</acquisitionInfo>
+  <acquisitionInformation>Acquisition Info</acquisitionInformation>
 
 
   <add-resource-id>Compute resource identifier</add-resource-id>

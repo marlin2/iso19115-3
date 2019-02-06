@@ -5,7 +5,7 @@
     xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
     xmlns:gml="http://www.opengis.net/gml/3.2" 
     xmlns:xlink="http://www.w3.org/1999/xlink" 
-    xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0"
+    xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0"
     xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
     xmlns:geonet="http://www.fao.org/geonetwork" 
     xmlns:exslt="http://exslt.org/common" 

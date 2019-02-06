@@ -3,7 +3,7 @@
   xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
   xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
   xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
-  xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0">
+  xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0">
   
   <xsl:template match="mdb:MD_Metadata|*[contains(@gco:isoType, 'MD_Metadata')]">
     <thumbnail>

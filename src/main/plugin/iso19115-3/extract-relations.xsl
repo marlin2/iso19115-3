@@ -10,11 +10,11 @@
   xmlns:gmx="http://standards.iso.org/iso/19115/-3/gmx"
   xmlns:gn="http://www.fao.org/geonetwork"
   xmlns:gn-fn-iso19115-3="http://geonetwork-opensource.org/xsl/functions/profiles/iso19115-3"
-  xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0"
+  xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
   xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
   xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
   xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
-  xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/1.0"
+  xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
   exclude-result-prefixes="#all" >
 
 
