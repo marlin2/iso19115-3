@@ -3,8 +3,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://geonetwork-opensource.org/schemas/schema-ident http://geonetwork-opensource.org/schemas/schema-ident/schema-ident.xsd">
   <name>iso19115-3</name>
-  <id>73928c1f-6b15-422e-8209-1fb9ee96aa62</id>
-  <version>1.0</version>
+  <id>00c26e3d-560a-49e8-9d10-49705b6ac863</id>
+  <version>2.0</version>
   <appMinorVersionSupported>3.4.0</appMinorVersionSupported>
   <title xml:lang="en">Geographic information &#45;&#45; Metadata</title>
   <title xml:lang="fr">Information géographique &#45;&#45; Métadonnées</title>
