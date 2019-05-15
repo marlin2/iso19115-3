@@ -9,6 +9,7 @@
     <!-- Namespaces that include concepts outside of metadata -->
     <!-- Catalog (ISO 19115-3) -->
     <xsl:namespace name="cat" select="'http://standards.iso.org/iso/19115/-3/cat/1.0'"/>
+    <xsl:namespace name="gfc" select="'http://standards.iso.org/iso/19110/gfc/1.1'"/>
     <!-- Citation (ISO 19115-3) -->
     <xsl:namespace name="cit" select="'http://standards.iso.org/iso/19115/-3/cit/2.0'"/>
     <!-- Geospatial Common eXtension (ISO 19115-3) -->
@@ -26,13 +27,13 @@
     <!-- Metadata for COnstraints (ISO 19115-3) -->
     <xsl:namespace name="mco" select="'http://standards.iso.org/iso/19115/-3/mco/1.0'"/>
     <!-- MetaData Application (ISO 19115-3) -->
-    <xsl:namespace name="mda" select="'http://standards.iso.org/iso/19115/-3/mda/1.0'"/>
+    <xsl:namespace name="mda" select="'http://standards.iso.org/iso/19115/-3/mda/2.0'"/>
     <!-- MetaDataBase (ISO 19115-3) -->
     <xsl:namespace name="mdb" select="'http://standards.iso.org/iso/19115/-3/mdb/2.0'"/>
     <!-- Metadata for Data and Services (ISO 19115-3) -->
-    <xsl:namespace name="mds" select="'http://standards.iso.org/iso/19115/-3/mds/1.0'"/>
+    <xsl:namespace name="mds" select="'http://standards.iso.org/iso/19115/-3/mds/2.0'"/>
     <!-- Metadata based Data Transfer (ISO 19115-3) -->
-    <xsl:namespace name="mdt" select="'http://standards.iso.org/iso/19115/-3/mdt/1.0'"/>
+    <xsl:namespace name="mdt" select="'http://standards.iso.org/iso/19115/-3/mdt/2.0'"/>
     <!-- Metadata for EXtensions (ISO 19115-3) -->
     <xsl:namespace name="mex" select="'http://standards.iso.org/iso/19115/-3/mex/1.0'"/>
     <!-- Metadata for Maintenance Information (ISO 19115-3) -->
@@ -61,5 +62,6 @@
     <!-- external namespaces -->
     <xsl:namespace name="gml" select="'http://www.opengis.net/gml/3.2'"/>
     <xsl:namespace name="xlink" select="'http://www.w3.org/1999/xlink'"/>
+    <xsl:namespace name="delwp" select="'https://github.com/geonetwork-delwp/iso19115-3.2018'"/>
   </xsl:template>
 </xsl:stylesheet>

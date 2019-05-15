@@ -40,7 +40,7 @@
 
 
   <xsl:variable name="mainLang"
-                select="/mdb:MD_Metadata/mdb:defaultLocale/*/lan:language/*/@codeListValue"
+                select="if (/mdb:MD_Metadata/mdb:defaultLocale/*/lan:language/*/@codeListValue) then /mdb:MD_Metadata/mdb:defaultLocale/*/lan:language/*/@codeListValue else 'eng'"
                 as="xs:string"/>
 
   <xsl:variable name="useOnlyPTFreeText"
@@ -236,11 +236,13 @@
                 </cit:applicationProfile>
               </xsl:if>
 
-              <xsl:if test="normalize-space($name) != ''">
-                <cit:name>
-                  <xsl:copy-of select="gn-fn-iso19115-3:fillTextElement($name, $mainLang, $useOnlyPTFreeText)"/>
-                </cit:name>
-              </xsl:if>
+              <!-- if no name supplied, then get the last part of the 
+                   url path -->
+              <xsl:variable name="defaultName" select="if (normalize-space($name)='') then tokenize($url,'/')[last()] else $name"/>
+
+              <cit:name>
+                <xsl:copy-of select="gn-fn-iso19115-3:fillTextElement($defaultName, $mainLang, $useOnlyPTFreeText)"/>
+              </cit:name>
 
               <xsl:if test="$desc != ''">
                 <cit:description>
