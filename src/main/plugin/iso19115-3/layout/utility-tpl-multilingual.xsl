@@ -4,7 +4,7 @@
   xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
   xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
   xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
-                xmlns:delwp="https://github.com/geonetwork-delwp/iso19115-3.2018"
+                xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
   xmlns:gn="http://www.fao.org/geonetwork"
   xmlns:xslutil="java:org.fao.geonet.util.XslUtil"
   exclude-result-prefixes="#all">

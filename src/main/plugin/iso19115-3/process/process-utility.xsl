@@ -25,7 +25,7 @@
                 xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
                 xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
-                xmlns:delwp="https://github.com/geonetwork-delwp/iso19115-3.2018"
+                xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
                 xmlns:gml="http://www.opengis.net/gml/3.2"
                 xmlns:gn="http://www.fao.org/geonetwork"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
