@@ -352,7 +352,8 @@
           <xsl:apply-templates select="gmd:resourceFormat" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:descriptiveKeywords" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:resourceSpecificUsage" mode="from19139to19115-3"/>
-          <xsl:apply-templates select="gmd:resourceConstraints" mode="from19139to19115-3"/>
+          <xsl:apply-templates select="gmd:resourceConstraints[not(mcpold:MD_Commons)]" mode="from19139to19115-3"/>
+          <xsl:apply-templates select="gmd:resourceConstraints[mcpold:MD_Commons]" mode="mcpcommons"/>
           <xsl:apply-templates select="gmd:aggregationInfo" mode="from19139to19115-3"/>
           <xsl:call-template name="collectiveTitle"/>
           <xsl:apply-templates select="gmd:language" mode="from19139to19115-3"/>
@@ -665,6 +666,8 @@
   </xsl:template>
   <xsl:include href="defaults.xsl"/>
   <xsl:include href="mcpcontacts.xsl"/>
+  <xsl:include href="mcpcommons.xsl"/>
+
   <!--
     Empty High-Priority Templates to prevent
     independent actions on these elements
