@@ -11,6 +11,7 @@
   xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
   xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mai="http://standards.iso.org/iso/19115/-3/mai/1.0"
   xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:mcpold="http://schemas.aodn.org.au/mcp-2.0"
   xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" exclude-result-prefixes="#all">
   <xsl:import href="../utility/multiLingualCharacterStrings.xsl"/>
   <xsl:import href="../utility/dateTime.xsl"/>
@@ -232,6 +233,32 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  <xsl:template match="mcpold:revisionDate" priority="5" mode="from19139to19115-3">
+    <!--
+      revision is changed into a CI_Date that includes a dateType
+    -->
+    <xsl:choose>
+      <xsl:when test="@*[local-name()='nilReason']">
+        <xsl:element name="mdb:dateInfo">
+          <xsl:attribute name="gco:nilReason" select="@*[local-name()='nilReason']"/>
+        </xsl:element>
+      </xsl:when>
+      <xsl:otherwise>
+        <mdb:dateInfo>
+          <cit:CI_Date>
+            <cit:date>
+              <xsl:call-template name="writeDateTime"/>
+            </cit:date>
+            <xsl:call-template name="writeCodelistElement">
+              <xsl:with-param name="elementName" select="'cit:dateType'"/>
+              <xsl:with-param name="codeListName" select="'cit:CI_DateTypeCode'"/>
+              <xsl:with-param name="codeListValue" select="'revision'"/>
+            </xsl:call-template>
+          </cit:CI_Date>
+        </mdb:dateInfo>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
   <xsl:template match="gmd:metadataStandardName" priority="5" mode="from19139to19115-3">
     <!--
       metadataStandardName and gmd:metadataStandardVersion are combined into a CI_Citation
@@ -309,6 +336,7 @@
               <xsl:with-param name="codeListName" select="'mcc:MD_ProgressCode'"/>
             </xsl:call-template>
           <xsl:apply-templates select="gmd:pointOfContact" mode="from19139to19115-3"/>
+          <xsl:apply-templates select="mcpold:resourceContactInfo" mode="from19139to19115-3"/>
             <xsl:call-template name="writeCodelistElement">
               <xsl:with-param name="elementName" select="'mri:spatialRepresentationType'"/>
               <xsl:with-param name="codeListName" select="'mcc:MD_SpatialRepresentationTypeCode'"/>
@@ -636,6 +664,7 @@
     </xsl:element>
   </xsl:template>
   <xsl:include href="defaults.xsl"/>
+  <xsl:include href="mcpcontacts.xsl"/>
   <!--
     Empty High-Priority Templates to prevent
     independent actions on these elements
