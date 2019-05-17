@@ -87,9 +87,9 @@
           </cit:CI_Citation>
         </mco:reference>
         <xsl:if test="*//mcpold:attributionConstraints">
-          <mco:useConstraints>
+          <mco:otherConstraints>
             <gco:CharacterString><xsl:value-of select="*//mcpold:attributionConstraints/gcoold:CharacterString"/></gco:CharacterString>
-          </mco:useConstraints>
+          </mco:otherConstraints>
         </xsl:if>
       </mco:MD_LegalConstraints>
     </mri:resourceConstraints>

@@ -316,7 +316,7 @@
           <xsl:call-template name="getNamespacePrefix"/>
         </xsl:variable>
         <xsl:element name="{concat($nameSpacePrefix,':',local-name(.))}">
-          <xsl:apply-templates select="@*" mode="from19139to19115-3"/>
+          <xsl:apply-templates select="@*[local-name()!='isoType']" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:citation" mode="from19139to19115-3"/>
           <xsl:call-template name="writeCharacterStringElement">
             <xsl:with-param name="elementName" select="'mri:abstract'"/>
