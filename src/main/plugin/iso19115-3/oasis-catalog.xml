@@ -55,8 +55,8 @@
   <uri name="http://schemas.opengis.net/gml/3.2.1/gml.xsd"
        uri="schema/others/ISO19136/gml.xsd"/>
 
-  <uri name="https://github.com/geonetwork-delwp/iso19115-3.2018"
-       uri="schema/delwp/delwp.xsd"/>
+  <uri name="http://schemas.aodn.org.au/mcp-3.0"
+       uri="schema/others/mcpExtensions.xsd"/>
 
 <!-- older -->
 

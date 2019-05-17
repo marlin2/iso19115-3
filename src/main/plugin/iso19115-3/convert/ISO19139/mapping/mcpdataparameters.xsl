@@ -31,7 +31,7 @@
                 xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0"
                 xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0"
                 xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0"
-                xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/1.0"
+                xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0"
                 xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
                 xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
                 xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
@@ -54,16 +54,18 @@
           <mrc:MD_AttributeGroup>
             <mrc:contentType>
               <mrc:MD_CoverageContentTypeCode codeList='http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#MD_CoverageContentTypeCode' codeListValue='physicalMeasurement'/>
+            </mrc:contentType>
+            <xsl:for-each select="*/mcpold:dataParameter">
               <mrc:attribute>
                 <mrc:MD_SampleDimension>
                   <mrc:otherProperty>
-                    <gco:Record xsi:type="mcp:MD_DataParameters_PropertyType">
-                      <xsl:apply-templates select="*/mcpold:dataParameter" mode="mcpdp"/>
+                    <gco:Record xsi:type="mcp:DP_DataParameter_PropertyType">
+                      <xsl:apply-templates select="mcpold:DP_DataParameter" mode="mcpdp"/>
                     </gco:Record>
                   </mrc:otherProperty>
                 </mrc:MD_SampleDimension>
               </mrc:attribute>
-            </mrc:contentType>
+            </xsl:for-each>
           </mrc:MD_AttributeGroup>
         </mrc:attributeGroup> 
       </mrc:MD_CoverageDescription>
@@ -73,8 +75,7 @@
   <xsl:template match="mcpold:*" mode="mcpdp">
     <xsl:variable name="localname" select="local-name()"/>
     <xsl:element name="{concat('mcp:',$localname)}">
-      <xsl:copy-of select="@*"/>
-      <xsl:apply-templates select="*" mode="mcpdp"/>
+      <xsl:apply-templates select="@*|node()" mode="mcpdp"/>
     </xsl:element>
   </xsl:template>
 
@@ -91,10 +92,16 @@
     </xsl:element>
   </xsl:template>
 
-  <xsl:template match="*" mode="mcpdp">
+  <xsl:template match="@gcoold:*" mode="mcpdp">
+    <xsl:variable name="localname" select="local-name()"/>
+    <xsl:attribute name="{concat('gco:',$localname)}">
+      <xsl:value-of select="."/>
+    </xsl:attribute>
+  </xsl:template>
+
+  <xsl:template match="@*|node()" mode="mcpdp">
     <xsl:copy>
-      <xsl:copy-of select="@*"/>
-      <xsl:apply-templates select="*" mode="mcpdp"/>
+      <xsl:apply-templates select="@*|node()" mode="mcpdp"/>
     </xsl:copy>
   </xsl:template>
 </xsl:stylesheet>

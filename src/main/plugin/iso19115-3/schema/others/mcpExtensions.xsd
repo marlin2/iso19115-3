@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://schemas.aodn.org.au/mcp-3.0" elementFormDefault="qualified" version="3.0" xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0">
+
+	<xs:import namespace="http://standards.iso.org/iso/19115/-3/gco/1.0" schemaLocation="../standards.iso.org/19115/-3/gco/1.0/gco.xsd"/>
+	<xs:import namespace="http://standards.iso.org/iso/19115/-3/mcc/1.0" schemaLocation="../standards.iso.org/19115/-3/mcc/1.0/mcc.xsd"/>
+
+	<xs:annotation>
+		<xs:documentation>
+This file contains extensions to be used with the ISO19115-3 (2018) schemas.
+The extensions are used in the mdb:contentInfo/mrc:MD_CoverageDescription to 
+add data parameter (or attribute) descriptions from the Marine Community Profile
+3.0 as follows:
+
+<!--
+  <mdb:contentInfo>
+    <mrc:MD_CoverageDescription xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/1.0">
+      <mrc:attributeDescription gco:nilReason="inapplicable" />
+      <mrc:attributeGroup>
+        <mrc:MD_AttributeGroup>
+          <mrc:contentType>
+            <mrc:MD_CoverageContentTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#MD_CoverageContentTypeCode" codeListValue="physicalMeasurement" />
+            <mrc:attribute>
+              <mrc:MD_SampleDimension>
+                <mrc:otherProperty>
+                  <gco:Record xsi:type="mcp:DP_DataParameter_PropertyType">
+                      <mcp:DP_DataParameter>
+                        <mcp:parameterName>
+                          <mcp:DP_Term>
+                            <mcp:term>
+                              <gco:CharacterString>Practical salinity of the water body</gco:CharacterString>
+                            </mcp:term>
+                            <mcp:type>
+                              <mcp:DP_TypeCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#DP_TypeCode" codeListValue="longName" />
+                            </mcp:type>
+                            <mcp:usedInDataset>
+                              <gco:Boolean>false</gco:Boolean>
+                            </mcp:usedInDataset>
+                            <mcp:vocabularyTermURL>
+                              <gco:CharacterString>http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01</gco:CharacterString>
+                            </mcp:vocabularyTermURL>
+                          </mcp:DP_Term>
+                        </mcp:parameterName>
+            ... and so on ...
+                      </mcp:DP_DataParameter>
+                  </gco:Record>
+                </mrc:otherProperty>
+              </mrc:MD_SampleDimension>
+            </mrc:attribute>
+            <mrc:attribute>
+              <mrc:MD_SampleDimension>
+                <mrc:otherProperty>
+                  <gco:Record xsi:type="mcp:DP_DataParameter_PropertyType">
+                      <mcp:DP_DataParameter>
+            ... next data parameter ...
+                      </mcp:DP_DataParameter>
+                    </mcp:dataParameter>
+                  </gco:Record>
+                </mrc:otherProperty>
+              </mrc:MD_SampleDimension>
+            </mrc:attribute>
+          </mrc:contentType>
+        </mrc:MD_AttributeGroup>
+      </mrc:attributeGroup>
+    </mrc:MD_CoverageDescription>
+  </mdb:contentInfo>
+-->
+
+History:
+
+Simon Pigot, January 2008 
+Added Creative Commons as a substitute for gmd:MD_Constraints
+
+Simon Pigot, December 2008
+Added DataParameters to mcp:MD_DataIndentification
+Added Data Commons as a substitute for gmd:MD_Constraints
+
+Craig Jones, May 2010
+Added dataObject to gmd:MD_ScopeCode code list.
+
+Simon Pigot, July 2010
+Reorganise for MCP 1.4
+
+Simon Pigot, March 2013  
+Version 2.0 changes: mcp:taxonomicCoverage and mcp:dataParameter mods
+
+Simon Pigot, July 2017
+Add new CI_Responsibility from ISO19115 revision to allow better re-use
+of organisation and individual contact details around roles - this adds:
+CI_Citation/responsibleParty/CI_Responsibility and
+MD_Metadata/metadataContactInfo/CI_Responsibility
+MD_DataIdentification/resourceContactInfo/CI_Responsibility
+
+Simon Pigot, May 2019
+Remove everything except the mcp:DP_DataParameter_PropertyType (and children)
+Everything else that was in the mcp 2.0 and earlier is now present as 
+default elements in the 19115-3 standard.
+See https://github.com/marlin2/mcp2toiso191152018 for conversion details.
+Change namespace for version 3.0, use -3 2018 namespaces.
+		</xs:documentation>
+	</xs:annotation>
+
+<!-- ====================================================================== -->
+<!-- Data Parameter Definitions -->
+<!-- ====================================================================== -->
+
+	<xs:element name="DP_RelationshipTypeCode" type="gco:CodeListValue_Type" substitutionGroup="gco:CharacterString"/>
+
+	<xs:complexType name="DP_RelationshipTypeCode_PropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="mcp:DP_RelationshipTypeCode"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+
+	<xs:element name="DP_VocabularyRelationship" type="mcp:DP_VocabularyRelationship_Type"/>
+
+	<xs:complexType name="DP_VocabularyRelationship_PropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="mcp:DP_VocabularyRelationship"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+
+	<xs:complexType name="DP_VocabularyRelationship_Type">
+		<xs:annotation>
+			<xs:documentation>Information about relationships to a term in 
+			another vocabulary
+			- the type of relationship between the term and the vocabulary term   
+			- URL of the term from the vocabulary
+			- URL of the definition of the term from the vocabulary
+			- Definition of the term (if not in a definition vocabulary)
+			- URL of the vocabulary
+			- Version of the vocabulary
+			- Citation of the vocabulary
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence minOccurs="1">
+					<xs:element name="relationshipType" type="mcp:DP_RelationshipTypeCode_PropertyType" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="vocabularyTermURL" type="gco:CharacterString_PropertyType" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="vocabularyTermDefinitionURL" type="gco:CharacterString_PropertyType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="vocabularyTermDefinition" type="gco:CharacterString_PropertyType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="vocabularyListURL" type="gco:CharacterString_PropertyType" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="vocabularyListVersion" type="gco:CharacterString_PropertyType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="vocabularyListAuthority" type="mcc:Abstract_Citation_PropertyType" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+<!-- ====================================================================== -->
+
+	<xs:element name="DP_TypeCode" type="gco:CodeListValue_Type" substitutionGroup="gco:CharacterString"/>
+
+	<xs:complexType name="DP_TypeCode_PropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="mcp:DP_TypeCode"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+
+	<xs:element name="DP_Term" type="mcp:DP_Term_Type"/>
+
+	<xs:complexType name="DP_Term_PropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="mcp:DP_Term"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+
+	<xs:complexType name="DP_Term_Type">
+		<xs:annotation>
+			<xs:documentation>Information about a Data Parameter Term - 
+			- the term, 
+			- term type: short name, long name, localSynonym etc     
+			- whether the term is actually used in dataset (boolean), 
+			- relationships between the term and terms in other vocabularies      
+			- local definition (usually used if term is not related to terms in other
+			  vocabularies)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence minOccurs="1">
+					<xs:element name="term" type="gco:CharacterString_PropertyType" minOccurs="1"/>
+					<xs:element name="type" type="mcp:DP_TypeCode_PropertyType" minOccurs="1"/>
+					<xs:element name="usedInDataset" type="gco:Boolean_PropertyType" minOccurs="0"/>
+					<xs:element name="vocabularyRelationship" type="mcp:DP_VocabularyRelationship_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="localDefinition" type="gco:CharacterString_PropertyType" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+<!-- ====================================================================== -->
+
+	<xs:element name="DP_DataParameter" type="mcp:DP_DataParameter_Type"/>
+
+	<xs:complexType name="DP_DataParameter_PropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="mcp:DP_DataParameter"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+
+	<xs:complexType name="DP_DataParameter_Type">
+		<xs:annotation>
+			<xs:documentation>Information about a Data Parameter</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence minOccurs="1">
+					<xs:element name="parameterName" type="mcp:DP_Term_PropertyType" minOccurs="1" maxOccurs="unbounded"/>
+					<xs:element name="parameterUnits" type="mcp:DP_Term_PropertyType" minOccurs="1" maxOccurs="unbounded"/>
+					<xs:element name="parameterMinimumValue" type="gco:CharacterString_PropertyType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="parameterMaximumValue" type="gco:CharacterString_PropertyType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="parameterDescription" type="gco:CharacterString_PropertyType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="parameterDeterminationInstrument" type="mcp:DP_Term_PropertyType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="parameterAnalysisMethod" type="mcp:DP_Term_PropertyType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="platform" type="mcp:DP_Term_PropertyType" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>
