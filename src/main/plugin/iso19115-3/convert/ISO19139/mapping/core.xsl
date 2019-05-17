@@ -346,7 +346,8 @@
           <!-- This is here to handle early adopters of temporalResolution -->
           <xsl:apply-templates select="gmd:temporalResolution" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:topicCategory" mode="from19139to19115-3"/>
-          <xsl:apply-templates select="gmd:extent | srvold:extent" mode="from19139to19115-3"/>
+          <xsl:apply-templates select="gmd:extent[not(child::mcpold:EX_Extent)] | srvold:extent" mode="from19139to19115-3"/>
+          <xsl:apply-templates select="gmd:extent[child::mcpold:EX_Extent]" mode="mcpextent"/>
           <xsl:apply-templates select="gmd:resourceMaintenance" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:graphicOverview" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:resourceFormat" mode="from19139to19115-3"/>
@@ -667,6 +668,7 @@
   <xsl:include href="defaults.xsl"/>
   <xsl:include href="mcpcontacts.xsl"/>
   <xsl:include href="mcpcommons.xsl"/>
+  <xsl:include href="mcpextent.xsl"/>
 
   <!--
     Empty High-Priority Templates to prevent
