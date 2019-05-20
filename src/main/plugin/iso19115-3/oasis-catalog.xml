@@ -180,6 +180,15 @@
   <system systemId="http://schemas.aodn.org.au/mcp-3.0/mcpExtensions.xsd"
           uri="schema/others/mcpExtensions.xsd"/>
 
+  <system systemId="https://schemas.isotc211.org/19157/-2/dqc/1.0/dqc.xsd"
+          uri="schema/standards.iso.org/19157/-2/dqc/1.0/dqc.xsd"/>
+
+  <system systemId="https://schemas.isotc211.org/19135/-2/pre/1.0/pre.xsd"
+          uri="schema/standards.iso.org/19135/-2/pre/1.0/pre.xsd"/>
+
+  <system systemId="https://schemas.isotc211.org/19110/fcc/1.0/fcc.xsd"
+          uri="schema/standards.iso.org/19110/fcc/1.0/fcc.xsd"/>
+
   <system systemId="http://schemas.opengis.net/gml/3.2.1/gml.xsd"
           uri="schema/others/ISO19136/gml.xsd"/>
 
