@@ -265,6 +265,7 @@
     -->
     <mdb:metadataStandard>
       <cit:CI_Citation>
+        <!--
         <xsl:call-template name="writeCharacterStringElement">
           <xsl:with-param name="elementName" select="'cit:title'"/>
           <xsl:with-param name="nodeWithStringToWrite" select="."/>
@@ -273,6 +274,13 @@
           <xsl:with-param name="elementName" select="'cit:edition'"/>
           <xsl:with-param name="nodeWithStringToWrite" select="../gmd:metadataStandardVersion"/>
         </xsl:call-template>
+        -->
+        <cit:title>
+          <gco:CharacterString>Australian Marine Community Profile of ISO 19115:2018</gco:CharacterString>
+        </cit:title>
+        <cit:edition>
+          <gco:CharacterString>3.0</gco:CharacterString>
+        </cit:edition>
       </cit:CI_Citation>
     </mdb:metadataStandard>
   </xsl:template>
@@ -677,6 +685,8 @@
   <xsl:template match="gmd:hierarchyLevelName" priority="5" mode="from19139to19115-3"/>
   <xsl:template match="gmd:metadataStandardVersion" priority="5" mode="from19139to19115-3"/>
   <xsl:template match="gmd:dataSetURI" priority="5" mode="from19139to19115-3"/>
+  <!-- the following is handled by mdb:metadataLinkage so we need to exclude it -->
+  <xsl:template match="gmd:onLine[descendant::gmd:protocol[gcoold:CharacterString='WWW:LINK-1.0-http--metadata-URL']]" priority="5" mode="from19139to19115-3"/>
   <!-- Match MD_ and MI_CoverageDescription -->
   <xsl:template match="gmd:contentInfo/gmd:MD_CoverageDescription/gmd:attributeDescription | gmd:contentInfo/gmi:MI_CoverageDescription/gmd:attributeDescription" priority="5" mode="from19139to19115-3"/>
   <xsl:template match="gmd:contentInfo/gmi:MI_CoverageDescription/gmi:rangeElementDescription" priority="5" mode="from19139to19115-3"/>

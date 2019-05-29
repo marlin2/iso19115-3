@@ -130,6 +130,7 @@
         <xsl:apply-templates select="mcpold:revisionDate" mode="from19139to19115-3"/>
         <xsl:apply-templates select="gmd:metadataStandardName" mode="from19139to19115-3"/>
         <xsl:apply-templates select="gmd:locale" mode="from19139to19115-3"/>
+        <xsl:apply-templates select="gmd:distributionInfo//gmd:onLine[descendant::gmd:protocol[gcoold:CharacterString='WWW:LINK-1.0-http--metadata-URL']]" mode="mcpmetadatalinkage"/>
         <xsl:apply-templates select="gmd:spatialRepresentationInfo" mode="from19139to19115-3"/>
         <xsl:apply-templates select="gmd:referenceSystemInfo" mode="from19139to19115-3"/>
         <xsl:apply-templates select="gmd:metadataExtensionInfo" mode="from19139to19115-3"/>
@@ -163,6 +164,7 @@
   <xsl:include href="mapping/SRV.xsl"/>
   <xsl:include href="mapping/DQ.xsl"/>
   <xsl:include href="mapping/mcpdataparameters.xsl"/>
+  <xsl:include href="mapping/mcpmetadatalinkage.xsl"/>
 
 
 
