@@ -6,7 +6,7 @@
   <id>4e6a5495-43a6-4e80-a040-0a7b583415b7</id>
   <version>3.0</version>
   <appMinorVersionSupported>3.4.0</appMinorVersionSupported>
-  <title xml:lang="en">Australian Marine Community Profile ISO 19115:2018|Marine Community Profile of ISO 19115:2018</title>
+  <title xml:lang="en">Marine Community Profile ISO 19115:2018 Version 3.0</title>
   <standardUrl xml:lang="en">https://mcp-profile-docs.readthedocs.io/en/stable/</standardUrl>
   <schemaLocation>http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd</schemaLocation>
   <autodetect xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"

@@ -30,8 +30,6 @@
   <portrayalCatalogueInfo>Portrayal</portrayalCatalogueInfo>
   <metadataMaintenance>Metadata Maintenance</metadataMaintenance>
   <applicationSchemaInfo>Schema info</applicationSchemaInfo>
-  <acquisitionInfo>Acquisition Info</acquisitionInfo>
-  <acquisitionInformation>Acquisition Info</acquisitionInformation>
 
 
   <add-resource-id>Compute resource identifier</add-resource-id>
@@ -50,28 +48,42 @@
   <resourceExtents>Extents</resourceExtents>
 
   <resourceQuality>Quality</resourceQuality>
-  <conceptualConsistency>Logical Consistency</conceptualConsistency>
-  <absoluteExternalPositionalAccuracy>Positional Accuracy</absoluteExternalPositionalAccuracy>
-  <nonQuantitativeAttributeCorrectness>Attribute Correctness</nonQuantitativeAttributeCorrectness>
-  <completenessOmission>Completeness</completenessOmission>
+
+  <!-- Added from MCP 2.0 -->
+
+  <beginPosition>Begin</beginPosition>
+  <endPosition>End</endPosition>
+
+  <conceptualConsistency>Quality: Logical Consistency</conceptualConsistency>
+  <absoluteExternalPositionalAccuracy>Quality: Positional Accuracy</absoluteExternalPositionalAccuracy>
+  <nonQuantitativeAttributeAccuracy>Quality: Attribute Accuracy</nonQuantitativeAttributeAccuracy>
+  <completenessOmission>Quality: Completeness</completenessOmission>
   <conformity_title>Title</conformity_title>
   <conformity_date>Date</conformity_date>
   <explanation>Explanation</explanation>
   <pass>Pass</pass>
-  <notEvaluated>Not evaluated</notEvaluated>
 
-  <qualityMeasures>Q. measures</qualityMeasures>
-  <bboxesSection>Geographic coverage</bboxesSection>
-  <overviews>Overviews</overviews>
-  <metadataInXML>XML</metadataInXML>
-  <providedBy>Provided by</providedBy>
-  <shareOnSocialSite>Share on social sites</shareOnSocialSite>
-  <viewMode>Views</viewMode>
-  <linkToPortal>Access to the portal</linkToPortal>
-  <linkToPortal-help>Read here the full details and access to the data.</linkToPortal-help>
-  <citationProposal>Citation proposal</citationProposal>
-  <citationProposal-help>This proposal was automatically generated, check if the metadata authors did not specified custom citation requirements.</citationProposal-help>
-  <associatedResources>Associated resources</associatedResources>
+  <indeterminatePosition>Indeterminate position</indeterminatePosition>
+  <pointOfContact>Contact for the resource</pointOfContact>
+  <metadataPointOfContact>Contact for the metadata</metadataPointOfContact>
+  <organisationName>Organisation name</organisationName>
+  <electronicMailAddress>Email</electronicMailAddress>
+  <role>Role</role>
+  <encoding>Encoding</encoding>
+  <inspireTheme>INSPIRE themes</inspireTheme>
+  <format>Format</format>
+  <format_version>Version</format_version>
+  <spatialResolution>Spatial resolution (scale)</spatialResolution>
+  <spatialDistance>Spatial resolution (distance)</spatialDistance>
+  <accessConstraints>Access constraints</accessConstraints>
+  <useLimitation>Use limitation</useLimitation>
+  <notEvaluated>Not evaluated</notEvaluated>
+  <noPublications>No Publications</noPublications>
+  <add-extent-from-geokeywords>Compute extent from keyword</add-extent-from-geokeywords>
+  <add-extent-from-geokeywordsHelp>Analyze each keyword of type place and add matching extent.</add-extent-from-geokeywordsHelp>
+
+  <resourceContactInfo>Resource Contact</resourceContactInfo>
+  <metadataContactInfo>Metadata Contact</metadataContactInfo>
 
   <!-- new tabs in default mode -->
   <resourceCitation>Citation</resourceCitation>
@@ -85,33 +97,13 @@
   <resourceContact>Resource Contacts</resourceContact>
   <metadataContact>Metadata Contacts</metadataContact>
   <resourceSpatial>Spatial</resourceSpatial>
-  <distribution_name>Name</distribution_name>
-  <distribution_version>Version</distribution_version>
+  <resourceTemporal>Temporal</resourceTemporal>
   <resourceType>Type</resourceType>
-        <resourceLineageTab>Lineage</resourceLineageTab>
-        <resourceFormat>Format (admin only)</resourceFormat>
-        <resourceFormatNoTitle></resourceFormatNoTitle>
-        <distribution>Distribution</distribution>
-
-  <useAssociatedResources><span>Add an online resource for distribution using the "<i class="fa fa-link"></i><i class="icon-external-link"></i>Associated resources" panel at the right hand side of the form</span></useAssociatedResources>
-
-  <!-- gaDatasetURI -->
-  <gaDatasetURI>GA Dataset URI</gaDatasetURI>
-
-  <!-- Service stuff -->
-  <serviceDescription>Description</serviceDescription>
-  <serviceType>Service Type</serviceType>
-  <serviceParameter>Parameter</serviceParameter>
-  <containsOperations>Operations</containsOperations>
-  <operation>Operation</operation>
-  <operatesOn>Operates On</operatesOn>
-  <parameter-name>Name</parameter-name>
-  <parameter-direction>Direction</parameter-direction>
-  <parameter-description>Description</parameter-description>
-  <optionality>Optional?</optionality>
-  <repeatability>Repeatable?</repeatability>
-
-  <useAssociatedResourcesForOperatesOn><span>Select metadata records describing datasets that the service operates on using the "<i class="fa fa-link"></i><i class="icon-external-link"></i>Associated resources" panel at the right hand side of the form. Use the "<i class="fa fa-files-o"></i><i class="icon-external-link"></i>Link to a dataset" menu option.</span></useAssociatedResourcesForOperatesOn>
-
-
+  <resourceLineageTab>Lineage</resourceLineageTab>
+  <distribution>Distribution</distribution>
+  <dataParameters>Parameters</dataParameters>
+  <distributionFormat>Format</distributionFormat>
+  <distributionFormatNoTitle></distributionFormatNoTitle>
+  <publications>Publications</publications>
+  <publicationDetails>Details</publicationDetails>
 </strings>

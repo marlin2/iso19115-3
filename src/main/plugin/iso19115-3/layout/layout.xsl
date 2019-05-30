@@ -37,13 +37,12 @@
   <xsl:include href="layout-custom-fields-date.xsl"/>
   <xsl:include href="layout-custom-fields-contact.xsl"/>
   <xsl:include href="layout-custom-fields-keywords.xsl"/>
-  <!-- <xsl:include href="layout-custom-fields-delwp.xsl"/> -->
 
   <!-- Visit all XML tree recursively -->
   <xsl:template mode="mode-iso19115-3"
                 match="mds:*|mcc:*|mri:*|mrs:*|mrc:*|mrd:*|mco:*|msr:*|lan:*|
-                       gcx:*|gex:*|dqm:*|mdq:*|cit:*|srv:*|gml:*|gts:*|gfc:*|
-                       delwp:*"
+                       gcx:*|gex:*|dqm:*|mdq:*|cit:*|srv:*|gml:*|gts:*|gfc:*
+                       "
                 priority="2">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
