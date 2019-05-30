@@ -407,6 +407,27 @@
               </xsl:if>
             </xsl:if>
           </xsl:if>
+
+          <xsl:choose>
+            <xsl:when test="contains($thesaurusIdentifier,'sourceregister')">
+              <Field name="source" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="contains($thesaurusIdentifier,'surveyregister')">
+              <Field name="survey" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="contains($thesaurusIdentifier,'projectregister')">
+              <Field name="project" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="contains($thesaurusIdentifier,'gcmd_keywords')">
+              <Field name="gcmd" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="contains($thesaurusIdentifier,'awavea-keywords')">
+              <Field name="awavea" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <Field name="otherkeyword" string="{string(.)}" store="true" index="true"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:for-each>
       </xsl:for-each>
 
@@ -584,21 +605,14 @@
         <xsl:variable name="fileName"  select="mcc:fileName/gco:CharacterString"/>
         <xsl:if test="$fileName != ''">
           <xsl:variable name="fileDescr" select="mcc:fileDescription/gco:CharacterString"/>
-          <xsl:choose>
-            <xsl:when test="contains($fileName ,'://')">
-              <xsl:choose>
-                <xsl:when test="string($fileDescr)='thumbnail'">
-                  <Field  name="image" string="{concat('thumbnail|', $fileName)}" store="true" index="false"/>
-                </xsl:when>
-                <xsl:when test="string($fileDescr)='large_thumbnail'">
-                  <Field  name="image" string="{concat('overview|', $fileName)}" store="true" index="false"/>
-                </xsl:when>
-                <xsl:otherwise>
-                  <Field  name="image" string="{concat('unknown|', $fileName)}" store="true" index="false"/>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:when>
-          </xsl:choose>
+          <xsl:if test="contains($fileName ,'://')">
+            <xsl:variable name="thumbnailType"
+                      select="if (position() = 1) then 'thumbnail' else 'overview'"/>
+            <!-- First thumbnail is flagged as thumbnail and could be considered the main one -->
+            <Field name="image"
+                   string="{concat($thumbnailType, '|', $fileName, '|', $fileDescr)}"
+                   store="true" index="false"/>
+          </xsl:if>
         </xsl:if>
       </xsl:for-each>
       <xsl:if test="count(mri:graphicOverview/mcc:MD_BrowseGraphic) = 0">
