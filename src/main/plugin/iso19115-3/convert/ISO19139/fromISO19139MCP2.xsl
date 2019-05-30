@@ -49,6 +49,7 @@
   <xsl:import href="utility/create19115-3Namespaces.xsl"/>
   <xsl:import href="utility/dateTime.xsl"/>
   <xsl:import href="utility/multiLingualCharacterStrings.xsl"/>
+  <xsl:import href="utility/mcpStandardInfo.xsl"/>
 
   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet">
     <xd:desc>
@@ -128,7 +129,8 @@
         <xsl:apply-templates select="mcpold:metadataContactInfo" mode="from19139to19115-3"/>
         <xsl:apply-templates select="gmd:dateStamp" mode="from19139to19115-3"/>
         <xsl:apply-templates select="mcpold:revisionDate" mode="from19139to19115-3"/>
-        <xsl:apply-templates select="gmd:metadataStandardName" mode="from19139to19115-3"/>
+        <!--<xsl:apply-templates select="gmd:metadataStandardName" mode="from19139to19115-3"/>-->
+        <xsl:call-template name="mcpStandardInfo"/>
         <xsl:apply-templates select="gmd:locale" mode="from19139to19115-3"/>
         <xsl:apply-templates select="gmd:distributionInfo//gmd:onLine[descendant::gmd:protocol[gcoold:CharacterString='WWW:LINK-1.0-http--metadata-URL']]" mode="mcpmetadatalinkage"/>
         <xsl:apply-templates select="gmd:spatialRepresentationInfo" mode="from19139to19115-3"/>
