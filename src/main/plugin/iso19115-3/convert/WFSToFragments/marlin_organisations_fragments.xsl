@@ -159,16 +159,26 @@
 				<cit:CI_Contact>
 					<cit:phone>
 						<cit:CI_Telephone>
-							<cit:voice>
+							<cit:number>
 								<xsl:call-template name="doStr">
 									<xsl:with-param name="value" select="app:telephone"/>
 								</xsl:call-template>
-							</cit:voice>
-							<cit:facsimile>
+							</cit:number>
+              <cit:numberType>
+                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
+              </cit:numberType>
+						</cit:CI_Telephone>
+					</cit:phone>
+					<cit:phone>
+						<cit:CI_Telephone>
+							<cit:number>
 								<xsl:call-template name="doStr">
 									<xsl:with-param name="value" select="app:facsimile"/>
 								</xsl:call-template>
-							</cit:facsimile>
+							</cit:number>
+              <cit:numberType>
+                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
+              </cit:numberType>
 						</cit:CI_Telephone>
 					</cit:phone>
 					<cit:address>
