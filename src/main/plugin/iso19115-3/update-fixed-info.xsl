@@ -26,6 +26,30 @@
   <xsl:include href="convert/functions.xsl"/>
   <xsl:include href="layout/utility-fn.xsl"/>
 
+  <xsl:variable name="apiSiteUrl" select="substring(/root/env/siteURL, 1, string-length(/root/env/siteURL)-4)"/>
+
+  <xsl:variable name="codelistloc" select="'http://schemas.aodn.org.au/mcp-3.0/codelists.xml'"/>
+
+
+  <xsl:variable name="mapping" select="document('mcp-equipment/equipmentToDataParamsMapping.xml')"/>
+
+  <!-- The csv layout for each element in the above file is:
+                          1)OA_EQUIPMENT_ID,
+                          2)OA_EQUIPMENT_LABEL,
+                          3)AODN_PLATFORM,
+                          4)Platform IRI,
+                          5)AODN_INSTRUMENT,
+                          6)Instrument IRI,
+                          7)AODN_PARAMETER,
+                          8)Parameter IRI,
+                          9)AODN_UNITS,
+                          10)UNITS IRI
+        NOTE: can be multiple rows for each equipment keyword -->
+
+  <xsl:variable name="equipThesaurus" select="'geonetwork.thesaurus.register.equipment.urn:marlin.csiro.au:Equipment'"/>
+
+  <xsl:variable name="idcContact" select="document('http://marlin-dev.it.csiro.au/geonetwork/srv/eng/subtemplate?uuid=urn:marlin.csiro.au:person:125_person_organisation')"/>
+
   <xsl:variable name="editorConfig"
                 select="document('layout/config-editor.xml')"/>
 
@@ -89,8 +113,52 @@
       <xsl:apply-templates select="mdb:defaultLocale"/>
       <xsl:apply-templates select="mdb:parentMetadata"/>
       <xsl:apply-templates select="mdb:metadataScope"/>
+      <!--
       <xsl:apply-templates select="mdb:contact"/>
-
+      -->
+      <xsl:choose>
+        <!-- If no originator then add current user as originator -->
+        <xsl:when test="/root/env/created">
+          <mdb:contact>
+            <cit:CI_Responsibility>
+              <cit:role>
+                <cit:CI_RoleCode codeList="{concat($codelistloc,'#CI_RoleCode')}" codeListValue="originator">originator</cit:CI_RoleCode>
+              </cit:role>
+              <xsl:call-template name="addCurrentUserAsParty"/>
+            </cit:CI_Responsibility>
+          </mdb:contact>
+          <xsl:call-template name="addIDCAsPointOfContact"/>
+        </xsl:when>
+        <!-- Add current user as processor, then process everything except the 
+             existing processor which will be excluded from the output
+             document - this is to ensure that only the latest user is
+             added as a processor - note: Marlin administrator is excluded from 
+             this role -->
+        <xsl:otherwise>
+          <xsl:choose>
+            <xsl:when test="/root/env/user/details/username!='admin'">
+              <!-- marlin admin does not replace a processor -->
+              <mdb:contact>
+                <cit:CI_Responsibility>
+                  <cit:role>
+                    <cit:CI_RoleCode codeList="{concat($codelistloc,'#CI_RoleCode')}" codeListValue="processor">processor</cit:CI_RoleCode>
+                  </cit:role>
+                  <xsl:call-template name="addCurrentUserAsParty"/>
+                </cit:CI_Responsibility>
+              </mdb:contact>
+              <xsl:call-template name="addIDCAsPointOfContact"/>
+              <!-- copy any other metadata contacts with the exception of processors and 
+                   pointOfContact so we make sure that IDC is point of contact -->
+              <xsl:apply-templates select="mdb:contact[not(cit:CI_Responsibility/cit:role/cit:CI_RoleCode='processor' or cit:CI_Responsibility/cit:role/cit:CI_RoleCode='pointOfContact')]"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <!-- marlin admin does not replace a processor, so add IDC and then grab all mdb:contact except pointOfContact -->
+              <xsl:call-template name="addIDCAsPointOfContact"/>
+              <xsl:apply-templates select="mdb:contact[cit:CI_Responsibility/cit:role/cit:CI_RoleCode!='pointOfContact']"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:otherwise>
+      </xsl:choose>
 
       <xsl:variable name="isCreationDateAvailable"
                     select="mdb:dateInfo/*[cit:dateType/*/@codeListValue = 'creation']"/>
@@ -105,7 +173,7 @@
               <gco:DateTime><xsl:value-of select="/root/env/changeDate"/></gco:DateTime>
             </cit:date>
             <cit:dateType>
-              <cit:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="creation"/>
+              <cit:CI_DateTypeCode codeList="{concat($codelistloc,'#CI_DateTypeCode')}" codeListValue="creation"/>
             </cit:dateType>
           </cit:CI_Date>
         </mdb:dateInfo>
@@ -117,7 +185,7 @@
               <gco:DateTime><xsl:value-of select="/root/env/changeDate"/></gco:DateTime>
             </cit:date>
             <cit:dateType>
-              <cit:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision"/>
+              <cit:CI_DateTypeCode codeList="{concat($codelistloc,'#CI_DateTypeCode')}" codeListValue="revision"/>
             </cit:dateType>
           </cit:CI_Date>
         </mdb:dateInfo>
@@ -137,7 +205,7 @@
                   <gco:DateTime><xsl:value-of select="/root/env/changeDate"/></gco:DateTime>
                 </cit:date>
                 <cit:dateType>
-                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision"/>
+                  <cit:CI_DateTypeCode codeList="{concat($codelistloc,'#CI_DateTypeCode')}" codeListValue="revision"/>
                 </cit:dateType>
               </cit:CI_Date>
             </mdb:dateInfo>
@@ -156,7 +224,7 @@
           <mdb:metadataStandard>
             <cit:CI_Citation>
               <cit:title>
-                <gco:CharacterString>ISO 19115-3</gco:CharacterString>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
               </cit:title>
             </cit:CI_Citation>
           </mdb:metadataStandard>
@@ -187,7 +255,7 @@
             point of truth for the metadata linkage but this
             needs to be language dependant. -->
             <cit:function>
-              <cit:CI_OnLineFunctionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_OnLineFunctionCode"
+              <cit:CI_OnLineFunctionCode codeList="{concat($codelistloc,'#CI_OnLineFunctionCode')}"
                                          codeListValue="completeMetadata"/>
             </cit:function>
           </cit:CI_OnlineResource>
@@ -210,6 +278,39 @@
     </xsl:copy>
   </xsl:template>
 
+  <!-- ================================================================= -->
+
+  <xsl:template name="addIDCAsPointOfContact">
+    <mdb:contact>
+      <cit:CI_Responsibility>
+        <cit:role>
+          <cit:CI_RoleCode codeList="{concat($codelistloc,'#CI_RoleCode')}" codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
+        </cit:role>
+        <cit:party xlink:href="local://xml.metadata.get?uuid=urn:marlin.csiro.au:person:125_person_organisation"/>
+      </cit:CI_Responsibility>
+    </mdb:contact>
+  </xsl:template>
+
+	<!-- ================================================================= -->
+
+  <xsl:template name="addCurrentUserAsParty">
+    <cit:party>
+      <cit:CI_Organisation>
+        <cit:name>
+          <gco:CharacterString><xsl:value-of select="/root/env/user/details/organisation"/></gco:CharacterString>
+        </cit:name>
+        <cit:individual>
+          <cit:CI_Individual>
+            <cit:name>
+              <gco:CharacterString><xsl:value-of select="concat(/root/env/user/details/surname,', ',/root/env/user/details/firstname)"/></gco:CharacterString>
+            </cit:name>
+          </cit:CI_Individual>
+        </cit:individual>
+      </cit:CI_Organisation>
+    </cit:party>
+  </xsl:template>
+
+	<!-- ================================================================= -->
 
   <!-- Update revision date -->
   <xsl:template match="mdb:dateInfo[cit:CI_Date/cit:dateType/cit:CI_DateTypeCode/@codeListValue='lastUpdate']">
@@ -221,7 +322,7 @@
               <gco:DateTime><xsl:value-of select="/root/env/changeDate"/></gco:DateTime>
             </cit:date>
             <cit:dateType>
-              <cit:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="lastUpdate"/>
+              <cit:CI_DateTypeCode codeList="{concat($codelistloc,'#CI_DateTypeCode')}" codeListValue="lastUpdate"/>
             </cit:dateType>
           </cit:CI_Date>
         </xsl:when>
@@ -364,7 +465,7 @@
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
       <xsl:attribute name="codeList">
-        <xsl:value-of select="concat('http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19157_Schemas/resources/codelist/ML_gmxCodelists.xml#',local-name(.))"/>
+        <xsl:value-of select="concat($codelistloc,'#',local-name(.))"/>
       </xsl:attribute>
     </xsl:copy>
   </xsl:template>
@@ -373,7 +474,7 @@
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
       <xsl:attribute name="codeList">
-        <xsl:value-of select="concat('http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#',local-name(.))"/>
+        <xsl:value-of select="concat($codelistloc,'#',local-name(.))"/>
       </xsl:attribute>
     </xsl:copy>
   </xsl:template>
@@ -390,7 +491,7 @@
         <xsl:choose>
           <xsl:when test="not(string(@xlink:href)) or starts-with(@xlink:href, /root/env/siteURL)">
             <xsl:attribute name="xlink:href">
-              <xsl:value-of select="concat(/root/env/siteURL,'csw?service=CSW&amp;request=GetRecordById&amp;version=2.0.2&amp;outputSchema=http://standards.iso.org/iso/19115/-3/gmd&amp;elementSetName=full&amp;id=',@uuidref)"/>
+              <xsl:value-of select="concat(/root/env/siteURL,'csw?service=CSW&amp;request=GetRecordById&amp;version=2.0.2&amp;outputSchema=http://standards.iso.org/iso/19115/-3/mdb&amp;elementSetName=full&amp;id=',@uuidref)"/>
             </xsl:attribute>
           </xsl:when>
           <xsl:otherwise>

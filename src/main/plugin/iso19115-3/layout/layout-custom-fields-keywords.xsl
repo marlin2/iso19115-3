@@ -117,19 +117,27 @@
                   else mri:keyword/*[1]/replace(text(), ',', ',,'), ',')"/>
 
         <!-- Define the list of transformation mode available. -->
+        <!--
         <xsl:variable name="transformations"
                       as="xs:string"
                       select="if ($thesaurusConfig/@transformations != '')
                               then $thesaurusConfig/@transformations
                               else 'to-iso19115-3-keyword,to-iso19115-3-keyword-with-anchor,to-iso19115-3-keyword-as-xlink'"/>
+        -->
+        <!-- override as Marlin only links to keywords from the thesaurus -->
+        <xsl:variable name="transformations" select="'to-iso19115-3-keyword-with-anchor'"/>
 
         <!-- Get current transformation mode based on XML fragement analysis -->
+        <!--
         <xsl:variable name="transformation"
           select="if (parent::node()/@xlink:href)
                   then 'to-iso19115-3-keyword-as-xlink'
                   else if (count(mri:keyword/gmx:Anchor) > 0)
                   then 'to-iso19115-3-keyword-with-anchor'
                   else 'to-iso19115-3-keyword'"/>
+        -->
+        <!-- override as Marlin only links to keywords from the thesaurus -->
+        <xsl:variable name="transformation" select="'to-iso19115-3-keyword-with-anchor'"/>
 
         <xsl:variable name="parentName" select="name(..)"/>
 
@@ -175,6 +183,7 @@
           data-max-tags="{$maxTags}">
         </div>
 
+        <!--
         <xsl:variable name="isTypePlace" select="count(mri:type/mri:MD_KeywordTypeCode[@codeListValue='place']) > 0"/>
         <xsl:if test="$isTypePlace">
           <xsl:call-template name="render-batch-process-button">
@@ -182,6 +191,7 @@
             <xsl:with-param name="process-params">{"replace": true}</xsl:with-param>
           </xsl:call-template>
         </xsl:if>
+        -->
       </xsl:when>
       <xsl:otherwise>
         <xsl:apply-templates mode="mode-iso19115-3" select="*"/>
