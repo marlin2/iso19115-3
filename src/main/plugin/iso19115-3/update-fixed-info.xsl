@@ -6,6 +6,7 @@
   xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
   xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
   xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+  xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
   xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0"
   xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
   xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
@@ -29,7 +30,6 @@
   <xsl:variable name="apiSiteUrl" select="substring(/root/env/siteURL, 1, string-length(/root/env/siteURL)-4)"/>
 
   <xsl:variable name="codelistloc" select="'http://schemas.aodn.org.au/mcp-3.0/codelists.xml'"/>
-
 
   <xsl:variable name="mapping" select="document('mcp-equipment/equipmentToDataParamsMapping.xml')"/>
 
@@ -267,6 +267,56 @@
       <xsl:apply-templates select="mdb:metadataExtensionInfo"/>
       <xsl:apply-templates select="mdb:identificationInfo"/>
       <xsl:apply-templates select="mdb:contentInfo"/>
+
+      <!-- Add/Overwrite data parameters if we have an equipment keyword that matches one in our mapping -->
+      <!-- if we have an equipment thesaurus with a match keyword then we process -->
+
+      <xsl:variable name="equipPresent">
+       <xsl:for-each select="//mri:descriptiveKeywords/mri:MD_Keywords[normalize-space(mri:thesaurusName/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:code/gcx:Anchor)=$equipThesaurus]/mri:keyword/gcx:Anchor">
+        <xsl:element name="dp">
+           <xsl:variable name="currentKeyword" select="text()"/>
+           <!-- <xsl:message>Automatically created dp from <xsl:value-of select="$currentKeyword"/></xsl:message> -->
+           <xsl:for-each select="$mapping/map/equipment">
+              <xsl:variable name="tokens" select="tokenize(string(),',')"/>
+              <!-- <xsl:message>Checking <xsl:value-of select="$tokens[2]"/></xsl:message> -->
+              <xsl:if test="$currentKeyword=$tokens[2]">
+                 <!-- <xsl:message>KW MATCHED TOKEN: <xsl:value-of select="$tokens[2]"/></xsl:message> -->
+                 <xsl:call-template name="fillOutDataParameters">
+ 										<xsl:with-param name="tokens" select="$tokens"/> 
+                 </xsl:call-template>
+              </xsl:if>
+           </xsl:for-each>
+        </xsl:element>
+		   </xsl:for-each>
+      </xsl:variable>
+
+      <!-- Now copy the constructed data parameters into the record -->
+      <xsl:if test="count($equipPresent/dp/*) > 0">
+        <mdb:contentInfo>
+          <mrc:MD_CoverageDescription>
+            <mrc:attributeDescription gco:nilReason="inapplicable" />
+            <mrc:attributeGroup>
+              <mrc:MD_AttributeGroup>
+                <mrc:contentType>
+                  <mrc:MD_CoverageContentTypeCode codeList="concat($codelistloc,'#MD_CoverageContentTypeCode')" codeListValue="physicalMeasurement" />
+                </mrc:contentType>
+                <xsl:for-each select="$equipPresent/dp/*">
+                  <mrc:attribute>
+                    <mrc:MD_SampleDimension>
+                      <mrc:otherProperty>
+                        <gco:Record xsi:type="mcp:DP_DataParameter_PropertyType">
+      	                  <xsl:copy-of select="."/>
+                        </gco:Record>
+                      </mrc:otherProperty>
+                    </mrc:MD_SampleDimension>
+                  </mrc:attribute>
+                </xsl:for-each>
+              </mrc:MD_AttributeGroup>
+            </mrc:attributeGroup>
+          </mrc:MD_CoverageDescription>
+        </mdb:contentInfo>
+      </xsl:if>
+
       <xsl:apply-templates select="mdb:distributionInfo"/>
       <xsl:apply-templates select="mdb:dataQualityInfo"/>
       <xsl:apply-templates select="mdb:resourceLineage"/>
@@ -333,6 +383,129 @@
     </xsl:copy>
   </xsl:template>
 
+	<!-- ================================================================= -->
+ 
+  <xsl:template match="mri:MD_DataIdentification" priority="100">
+    <xsl:copy>
+      <xsl:copy-of select="@*"/>
+      <xsl:apply-templates select="mri:citation"/>
+      <xsl:apply-templates select="mri:abstract"/>
+      <xsl:apply-templates select="mri:purpose"/>
+      <xsl:apply-templates select="mri:credit"/>
+      <xsl:apply-templates select="mri:status"/>
+      <xsl:apply-templates select="mri:pointOfContact"/>
+			<!-- If no custodian then copy in a resource contact with
+           role custodian, then copy the other resource contact -->
+      <xsl:if test="count(mri:pointOfContact/cit:CI_Responsibility/cit:role/cit:CI_RoleCode[@codeListValue='custodian'])=0">
+        <mri:pointOfContact>
+          <cit:CI_Responsibility>
+            <cit:role>
+              <cit:CI_RoleCode codeList="{concat($codelistloc,'#CI_RoleCode')}"
+                          codeListValue="custodian">custodian</cit:CI_RoleCode>
+            </cit:role>
+          </cit:CI_Responsibility>
+        </mri:pointOfContact>
+      </xsl:if>
+      <xsl:apply-templates select="mri:spatialRepresentationType"/>
+      <xsl:apply-templates select="mri:spatialResolution"/>
+      <xsl:apply-templates select="mri:temporalResolution"/>
+      <xsl:apply-templates select="mri:topicCategory"/>
+      <xsl:apply-templates select="mri:extent"/>
+      <xsl:apply-templates select="mri:additionalDocumentation"/> 
+      <xsl:apply-templates select="mri:processingLevel"/> 
+      <xsl:apply-templates select="mri:resourceMaintenance"/>
+      <xsl:apply-templates select="mri:graphicOverview"/>
+      <xsl:apply-templates select="mri:resourceFormat"/>
+      <xsl:apply-templates select="mri:descriptiveKeywords"/>
+      <xsl:apply-templates select="mri:resourceSpecificUsage"/>
+      <xsl:apply-templates select="mri:resourceConstraints"/>
+      <xsl:apply-templates select="mri:associatedResource"/>
+      <xsl:apply-templates select="mri:defaultLocale"/>
+      <xsl:apply-templates select="mri:environmentDescription"/>
+      <xsl:apply-templates select="mri:supplementalInformation"/> 
+    </xsl:copy>
+  </xsl:template>
+
+	<!-- ================================================================= -->
+
+  <xsl:template name="fillOutDataParameters">
+    <xsl:param name="tokens"/>
+
+      <mcp:DP_DataParameter>
+      	<mcp:parameterName>
+					<mcp:DP_Term>
+						<mcp:term>
+							<gco:CharacterString><xsl:value-of select="$tokens[7]"/></gco:CharacterString>
+						</mcp:term>
+						<mcp:type>
+							<mcp:DP_TypeCode codeList="{concat($codelistloc,'#DP_TypeCode')}" codeListValue="longName">longName</mcp:DP_TypeCode>
+						</mcp:type>
+						<mcp:usedInDataset>
+							<gco:Boolean>false</gco:Boolean>
+						</mcp:usedInDataset>
+						<mcp:vocabularyTermURL>
+							<gco:CharacterString><xsl:value-of select="$tokens[8]"/></gco:CharacterString>
+						</mcp:vocabularyTermURL>
+					</mcp:DP_Term>
+			  </mcp:parameterName>
+				<mcp:parameterUnits>
+					<mcp:DP_Term>
+						<mcp:term>
+							<gco:CharacterString><xsl:value-of select="$tokens[9]"/></gco:CharacterString>
+						</mcp:term>
+						<mcp:type>
+							<mcp:DP_TypeCode codeList="{concat($codelistloc,'#DP_TypeCode')}" codeListValue="longName">longName</mcp:DP_TypeCode>
+						</mcp:type>
+						<mcp:usedInDataset>
+							<gco:Boolean>false</gco:Boolean>
+						</mcp:usedInDataset>
+						<mcp:vocabularyTermURL>
+							<gco:CharacterString><xsl:value-of select="$tokens[10]"/></gco:CharacterString>
+						</mcp:vocabularyTermURL>
+					</mcp:DP_Term>
+				</mcp:parameterUnits>
+				<mcp:parameterMinimumValue gco:nilReason="missing">
+					<gco:CharacterString/>
+				</mcp:parameterMinimumValue>
+				<mcp:parameterMaximumValue gco:nilReason="missing">
+					<gco:CharacterString/>
+				</mcp:parameterMaximumValue>
+        <mcp:parameterDeterminationInstrument>
+					<mcp:DP_Term>
+						<mcp:term>
+							<gco:CharacterString><xsl:value-of select="$tokens[5]"/></gco:CharacterString>
+						</mcp:term>
+						<mcp:type>
+							<mcp:DP_TypeCode codeList="{concat($codelistloc,'#DP_TypeCode')}" codeListValue="longName">longName</mcp:DP_TypeCode>
+						</mcp:type>
+						<mcp:usedInDataset>
+							<gco:Boolean>false</gco:Boolean>
+						</mcp:usedInDataset>
+						<mcp:vocabularyTermURL>
+							<gco:CharacterString><xsl:value-of select="$tokens[6]"/></gco:CharacterString>
+						</mcp:vocabularyTermURL>
+					</mcp:DP_Term>
+				</mcp:parameterDeterminationInstrument>
+        <mcp:platform>
+					<mcp:DP_Term>
+						<mcp:term>
+							<gco:CharacterString><xsl:value-of select="$tokens[3]"/></gco:CharacterString>
+						</mcp:term>
+						<mcp:type>
+							<mcp:DP_TypeCode codeList="{concat($codelistloc,'#DP_TypeCode')}" codeListValue="longName">longName</mcp:DP_TypeCode>
+						</mcp:type>
+						<mcp:usedInDataset>
+							<gco:Boolean>false</gco:Boolean>
+						</mcp:usedInDataset>
+						<mcp:vocabularyTermURL>
+							<gco:CharacterString><xsl:value-of select="$tokens[4]"/></gco:CharacterString>
+						</mcp:vocabularyTermURL>
+					</mcp:DP_Term>
+				</mcp:platform>
+      </mcp:DP_DataParameter>
+  </xsl:template>
+	
+	<!-- ================================================================= -->
 
   <xsl:template match="@gml:id">
     <xsl:choose>

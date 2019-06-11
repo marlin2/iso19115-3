@@ -1200,7 +1200,7 @@
     <_condition>optional</_condition>
   </element>
   <element name="mri:additionalDocumentation" id="91.0">
-    <label>Additional documentation</label>
+    <label>Publication</label>
     <description iso="true">Publications that describe usage of data
     </description>
     <_condition>optional</_condition>
@@ -5530,6 +5530,26 @@
   <element name="reg:RE_ItemStatus">
     <label>Item status</label>
     <description></description>
+  </element>
+  <element name="cit:title" id="66285.0"
+           context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:title">
+	  <label>Title</label>
+		<description>Title of the publication.</description>
+  </element>
+  <element name="cit:date" id="66286.0"
+           context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:date/cit:CI_Date/cit:date">
+	  <label>Date</label>
+		<description>Date of publication.</description>
+  </element>
+  <element name="cit:name" id="66287.0"
+           context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:citedResponsibleParty/cit:CI_Responsibility/cit:party/cit:CI_Organisation/cit:individual/cit:CI_Individual/cit:name">
+	  <label>Author(s) Name</label>
+		<description>Name(s) of the Author(s) of publication.</description>
+  </element>
+  <element name="cit:name" id="66288.0"
+           context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:citedResponsibleParty/cit:CI_Responsibility/cit:party/cit:CI_Organisation/cit:name">
+	  <label>Author(s) Organisation</label>
+		<description>Name of organisation to which author(s) belongs.</description>
   </element>
   <element name="cit:title" id="285.0"
            context="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title">

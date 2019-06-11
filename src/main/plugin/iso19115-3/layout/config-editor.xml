@@ -177,6 +177,7 @@
 		<name>mrl:source</name>
 		<name>srv:parameter</name>
     <name>mac:MI_Sensor</name>
+    <name>mri:additionalDocumentation</name>
   </fieldsWithFieldset>
 
   <multilingualFields>
@@ -578,48 +579,51 @@
 
       <tab id="publications" mode="flat">
         <section>
-          <field name="publications" xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation" templateModeOnly="true" isMissingLabel="noPublications" >
+          <field name="publication" xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation"/>
+          <action type="add" name="publication" or="additionalDocumentation" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification">
             <template>
-              <values>
-                <key label="publicationTitle" xpath="cit:CI_Citation/cit:title/gco:CharacterString" use="textarea" tooltip="publication_title"/>
-                <key label="publicationDate" xpath="cit:CI_Citation/cit:date/cit:CI_Date/cit:date/gco:Date" use="date" tooltip="publication_date"/>
-                <key label="publicationAuthor" xpath="cit:CI_Citation/cit:citedResponsibleParty/cit:individual/cit:CI_Individual/cit:name/gco:CharacterString" use="textarea" tooltip="publication_author"/>
-              </values>
               <snippet>
-
                 <mri:additionalDocumentation>
                   <cit:CI_Citation>
-                     <cit:title>
-                        <gco:CharacterString>{{publicationTitle}}</gco:CharacterString>
-                     </cit:title>
-                     <cit:date>
-                        <cit:CI_Date>
-                           <cit:date>
-                             <gco:Date>{{publicationDate}}</gco:Date>
-                           </cit:date>
-                           <cit:dateType>
-                              <cit:CI_DateTypeCode codeList="codeListLocation#CI_DateTypeCode" codeListValue="publication">publication</cit:CI_DateTypeCode>
-                           </cit:dateType>
-                        </cit:CI_Date>
-                     </cit:date>
-                     <cit:citedResponsibleParty>
-                       <cit:role>
-                         <cit:CI_RoleCode codeList="codeListLocation#CI_RoleCode" codeListValue="author">author</cit:CI_RoleCode>
-                       </cit:role>
-                       <cit:individual>
-                         <cit:CI_Individual>
-                           <cit:name>
-                             <gco:CharacterString>{{publicationAuthor}}</gco:CharacterString>
-                           </cit:name>
-                         </cit:CI_Individual>
-                       </cit:individual> 
-                     </cit:citedResponsibleParty>
+                    <cit:title>
+                       <gco:CharacterString></gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                      <cit:CI_Date>
+                        <cit:date>
+                          <gco:Date></gco:Date>
+                        </cit:date>
+                        <cit:dateType>
+                          <cit:CI_DateTypeCode codeList="codeListLocation#CI_DateTypeCode" codeListValue="publication">publication</cit:CI_DateTypeCode>
+                        </cit:dateType>
+                      </cit:CI_Date>
+                    </cit:date>
+                    <cit:citedResponsibleParty>
+                      <cit:CI_Responsibility>
+                        <cit:role>
+                          <cit:CI_RoleCode codeList="codeListLocation#CI_RoleCode" codeListValue="author">author</cit:CI_RoleCode>
+                        </cit:role>
+                        <cit:party>
+                          <cit:CI_Organisation>
+                            <cit:name>
+                              <gco:CharacterString></gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                              <cit:CI_Individual>
+                                <cit:name>
+                                  <gco:CharacterString></gco:CharacterString>
+                                </cit:name>
+                              </cit:CI_Individual>
+                            </cit:individual> 
+                          </cit:CI_Organisation>
+                        </cit:party>
+                      </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
                   </cit:CI_Citation>
                 </mri:additionalDocumentation>
-
               </snippet>
             </template>
-          </field>
+          </action>
         </section>
       </tab>
 
