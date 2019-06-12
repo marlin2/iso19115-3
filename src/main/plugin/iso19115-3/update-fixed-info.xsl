@@ -443,9 +443,17 @@
 						<mcp:usedInDataset>
 							<gco:Boolean>false</gco:Boolean>
 						</mcp:usedInDataset>
-						<mcp:vocabularyTermURL>
-							<gco:CharacterString><xsl:value-of select="$tokens[8]"/></gco:CharacterString>
-						</mcp:vocabularyTermURL>
+            <mcp:vocabularyRelationship>
+              <mcp:DP_VocabularyRelationship>
+                <mcp:relationshipType>
+                  <mcp:DP_RelationshipTypeCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#DP_RelationshipTypeCode" codeListValue="skos:exactmatch">skos:exactmatch</mcp:DP_RelationshipTypeCode>
+                </mcp:relationshipType>
+                <mcp:vocabularyTermURL>
+                  <gmd:URL><xsl:value-of select="$tokens[8]"/></gmd:URL>
+                </mcp:vocabularyTermURL>
+                <mcp:vocabularyListURL gco:nilReason="inapplicable"/>
+              </mcp:DP_VocabularyRelationship>
+            </mcp:vocabularyRelationship>
 					</mcp:DP_Term>
 			  </mcp:parameterName>
 				<mcp:parameterUnits>
@@ -459,9 +467,17 @@
 						<mcp:usedInDataset>
 							<gco:Boolean>false</gco:Boolean>
 						</mcp:usedInDataset>
-						<mcp:vocabularyTermURL>
-							<gco:CharacterString><xsl:value-of select="$tokens[10]"/></gco:CharacterString>
-						</mcp:vocabularyTermURL>
+            <mcp:vocabularyRelationship>
+              <mcp:DP_VocabularyRelationship>
+                <mcp:relationshipType>
+                  <mcp:DP_RelationshipTypeCode codeList="{concat($codelistloc,'#DP_RelationshipTypeCode')}" codeListValue="skos:exactmatch">skos:exactmatch</mcp:DP_RelationshipTypeCode>
+                </mcp:relationshipType>
+                <mcp:vocabularyTermURL>
+                  <gmd:URL><xsl:value-of select="$tokens[10]"/></gmd:URL>
+                </mcp:vocabularyTermURL>
+                <mcp:vocabularyListURL gco:nilReason="inapplicable"/>
+              </mcp:DP_VocabularyRelationship>
+            </mcp:vocabularyRelationship>
 					</mcp:DP_Term>
 				</mcp:parameterUnits>
 				<mcp:parameterMinimumValue gco:nilReason="missing">
@@ -481,9 +497,17 @@
 						<mcp:usedInDataset>
 							<gco:Boolean>false</gco:Boolean>
 						</mcp:usedInDataset>
-						<mcp:vocabularyTermURL>
-							<gco:CharacterString><xsl:value-of select="$tokens[6]"/></gco:CharacterString>
-						</mcp:vocabularyTermURL>
+            <mcp:vocabularyRelationship>
+              <mcp:DP_VocabularyRelationship>
+                <mcp:relationshipType>
+                  <mcp:DP_RelationshipTypeCode codeList="{concat($codelistloc,'#DP_RelationshipTypeCode')}" codeListValue="skos:exactmatch">skos:exactmatch</mcp:DP_RelationshipTypeCode>
+                </mcp:relationshipType>
+                <mcp:vocabularyTermURL>
+                  <gmd:URL><xsl:value-of select="$tokens[6]"/></gmd:URL>
+                </mcp:vocabularyTermURL>
+                <mcp:vocabularyListURL gco:nilReason="inapplicable"/>
+              </mcp:DP_VocabularyRelationship>
+            </mcp:vocabularyRelationship>
 					</mcp:DP_Term>
 				</mcp:parameterDeterminationInstrument>
         <mcp:platform>
@@ -497,9 +521,17 @@
 						<mcp:usedInDataset>
 							<gco:Boolean>false</gco:Boolean>
 						</mcp:usedInDataset>
-						<mcp:vocabularyTermURL>
-							<gco:CharacterString><xsl:value-of select="$tokens[4]"/></gco:CharacterString>
-						</mcp:vocabularyTermURL>
+            <mcp:vocabularyRelationship>
+              <mcp:DP_VocabularyRelationship>
+                <mcp:relationshipType>
+                  <mcp:DP_RelationshipTypeCode codeList="{concat($codelistloc,'#DP_RelationshipTypeCode')}" codeListValue="skos:exactmatch">skos:exactmatch</mcp:DP_RelationshipTypeCode>
+                </mcp:relationshipType>
+                <mcp:vocabularyTermURL>
+                  <gmd:URL><xsl:value-of select="$tokens[4]"/></gmd:URL>
+                </mcp:vocabularyTermURL>
+                <mcp:vocabularyListURL gco:nilReason="inapplicable"/>
+              </mcp:DP_VocabularyRelationship>
+            </mcp:vocabularyRelationship>
 					</mcp:DP_Term>
 				</mcp:platform>
       </mcp:DP_DataParameter>
