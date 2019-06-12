@@ -62,8 +62,7 @@
   <xsl:template match="mcpold:*|gmd:*" mode="mcpcontacts">
     <xsl:variable name="localname" select="local-name()"/>
     <xsl:element name="{concat('cit:',$localname)}">
-      <xsl:copy-of select="@*"/>
-      <xsl:apply-templates select="*" mode="mcpcontacts"/>
+      <xsl:apply-templates select="@*|node()" mode="mcpcontacts"/>
     </xsl:element>
   </xsl:template>
 
@@ -74,10 +73,16 @@
     </xsl:element>
   </xsl:template>
 
-  <xsl:template match="*" mode="mcpcontacts">
+  <xsl:template match="@gcoold:*" mode="mcpcontacts">
+    <xsl:variable name="localname" select="local-name()"/>
+    <xsl:attribute name="{concat('gco:',$localname)}">
+      <xsl:value-of select="."/>
+    </xsl:attribute>
+  </xsl:template>
+
+  <xsl:template match="@*|node()" mode="mcpcontacts">
     <xsl:copy>
-      <xsl:copy-of select="@*"/>
-      <xsl:apply-templates select="*" mode="mcpcontacts"/>
+      <xsl:apply-templates select="@*|node()" mode="mcpcontacts"/>
     </xsl:copy>
   </xsl:template>
 </xsl:stylesheet>
