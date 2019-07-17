@@ -296,4 +296,8 @@
       </mrl:scope>
     </mrl:LI_Lineage>
   </mdb:resourceLineage>
+  <mdb:dataQualityInfo>
+    <mdq:DQ_DataQuality>
+    </mdq:DQ_DataQuality>
+  </mdb:dataQualityInfo>
 </mdb:MD_Metadata>

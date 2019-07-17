@@ -223,7 +223,7 @@
         </section>
       </tab>
 
-      <tab id="resourceDescription" default="true" mode="flat">
+      <tab id="resourceDescription" mode="flat">
         <section name=" ">
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:abstract"/>
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:purpose"/>
@@ -358,16 +358,12 @@
       <tab id="resourceLineageTab" mode="flat">
         <section name=" ">
           <field xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement"/>
-					<action type="add" name="source" or="source" in="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage">
+					<action type="add" name="statement" or="statement" if="count(mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement)=0" in="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage">
 						<template>
 							<snippet>
-							<mrl:source>
-								<mrl:LI_Source>
-									<mrl:description>
-                  	<gco:CharacterString></gco:CharacterString>
-               		</mrl:description>
-								</mrl:LI_Source>
-							</mrl:source>
+							<mrl:statement>
+                <gco:CharacterString></gco:CharacterString>
+							</mrl:statement>
 							</snippet>
 						</template>
 					</action>
@@ -379,15 +375,14 @@
         <section name=" ">
 
           <!-- DQ_CompletenessOmission -->
-          <field name="completenessOmission" templateModeOnly="true" isMissingLabel="notEvaluated" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report[mdq:DQ_CompletenessOmission]" del=".">
+          <field name="completenessOmission" templateModeOnly="true" 
+                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]" 
+                 if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
-                <key label="explanation" xpath="mdq:DQ_CompletenessOmission/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
+                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
               </values>
               <snippet>
-                <mdq:report>
-                  <mdq:DQ_CompletenessOmission>
-
                 <mdq:result>
                   <mdq:DQ_ConformanceResult>
                     <mdq:specification>
@@ -413,23 +408,46 @@
                     <mdq:pass gco:nilReason="inapplicable"/>
                   </mdq:DQ_ConformanceResult>
                 </mdq:result>
-
-                  </mdq:DQ_CompletenessOmission>
-                </mdq:report>
               </snippet>
             </template>
           </field>
+
+          <action type="add" name="completenessOmission" or="report"
+                  btnLabel="completenessOmission"
+                  in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
+                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission)=0">
+            <template>
+              <snippet>
+               <mdq:report>
+               <mdq:DQ_CompletenessOmission>
+                <mdq:result>
+                  <mdq:DQ_ConformanceResult>
+                    <mdq:specification>
+                      <cit:CI_Citation>
+                        <cit:title gco:nilReason="inapplicable"/>
+                      </cit:CI_Citation>
+                    </mdq:specification>
+                    <mdq:explanation>
+                      <gco:CharacterString></gco:CharacterString>
+                    </mdq:explanation>
+                    <mdq:pass gco:nilReason="inapplicable"/>
+                  </mdq:DQ_ConformanceResult>
+                </mdq:result>
+               </mdq:DQ_CompletenessOmission>
+               </mdq:report>
+              </snippet>
+            </template>
+          </action>
 
           <!-- DQ_NonQuantitativeAttributeAccuracy -->
-          <field name="nonQuantitativeAttributeAccuracy" templateModeOnly="true" isMissingLabel="notEvaluated" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report[mdq:DQ_NonQuantitativeAttributeAccuracy]" del=".">
+          <field name="nonQuantitativeAttributeAccuracy" templateModeOnly="true" 
+                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeAccuracy/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]"
+                 if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
-                <key label="explanation" xpath="mdq:DQ_NonQuantitativeAttributeAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
+                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
               </values>
               <snippet>
-                <mdq:report>
-                  <mdq:DQ_NonQuantitativeAttributeAccuracy>
-
                 <mdq:result>
                   <mdq:DQ_ConformanceResult>
                     <mdq:specification>
@@ -455,23 +473,46 @@
                     <mdq:pass gco:nilReason="inapplicable"/>
                   </mdq:DQ_ConformanceResult>
                 </mdq:result>
-
-                  </mdq:DQ_NonQuantitativeAttributeAccuracy>
-                </mdq:report>
               </snippet>
             </template>
           </field>
+
+          <action type="add" name="nonQuantitativeAttributeAccuracy" or="report"
+                  btnLabel="nonQuantitativeAttributeAccuracy"
+                  in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
+                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeAccuracy)=0">
+            <template>
+              <snippet>
+               <mdq:report>
+               <mdq:DQ_NonQuantitativeAttributeAccuracy>
+                <mdq:result>
+                  <mdq:DQ_ConformanceResult>
+                    <mdq:specification>
+                      <cit:CI_Citation>
+                        <cit:title gco:nilReason="inapplicable"/>
+                      </cit:CI_Citation>
+                    </mdq:specification>
+                    <mdq:explanation>
+                      <gco:CharacterString></gco:CharacterString>
+                    </mdq:explanation>
+                    <mdq:pass gco:nilReason="inapplicable"/>
+                  </mdq:DQ_ConformanceResult>
+                </mdq:result>
+               </mdq:DQ_NonQuantitativeAttributeAccuracy>
+               </mdq:report>
+              </snippet>
+            </template>
+          </action>
 
           <!-- DQ_ConceptualConsistency -->
-          <field name="conceptualConsistency" templateModeOnly="true" isMissingLabel="notEvaluated" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report[mdq:DQ_ConceptualConsistency]" del=".">
+          <field name="conceptualConsistency" templateModeOnly="true" 
+                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]" 
+                 if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
-                <key label="explanation" xpath="mdq:DQ_ConceptualConsistency/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
+                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
               </values>
               <snippet>
-                <mdq:report>
-                  <mdq:DQ_ConceptualConsistency>
-
                 <mdq:result>
                   <mdq:DQ_ConformanceResult>
                     <mdq:specification>
@@ -497,23 +538,46 @@
                     <mdq:pass gco:nilReason="inapplicable"/>
                   </mdq:DQ_ConformanceResult>
                 </mdq:result>
-
-                  </mdq:DQ_ConceptualConsistency>
-                </mdq:report>
               </snippet>
             </template>
           </field>
+
+          <action type="add" name="conceptualConsistency" or="report"
+                  btnLabel="conceptualConsistency"
+                  in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
+                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency)=0">
+            <template>
+              <snippet>
+               <mdq:report>
+               <mdq:DQ_ConceptualConsistency>
+                <mdq:result>
+                  <mdq:DQ_ConformanceResult>
+                    <mdq:specification>
+                      <cit:CI_Citation>
+                        <cit:title gco:nilReason="inapplicable"/>
+                      </cit:CI_Citation>
+                    </mdq:specification>
+                    <mdq:explanation>
+                      <gco:CharacterString></gco:CharacterString>
+                    </mdq:explanation>
+                    <mdq:pass gco:nilReason="inapplicable"/>
+                  </mdq:DQ_ConformanceResult>
+                </mdq:result>
+               </mdq:DQ_ConceptualConsistency>
+               </mdq:report>
+              </snippet>
+            </template>
+          </action>
 
           <!-- DQ_AbsoluteExternalPositionalAccuracy -->
-          <field name="absoluteExternalPositionalAccuracy" templateModeOnly="true" isMissingLabel="notEvaluated" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report[mdq:DQ_AbsoluteExternalPositionalAccuracy]" del=".">
+          <field name="absoluteExternalPositionalAccuracy" templateModeOnly="true" 
+                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]" 
+                 if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
-                <key label="explanation" xpath="mdq:DQ_AbsoluteExternalPositionalAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
+                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
               </values>
               <snippet>
-                <mdq:report>
-                  <mdq:DQ_AbsoluteExternalPositionalAccuracy>
-
                 <mdq:result>
                   <mdq:DQ_ConformanceResult>
                     <mdq:specification>
@@ -539,12 +603,36 @@
                     <mdq:pass gco:nilReason="inapplicable"/>
                   </mdq:DQ_ConformanceResult>
                 </mdq:result>
-
-                  </mdq:DQ_AbsoluteExternalPositionalAccuracy>
-                </mdq:report>
               </snippet>
             </template>
           </field>
+
+          <action type="add" name="absoluteExternalPositionalAccuracy" or="report"
+                  btnLabel="absoluteExternalPositionalAccuracy"
+                  in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
+                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy)=0">
+            <template>
+              <snippet>
+               <mdq:report>
+               <mdq:DQ_AbsoluteExternalPositionalAccuracy>
+                <mdq:result>
+                  <mdq:DQ_ConformanceResult>
+                    <mdq:specification>
+                      <cit:CI_Citation>
+                        <cit:title gco:nilReason="inapplicable"/>
+                      </cit:CI_Citation>
+                    </mdq:specification>
+                    <mdq:explanation>
+                      <gco:CharacterString></gco:CharacterString>
+                    </mdq:explanation>
+                    <mdq:pass gco:nilReason="inapplicable"/>
+                  </mdq:DQ_ConformanceResult>
+                </mdq:result>
+               </mdq:DQ_AbsoluteExternalPositionalAccuracy>
+               </mdq:report>
+              </snippet>
+            </template>
+          </action>
         </section>
       </tab>
 

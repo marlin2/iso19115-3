@@ -11,6 +11,7 @@
   xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
   xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
   xmlns:dqm="http://standards.iso.org/iso/19157/-2/dqm/1.0"
+  xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
   xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
   xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -449,7 +450,7 @@
                   <mcp:DP_RelationshipTypeCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#DP_RelationshipTypeCode" codeListValue="skos:exactmatch">skos:exactmatch</mcp:DP_RelationshipTypeCode>
                 </mcp:relationshipType>
                 <mcp:vocabularyTermURL>
-                  <gmd:URL><xsl:value-of select="$tokens[8]"/></gmd:URL>
+                  <gco:CharacterString><xsl:value-of select="$tokens[8]"/></gco:CharacterString>
                 </mcp:vocabularyTermURL>
                 <mcp:vocabularyListURL gco:nilReason="inapplicable"/>
               </mcp:DP_VocabularyRelationship>
@@ -473,7 +474,7 @@
                   <mcp:DP_RelationshipTypeCode codeList="{concat($codelistloc,'#DP_RelationshipTypeCode')}" codeListValue="skos:exactmatch">skos:exactmatch</mcp:DP_RelationshipTypeCode>
                 </mcp:relationshipType>
                 <mcp:vocabularyTermURL>
-                  <gmd:URL><xsl:value-of select="$tokens[10]"/></gmd:URL>
+                  <gco:CharacterString><xsl:value-of select="$tokens[10]"/></gco:CharacterString>
                 </mcp:vocabularyTermURL>
                 <mcp:vocabularyListURL gco:nilReason="inapplicable"/>
               </mcp:DP_VocabularyRelationship>
@@ -503,7 +504,7 @@
                   <mcp:DP_RelationshipTypeCode codeList="{concat($codelistloc,'#DP_RelationshipTypeCode')}" codeListValue="skos:exactmatch">skos:exactmatch</mcp:DP_RelationshipTypeCode>
                 </mcp:relationshipType>
                 <mcp:vocabularyTermURL>
-                  <gmd:URL><xsl:value-of select="$tokens[6]"/></gmd:URL>
+                  <gco:CharacterString><xsl:value-of select="$tokens[6]"/></gco:CharacterString>
                 </mcp:vocabularyTermURL>
                 <mcp:vocabularyListURL gco:nilReason="inapplicable"/>
               </mcp:DP_VocabularyRelationship>
@@ -527,7 +528,7 @@
                   <mcp:DP_RelationshipTypeCode codeList="{concat($codelistloc,'#DP_RelationshipTypeCode')}" codeListValue="skos:exactmatch">skos:exactmatch</mcp:DP_RelationshipTypeCode>
                 </mcp:relationshipType>
                 <mcp:vocabularyTermURL>
-                  <gmd:URL><xsl:value-of select="$tokens[4]"/></gmd:URL>
+                  <gco:CharacterString><xsl:value-of select="$tokens[4]"/></gco:CharacterString>
                 </mcp:vocabularyTermURL>
                 <mcp:vocabularyListURL gco:nilReason="inapplicable"/>
               </mcp:DP_VocabularyRelationship>
