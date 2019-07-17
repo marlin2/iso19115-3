@@ -2,6 +2,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
   xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+  xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
   xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
   xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
   xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
@@ -357,6 +358,23 @@
       <xsl:apply-templates mode="mcp-html" select="*/cit:contactInfo[1]">
         <xsl:with-param name="organisationName" select="$organisationName"/>
       </xsl:apply-templates>
+    </fieldset>
+  </xsl:template>
+
+  <!-- XLINK'd mri:resourceConstraints 
+  -->
+  <xsl:template mode="mode-iso19115-3" match="mri:resourceConstraints[@xlink:href!='']" priority="33000">
+    <xsl:param name="schema" select="'iso191115-3'" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+    <xsl:variable name="title" select="mco:MD_LegalConstraints/mco:reference/cit:CI_Citation/cit:title/gco:CharacterString"/>
+    <fieldset>
+      <legend><xsl:value-of select="$title"/></legend>
+      <ul>
+       <xsl:if test="mco:MD_LegalConstraints/mco:graphic//cit:linkage/gco:CharacterString!=''">
+         <li style="list-style-type: none;"><img src="{mco:MD_LegalConstraints/mco:graphic//cit:linkage/gco:CharacterString}"/></li>
+        </xsl:if>
+        <li style="list-style-type: none;"><a href="{mco:MD_LegalConstraints/mco:reference//cit:linkage/gco:CharacterString}" target="_blank">License Text</a></li>
+      </ul>
     </fieldset>
   </xsl:template>
 

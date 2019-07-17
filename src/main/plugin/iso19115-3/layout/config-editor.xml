@@ -200,6 +200,24 @@
 
   <!-- View configuration -->
   <views>
+    <!-- CI_Organisation subtemplates -->
+    <view name="default" displayIfRecord="count(cit:CI_Organisation) > 0">
+      <tab id="simple" default="true">
+        <section name=" ">
+          <field xpath="cit:CI_Organisation"/>
+        </section>
+      </tab>
+    </view>
+
+    <!-- MD_LegalConstraints subtemplates -->
+    <view name="default" displayIfRecord="count(mco:MD_LegalConstraints) > 0">
+      <tab id="simple" default="true">
+        <section name=" ">
+          <field xpath="mco:MD_LegalConstraints"/>
+        </section>
+      </tab>
+    </view>
+
     <!-- datasets with spatialRepresentation = grid, pointCloud or contour -->
     <view name="default">
       <sidePanel>
@@ -686,6 +704,13 @@
                         </cit:dateType>
                       </cit:CI_Date>
                     </cit:date>
+                    <cit:identifier>
+                      <mcc:MD_Identifier>
+                        <mcc:code>
+                          <gco:CharacterString></gco:CharacterString>
+                        </mcc:code>
+                      </mcc:MD_Identifier>
+                    </cit:identifier>
                     <cit:citedResponsibleParty>
                       <cit:CI_Responsibility>
                         <cit:role>
@@ -707,6 +732,41 @@
                         </cit:party>
                       </cit:CI_Responsibility>
                     </cit:citedResponsibleParty>
+                    <cit:series>
+                      <cit:CI_Series>
+                        <cit:name>
+                          <gco:CharacterString></gco:CharacterString>
+                        </cit:name>
+                        <cit:issueIdentification>
+                          <gco:CharacterString></gco:CharacterString>
+                        </cit:issueIdentification>
+                        <cit:page>
+                          <gco:CharacterString></gco:CharacterString>
+                        </cit:page>
+                      </cit:CI_Series>
+                    </cit:series>
+                  </cit:CI_Citation>
+                </mri:additionalDocumentation>
+              </snippet>
+            </template>
+          </action>
+
+          <!-- short publication -->
+          <action type="add" name="shortPublication" or="additionalDocumentation" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification">
+            <template>
+              <snippet>
+                <mri:additionalDocumentation>
+                  <cit:CI_Citation>
+                    <cit:title>
+                       <gco:CharacterString></gco:CharacterString>
+                    </cit:title>
+                    <cit:identifier>
+                      <mcc:MD_Identifier>
+                        <mcc:code>
+                          <gco:CharacterString></gco:CharacterString>
+                        </mcc:code>
+                      </mcc:MD_Identifier>
+                    </cit:identifier>
                   </cit:CI_Citation>
                 </mri:additionalDocumentation>
               </snippet>
