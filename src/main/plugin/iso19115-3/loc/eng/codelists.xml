@@ -174,6 +174,13 @@
         distributed
       </description>
     </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- MCP -->
+    <entry>
+      <code>unknown</code>
+      <label>Unknown</label>
+      <description>It is unknown what the date identifies</description>
+    </entry>
   </codelist>
   <codelist name="cit:CI_OnLineFunctionCode" alias="function">
     <entry>
@@ -504,6 +511,43 @@
       <description>Party who has an interest in the resource or the use of the
         resource
       </description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- MCP -->
+    <entry>
+      <code>coInvestigator</code>
+      <label>Co-investigator</label>
+      <description>One of the key parties responsible for gathering information and conducting research</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>researchAssistant</code>
+      <label>Research assistant</label>
+      <description>Party who helped gather information and conduct research</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>licensor</code>
+      <label>Licensor</label>
+      <description>Party responsible for licensing</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>ipOwner</code>
+      <label>IP Owner</label>
+      <description>Party who owns the intellectual property</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>metadataContact</code>
+      <label>Metadata Contact</label>
+      <description>party who can be contacted about the metadata</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>moralRightsOwner</code>
+      <label>Moral Rights Owner</label>
+      <description>Party who owns the moral rights</description>
     </entry>
   </codelist>
   <codelist name="mdq:DQ_EvaluationMethodTypeCode">
@@ -1151,6 +1195,27 @@
       <label>Taxon</label>
       <description>Keyword identifies a taxonomy of the resource</description>
     </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- MCP -->
+    <entry>
+      <code>equipment</code>
+      <label>Equipment</label>
+      <description>Keyword identifies equipment used in data collection.</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- MCP -->
+    <entry>
+      <code>survey</code>
+      <label>Survey</label>
+      <description>Keyword identifies a survey/voyage.</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- MCP -->
+    <entry>
+      <code>dataSource</code>
+      <label>Data Source</label>
+      <description>Keyword identifies data source eg. model, or aggregated/derived data.</description>
+    </entry>
   </codelist>
   <codelist name="mmi:MD_MaintenanceFrequencyCode">
     <entry>
@@ -1229,6 +1294,13 @@
       <code>biennially</code>
       <label>Biennially</label>
       <description>Resource is updated every 2 years</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- MCP -->
+    <entry>
+      <code>hourly</code>
+      <label>Hourly</label>
+      <description>Resource is updated hourly</description>
     </entry>
   </codelist>
   <codelist name="mrd:MD_MediumFormatCode">
@@ -1328,13 +1400,13 @@
       <label>Completed</label>
       <description>Production of the data has been completed</description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>historicalArchive</code>
       <label>Historical archive</label>
       <description>Data has been stored in an offline storage facility
       </description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>obsolete</code>
       <label>Obsolete</label>
       <description>Data is no longer relevant</description>
@@ -1351,74 +1423,74 @@
         will be created or updated
       </description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>required</code>
       <label>Required</label>
       <description>Data needs to be generated or updated</description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>underDevelopment</code>
       <label>Under development</label>
       <description>Data is currently in the process of being created
       </description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>final</code>
       <label>Final</label>
       <description>Progress concluded and no changes will be accepted
       </description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>pending</code>
       <label>Pending</label>
       <description>Committed to, but not yet addressed</description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>retired</code>
       <label>Retired</label>
       <description>Item is no longer recommended for use. It has not been
         superseded by another item
       </description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>superseded</code>
       <label>Superseded</label>
       <description>Replaced by new item</description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>tentative</code>
       <label>Tentative</label>
       <description>Provisional changes likely before resource becomes final or
         complete
       </description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>valid</code>
       <label>Valid</label>
       <description>Acceptable under specific conditions</description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>accepted</code>
       <label>Accepted</label>
       <description>Agreed to by sponsor</description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>notAccepted</code>
       <label>Not Accepted</label>
       <description>Rejected by sponsor</description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>withdrawn</code>
       <label>Withdrawn</label>
       <description>Withdrawn</description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>proposed</code>
       <label>Proposed</label>
       <description>Suggested that development needs to be undertaken
       </description>
     </entry>
-    <entry>
+    <entry hideInEditMode="true">
       <code>deprecated</code>
       <label>Deprecated</label>
       <description>Resource superseded and will become obsolete, use only for
@@ -2934,6 +3006,58 @@
     <entry>
       <code>unknown</code>
       <label>Unknown</label>
+    </entry>
+  </codelist>
+  <!-- ==================================================== -->
+  <codelist name="mcp:DP_TypeCode">
+    <entry>
+      <code>shortName</code>
+      <label>Short Name</label>
+      <description>The parameter term is a short name</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>longName</code>
+      <label>Long Name</label>
+      <description>The parameter term is a long name</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>localSynonym</code>
+      <label>Local Synonym</label>
+      <description>The parameter term is a local synonym</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>localCode</code>
+      <label>Local Code</label>
+      <description>The parameter term is a local code</description>
+    </entry>
+  </codelist>
+  <!-- ==================================================== -->
+  <codelist name="mcp:DP_RelationshipTypeCode">
+    <entry>
+      <code>skos:exactmatch</code>
+      <label>Exact Match</label>
+      <description>The term from the vocabulary is an exact match for the local term</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>skos:closematch</code>
+      <label>Close Match</label>
+      <description>The term from the vocabulary is not an exact match but a close match to the local term</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>skos:narrowmatch</code>
+      <label>Narrower Match</label>
+      <description>The term from the vocabulary is considered to be narrower in definition than the local term</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
+      <code>skos:broadmatch</code>
+      <label>Broader Match</label>
+      <description>The term from the vocabulary is considered to be broader in definition than the local term</description>
     </entry>
   </codelist>
 </codelists>
