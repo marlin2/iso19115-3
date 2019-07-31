@@ -432,7 +432,6 @@
           </field>
 
           <action type="add" name="completenessOmission" or="report"
-                  btnLabel="completenessOmission"
                   in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
                   if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission)=0">
             <template>
@@ -497,7 +496,6 @@
           </field>
 
           <action type="add" name="nonQuantitativeAttributeAccuracy" or="report"
-                  btnLabel="nonQuantitativeAttributeAccuracy"
                   in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
                   if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeAccuracy)=0">
             <template>
@@ -562,7 +560,6 @@
           </field>
 
           <action type="add" name="conceptualConsistency" or="report"
-                  btnLabel="conceptualConsistency"
                   in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
                   if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency)=0">
             <template>
@@ -627,7 +624,6 @@
           </field>
 
           <action type="add" name="absoluteExternalPositionalAccuracy" or="report"
-                  btnLabel="absoluteExternalPositionalAccuracy"
                   in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
                   if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy)=0">
             <template>
