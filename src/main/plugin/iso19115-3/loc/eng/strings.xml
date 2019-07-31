@@ -54,10 +54,10 @@
   <beginPosition>Begin</beginPosition>
   <endPosition>End</endPosition>
 
-  <conceptualConsistency>Quality: Logical Consistency</conceptualConsistency>
-  <absoluteExternalPositionalAccuracy>Quality: Positional Accuracy</absoluteExternalPositionalAccuracy>
-  <nonQuantitativeAttributeAccuracy>Quality: Attribute Accuracy</nonQuantitativeAttributeAccuracy>
-  <completenessOmission>Quality: Completeness</completenessOmission>
+  <conceptualConsistency>Logical Consistency</conceptualConsistency>
+  <absoluteExternalPositionalAccuracy>Positional Accuracy</absoluteExternalPositionalAccuracy>
+  <nonQuantitativeAttributeAccuracy>Attribute Accuracy</nonQuantitativeAttributeAccuracy>
+  <completenessOmission>Completeness</completenessOmission>
   <conformity_title>Title</conformity_title>
   <conformity_date>Date</conformity_date>
   <explanation>Explanation</explanation>
