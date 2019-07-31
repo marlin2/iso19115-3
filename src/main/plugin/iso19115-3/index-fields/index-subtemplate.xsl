@@ -97,6 +97,10 @@
     <xsl:call-template name="subtemplate-common-fields"/>
   </xsl:template>
 
+  <xsl:template mode="index" match="cit:CI_Contact">
+    <xsl:call-template name="subtemplate-common-fields"/>
+  </xsl:template>
+
   <xsl:template mode="index" match="cit:CI_Organisation">
 
     <xsl:variable name="org" select="normalize-space(cit:name/gco:CharacterString)"/>
