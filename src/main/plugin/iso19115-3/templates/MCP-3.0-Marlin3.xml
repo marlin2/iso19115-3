@@ -257,6 +257,13 @@
   </mdb:resourceLineage>
   <mdb:dataQualityInfo>
     <mdq:DQ_DataQuality>
+      <mdq:scope>
+        <mcc:MD_Scope>
+          <mcc:level>
+            <mcc:MD_ScopeCode codeList="codeListLocation#MD_ScopeCode" codeListValue="dataset">dataset</mcc:MD_ScopeCode>
+          </mcc:level>
+        </mcc:MD_Scope>
+      </mdq:scope>
     </mdq:DQ_DataQuality>
   </mdb:dataQualityInfo>
 </mdb:MD_Metadata>

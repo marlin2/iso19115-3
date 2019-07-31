@@ -149,7 +149,7 @@
             </annotation>
           </element>
           <element minOccurs="0" name="standaloneQualityReport" type="mdq:DQ_StandaloneQualityReportInformation_PropertyType"/>
-          <element maxOccurs="unbounded" name="report" type="mdq:AbstractDQ_Element_PropertyType"/>
+          <element minOccurs="0" maxOccurs="unbounded" name="report" type="mdq:AbstractDQ_Element_PropertyType"/>
         </sequence>
       </extension>
     </complexContent>

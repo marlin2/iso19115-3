@@ -3086,7 +3086,6 @@
       resource after the
       initial resource is completed
     </description>
-    <condition>mandatory</condition>
   </element>
   <element name="mmi:maintenanceNote" id="148.0">
     <label>Maintenance note</label>
@@ -3936,7 +3935,6 @@
     <description>Quantitative quality information for the data specified by the
       scope
     </description>
-    <condition>optional</condition>
   </element>
   <element name="mrl:resolution" id="182.0">
     <label>Resolution</label>
