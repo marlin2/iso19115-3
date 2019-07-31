@@ -3936,7 +3936,7 @@
     <description>Quantitative quality information for the data specified by the
       scope
     </description>
-    <condition>conditional</condition>
+    <condition>optional</condition>
   </element>
   <element name="mrl:resolution" id="182.0">
     <label>Resolution</label>
@@ -5563,6 +5563,22 @@
            context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:code">
 	  <label>Author ID (eg. ORCID)</label>
 		<description>Author Identifier eg. ORCID.</description>
+  </element>
+  <element name="dq_attributeaccuracy_explanation" id="66293.0">
+    <label></label>
+    <description>Explanation of the correctness of non-quantitative attributes</description>
+  </element>
+  <element name="dq_externalpositionalaccuracy_explanation" id="66294.0">
+    <label></label>
+    <description>Explanation of how close coordinate values are to values accepted as being true</description>
+  </element>
+  <element name="dq_conceptualconsistency_explanation" id="66295.0">
+    <label></label>
+    <description>Explanation of the way in which the dataset adheres to concepts</description>
+  </element>
+  <element name="dq_completenessomission_explanation" id="66296.0">
+    <label></label>
+    <description>Explanation of any data absent from the dataset</description>
   </element>
   <element name="cit:title" id="285.0"
            context="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title">

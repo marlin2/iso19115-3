@@ -399,7 +399,7 @@
                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
-                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
+                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_completenessomission_explanation"/>
               </values>
               <snippet>
                 <mdq:result>
@@ -464,7 +464,7 @@
                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
-                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
+                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_attributeaccuracy_explanation"/>
               </values>
               <snippet>
                 <mdq:result>
@@ -529,7 +529,7 @@
                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
-                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
+                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_conceptualconsistency_explanation"/>
               </values>
               <snippet>
                 <mdq:result>
@@ -594,7 +594,7 @@
                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
-                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_explanation"/>
+                <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_externalpositionalaccuracy_explanation"/>
               </values>
               <snippet>
                 <mdq:result>
