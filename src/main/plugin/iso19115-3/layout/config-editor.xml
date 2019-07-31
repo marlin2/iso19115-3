@@ -26,6 +26,7 @@
     <for name="mri:abstract" use="textarea"/>
     <for name="mri:credit" use="textarea"/>
     <for name="cit:description" use="textarea"/>
+    <for name="cit:title" use="textarea"/>
     <for name="mdq:evaluationMethodDescription" use="textarea"/>
     <for name="mdq:explanation" use="textarea"/>
     <for name="mco:handlingDescription" use="textarea"/>
@@ -686,6 +687,7 @@
       <tab id="publications" mode="flat">
         <section>
           <field name="publication" xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation"/>
+          <!--
           <action type="add" name="publication" or="additionalDocumentation" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification">
             <template>
               <snippet>
@@ -750,6 +752,7 @@
               </snippet>
             </template>
           </action>
+          -->
 
           <!-- short publication -->
           <action type="add" name="shortPublication" or="additionalDocumentation" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification">
