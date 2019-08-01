@@ -3,10 +3,8 @@
   xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
   xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
   xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
-  xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
-  xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
-  xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
   xmlns:gn="http://www.fao.org/geonetwork"
+  xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
   xmlns:xslutil="java:org.fao.geonet.util.XslUtil"
   exclude-result-prefixes="#all">
 
@@ -37,7 +35,7 @@
                           select="$metadata/*/lan:PT_Locale[
                                   lan:language/lan:LanguageCode/@codeListValue = $mainLanguage]/@id"/>
 
-            <lang><xsl:value-of select="concat('&quot;', $mainLanguage, '&quot;:&quot;#', $mainLanguageId, '&quot;')"/></lang>
+            <lang><xsl:value-of select="concat('&quot;', $mainLanguage, '&quot;:&quot;#', $mainLanguageId[1], '&quot;')"/></lang>
           </xsl:if>
 
           <xsl:for-each select="$metadata/mdb:otherLocale/lan:PT_Locale[
@@ -52,6 +50,10 @@
 
   <!-- Get the list of other languages -->
   <xsl:template name="get-iso19115-3-other-languages">
+    <xsl:variable name="mainLanguage">
+      <xsl:call-template name="get-iso19115-3-language"/>
+    </xsl:variable>
+    
     <xsl:choose>
       <xsl:when test="$metadata/gn:info[position() = last()]/isTemplate = 's'">
         <xsl:for-each select="distinct-values($metadata//lan:LocalisedCharacterString/@locale)">
@@ -61,7 +63,8 @@
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:for-each select="$metadata/mdb:otherLocale/lan:PT_Locale">
+        <xsl:for-each select="$metadata/mdb:otherLocale/lan:PT_Locale[
+                                  lan:language/lan:LanguageCode/@codeListValue != $mainLanguage]">
           <lang id="{@id}" code="{lan:language/lan:LanguageCode/@codeListValue}"/>
         </xsl:for-each>
       </xsl:otherwise>
