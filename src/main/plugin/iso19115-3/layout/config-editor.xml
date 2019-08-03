@@ -165,7 +165,6 @@
     <name>mdb:extent</name>
     <name>cit:extent</name>
     <!-- <name>cit:date</name> -->
-    <name>gex:geographicBox</name>
     <name>gex:EX_TemporalExtent</name>
     <name>mrd:MD_Distributor</name>
     <name>srv:containsOperations</name>
@@ -343,7 +342,7 @@
                is no reference system -->
           <field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo" in="/mdb:MD_Metadata" if="count(mdb:MD_Metadata/mdb:referenceSystemInfo)=0"/>
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicElement"/>
-          <action type="add" name="geographicElement" or="geographicElement" if="count(mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicElement)=0" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent">
+          <action type="add" name="geographicElement" or="geographicElement" if="count(mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicElement/gex:EX_GeographicBoundingBox)=0" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent">
             <template>
               <snippet>
           <gex:geographicElement>
