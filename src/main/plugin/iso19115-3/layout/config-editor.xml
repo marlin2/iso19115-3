@@ -66,11 +66,6 @@
     <for name="lan:country" use="data-gn-country-picker"/>
     <for name="cit:country" use="data-gn-country-picker"/>
 
-    <for name="mdb:referenceSystemInfo" addDirective="data-gn-crs-selector">
-       <directiveAttributes data-schema="iso19115-3"
-                            data-template-add-action="true"/>
-		</for>
-
 		<for name="cit:party" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
             data-schema="iso19115-3"
@@ -340,7 +335,30 @@
         	<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo/mrs:MD_ReferenceSystem/mrs:referenceSystemIdentifier/mcc:MD_Identifier/mcc:code" del="../../../.."/>
           <!-- show the add reference system info directive only if there
                is no reference system -->
-          <field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo" in="/mdb:MD_Metadata" if="count(mdb:MD_Metadata/mdb:referenceSystemInfo)=0"/>
+          <action type="add" name="referenceSystemInfo" or="referenceSystemInfo" if="count(mdb:MD_Metadata/mdb:referenceSystemInfo)=0" in="/mdb:MD_Metadata">
+            <template>
+              <snippet>
+          <mdb:referenceSystemInfo>
+            <mrs:MD_ReferenceSystem>
+              <mrs:referenceSystemIdentifier>
+                <mcc:MD_Identifier>
+                  <mcc:code>
+                    <gco:CharacterString>WGS 84 (EPSG:4326)</gco:CharacterString>
+                  </mcc:code>
+                  <mcc:codeSpace>
+                    <gco:CharacterString>EPSG</gco:CharacterString>
+                  </mcc:codeSpace>
+                  <mcc:version>
+                    <gco:CharacterString>8.6</gco:CharacterString>
+                  </mcc:version>
+                </mcc:MD_Identifier>
+              </mrs:referenceSystemIdentifier>
+            </mrs:MD_ReferenceSystem>
+          </mdb:referenceSystemInfo>
+              </snippet>
+            </template>
+          </action>
+
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicElement"/>
           <action type="add" name="geographicElement" or="geographicElement" if="count(mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicElement/gex:EX_GeographicBoundingBox)=0" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent">
             <template>

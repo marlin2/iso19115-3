@@ -5582,6 +5582,14 @@
     <label></label>
     <description>Explanation of any data absent from the dataset</description>
   </element>
+  <element name="mcc:code" id="72000.0" context="/mdb:MD_Metadata/mdb:referenceSystemInfo/mrs:MD_ReferenceSystem/mrs:referenceSystemIdentifier/mcc:MD_Identifier/mcc:code">
+	  <label>Reference System</label>
+		<description>The spatial reference system used in the dataset.</description>
+		<helper>
+			<option value="WGS 84 (EPSG:4326)">WGS 84 (EPSG:4326)</option>
+			<option value="EPSG:28355">EPSG:28355 (GDA94, Zone 55)</option>
+		</helper>
+  </element>
   <element name="cit:title" id="285.0"
            context="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title">
 	  <label>Name</label>

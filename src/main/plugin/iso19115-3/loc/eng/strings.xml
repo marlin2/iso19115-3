@@ -25,7 +25,6 @@
   <dataQualityInfo>Quality</dataQualityInfo>
   <resourceLineage>Lineage</resourceLineage>
   <spatialRepresentationInfo>Spatial rep.</spatialRepresentationInfo>
-  <referenceSystemInfo>Ref. system</referenceSystemInfo>
   <contentInfo>Content</contentInfo>
   <portrayalCatalogueInfo>Portrayal</portrayalCatalogueInfo>
   <metadataMaintenance>Metadata Maintenance</metadataMaintenance>
@@ -108,6 +107,7 @@
   <publication>Publication</publication>
   <shortPublication>Short Publication</shortPublication>
   <geographicElement>Geographic bounding box</geographicElement>
+  <referenceSystemInfo>Reference System</referenceSystemInfo>
   <useAssociatedResources><span>Add an online resource for distribution using the "<i class="fa fa-link"></i><i class="icon-external-link"></i>Associated resources" panel at the right hand side of the form</span></useAssociatedResources>
   <custodianIsMandatory><span>You <b>must</b> have a resource custodian! Please select one by searching <i class="fa fa-search"></i> or typing in the box. If you can't find a custodian then enter one manually by pressing the <i class="fa fa-plus"></i> button.</span></custodianIsMandatory>
 </strings>
