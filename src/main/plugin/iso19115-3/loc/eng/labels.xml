@@ -2576,10 +2576,7 @@
   </element>
   <element name="mrd:distributionFormat" id="271.0">
     <label>Distribution format</label>
-    <condition>mandatory</condition>
-    <description>Provides a description of the format of the data to be
-      distributed
-    </description>
+    <description>Provides a description of the format of the data to be distributed.</description>
   </element>
   <element name="mdb:distributionInfo" id="17.0">
     <description>Provides information about the distributor of and options for
@@ -5592,10 +5589,10 @@
   </element>
   <element name="cit:title" id="285.0"
            context="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title">
-	  <label>Name</label>
-		<description>The format of the dataset.</description>
+	  <label>Format Name</label>
+		<description>If none of the suggestions matches, then please enter the name of the format you have used.</description>
 		<help>
-			<![CDATA[<p>Please select the <b>most appropriate</b> format or if not known then please select <b>'not yet ascertained'</b>.</p>]]>
+			<![CDATA[<p>Please select the <b>most appropriate</b> format. If not known then please select <b>'not yet ascertained'</b>.</p>]]>
 		</help>
 		<condition>mandatory</condition>
 		<helper rel="gmd:version">

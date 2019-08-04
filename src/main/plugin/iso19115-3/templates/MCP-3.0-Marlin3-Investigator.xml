@@ -241,6 +241,17 @@
       </mri:defaultLocale>
     </mri:MD_DataIdentification>
   </mdb:identificationInfo>
+  <mdb:distributionInfo>
+    <mrd:MD_Distribution>
+      <mrd:formatSpecificationCitation>
+        <cit:CI_Citation>
+          <cit:title gco:nilReason="missing">
+            <gco:CharacterString />
+          </cit:title>
+        </cit:CI_Citation>
+      </mrd:formatSpecificationCitation>
+    </mrd:MD_Distribution>
+  </mdb:distributionInfo>
   <mdb:resourceLineage>
     <mrl:LI_Lineage>
       <mrl:statement gco:nilReason="missing">
