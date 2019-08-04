@@ -5645,6 +5645,7 @@
 			<option value="DIGITAL - Text Documents - MS Word">DIGITAL - Text Documents - MS Word</option>
 			<option value="DIGITAL - Text Documents - RTF">DIGITAL - Text Documents - RTF</option>
 			<option value="DIGITAL - Text Documents - XML">DIGITAL - Text Documents - XML</option>
+			<option value="DIGITAL - Text Documents - CSV">DIGITAL - Text Documents - CSV</option>
 			<option value="DIGITAL - Text Documents - other">DIGITAL - Text Documents - other</option>
 			<option value="DIGITAL - MATLAB">DIGITAL - MATLAB</option>
 			<option value="DIGITAL - netCDF">DIGITAL - netCDF</option>
