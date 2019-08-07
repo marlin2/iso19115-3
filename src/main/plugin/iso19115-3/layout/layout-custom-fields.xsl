@@ -361,21 +361,24 @@
     </fieldset>
   </xsl:template>
 
-  <!-- XLINK'd mri:resourceConstraints 
-  -->
+  <!-- XLINK'd mri:resourceConstraints -->
   <xsl:template mode="mode-iso19115-3" match="mri:resourceConstraints[@xlink:href!='']" priority="33000">
     <xsl:param name="schema" select="'iso191115-3'" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
     <xsl:variable name="title" select="mco:MD_LegalConstraints/mco:reference/cit:CI_Citation/cit:title/gco:CharacterString"/>
-    <fieldset>
-      <legend><xsl:value-of select="$title"/></legend>
-      <ul>
-       <xsl:if test="mco:MD_LegalConstraints/mco:graphic//cit:linkage/gco:CharacterString!=''">
-         <li style="list-style-type: none;"><img src="{mco:MD_LegalConstraints/mco:graphic//cit:linkage/gco:CharacterString}"/></li>
-        </xsl:if>
-        <li style="list-style-type: none;"><a href="{mco:MD_LegalConstraints/mco:reference//cit:linkage/gco:CharacterString}" target="_blank">License Text</a></li>
-      </ul>
-    </fieldset>
+    <xsl:call-template name="render-boxed-element">
+      <xsl:with-param name="label" select="$title"/>
+      <xsl:with-param name="editInfo" select="gn:element"/>
+      <xsl:with-param name="cls" select="local-name()"/>
+      <xsl:with-param name="subTreeSnippet">
+        <ul>
+          <xsl:if test="mco:MD_LegalConstraints/mco:graphic//cit:linkage/gco:CharacterString!=''">
+            <li style="list-style-type: none;"><img src="{mco:MD_LegalConstraints/mco:graphic//cit:linkage/gco:CharacterString}"/></li>
+          </xsl:if>
+          <li style="list-style-type: none;"><a href="{mco:MD_LegalConstraints/mco:reference//cit:linkage/gco:CharacterString}" target="_blank">License Text</a></li>
+        </ul>
+      </xsl:with-param>
+    </xsl:call-template>
   </xsl:template>
 
 </xsl:stylesheet>
