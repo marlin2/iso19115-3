@@ -24,6 +24,7 @@
                 xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
                 xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
                 xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
+                xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
                 xmlns:util="java:org.fao.geonet.util.XslUtil"
                 xmlns:tr="java:org.fao.geonet.api.records.formatters.SchemaLocalizations"
                 xmlns:gn-fn-render="http://geonetwork-opensource.org/xsl/functions/render"
@@ -230,7 +231,8 @@
                        *[gco:LocalName != '']|*[lan:PT_FreeText != '']|
                        *[gml:beginPosition != '']|*[gml:endPosition != '']|
                        *[gco:Date != '']|*[gco:DateTime != '']|*[*/@codeListValue]|*[@codeListValue]|
-                       gml:beginPosition[. != '']|gml:endPosition[. != '']"
+                       gml:beginPosition[. != '']|gml:endPosition[. != '']|
+                       gml:timePosition[. != '']"
                 priority="500">
     <xsl:param name="fieldName" select="''" as="xs:string"/>
 
@@ -490,6 +492,25 @@
         <p>
           <xsl:value-of select="normalize-space($linkDescription)"/>
         </p>
+      </dd>
+    </dl>
+  </xsl:template>
+
+  <xsl:template mode="render-field"
+                match="mco:MD_LegalConstraints[mco:graphic and mco:reference]"
+                priority="100">
+   
+    <dl class="gn-link">
+      <dt>
+        <xsl:value-of select="mco:reference/cit:CI_Citation/cit:title/*"/>
+      </dt>
+      <dd>
+        <ul>
+          <xsl:if test="mco:graphic//cit:linkage/gco:CharacterString!=''">
+            <li style="list-style-type: none;"><img src="{mco:graphic//cit:linkage/gco:CharacterString}"/></li>
+          </xsl:if>
+          <li style="list-style-type: none;"><a href="{mco:reference//cit:linkage/gco:CharacterString}" target="_blank">License Text</a></li>
+        </ul>
       </dd>
     </dl>
   </xsl:template>

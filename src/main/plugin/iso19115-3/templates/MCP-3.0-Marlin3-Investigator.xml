@@ -16,7 +16,6 @@
       </lan:characterEncoding>
     </lan:PT_Locale>
   </mdb:defaultLocale>
-  <mdb:parentMetadata uuidref="" />
   <mdb:metadataScope>
     <mdb:MD_MetadataScope>
       <mdb:resourceScope>
