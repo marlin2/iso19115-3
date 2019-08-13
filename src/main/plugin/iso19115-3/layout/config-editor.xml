@@ -288,7 +288,7 @@
                 <mri:pointOfContact>
                   <cit:CI_Responsibility>
                     <cit:role>
-                      <cit:CI_RoleCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue=""/>
+                      <cit:CI_RoleCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue=""/>
                     </cit:role>
                   </cit:CI_Responsibility>
                 </mri:pointOfContact>
@@ -812,74 +812,77 @@
         <!-- <directive data-gn-suggestion-list=""/> -->
         <!-- <directive data-gn-need-help="user-guide/describing-information/creating-metadata.html"/> -->
       </sidePanel>
-      <tab id="identificationInfo" default="true">
-        <section xpath="/mdb:MD_Metadata/mdb:identificationInfo" or="identificationInfo"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="distributionInfo">
-        <section xpath="/mdb:MD_Metadata/mdb:distributionInfo" or="distributionInfo"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <!--
-      mdb:distributionInfo/mrd:MD_Distribution/mrd:transferOptions/mrd:MD_DigitalTransferOptions
-      -->
-      <tab id="dataQualityInfo">
-        <section xpath="/mdb:MD_Metadata/mdb:dataQualityInfo" or="dataQualityInfo"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="resourceLineageInfo">
-        <section xpath="/mdb:MD_Metadata/mdb:resourceLineage" or="resourceLineage"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="spatialRepresentationInfo">
-        <section xpath="/mdb:MD_Metadata/mdb:spatialRepresentationInfo"
-                 or="spatialRepresentationInfo" in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="referenceSystemInfo">
-        <section xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="contentInfo" toggle="true">
-        <section xpath="/mdb:MD_Metadata/mdb:contentInfo" or="contentInfo" in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="acquisitionInformation" toggle="true">
-        <section xpath="/mdb:MD_Metadata/mdb:acquisitionInformation" or="acquisitionInformation"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="metadata">
-        <section name="mdb:MD_Metadata">
+      <tab id="details" default="true">
+
+        <section name="contacts">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:citation/*/cit:citedResponsibleParty"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:pointOfContact"/>
+        </section>
+
+        <section name="identifiersAndKeywords">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:topicCategory"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:descriptiveKeywords"/>
+        </section>
+
+        <section name="resourceConstraints">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceConstraints/mco:MD_LegalConstraints"/>
+        </section>
+
+        <section name="otherDatasetDetails">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:status"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:credit"/>
+          <field name="format" xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:supplementalInformation"/>
+        </section>
+
+        <section name="spatial">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialRepresentationType"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicBoundingBox"/>
+          <field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo" in="/mdb:MD_Metadata"/>
+        </section>
+
+        <section name="temporal">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:temporalElement/gex:EX_TemporalExtent/gex:extent/gml:TimePeriod/gml:beginPosition"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:temporalElement/gex:EX_TemporalExtent/gex:extent/gml:TimePeriod/gml:endPosition"/>
+        </section>
+
+        <section name="dataQualityInfo" displayIfRecord="
+(count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report) > 0)
+">
+          <field name="conceptualConsistency" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation"/>
+          <field name="completenessOmission" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation"/>
+          <field name="completenessCommission" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessCommission/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation"/>
+          <field name="nonQuantitativeAttributeCorrectness" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeCorrectness/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation"/>
+          <field name="absoluteExternalPositionalAccuracy" xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation"/>
+        </section>
+
+        <section name="resourceLineage" displayIfRecord="
+(count(mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/*) > 0)
+">
+          <field xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:processStep/mrl:LI_ProcessStep/mrl:description"/>
+          <field xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement"/>
+        </section>
+
+        <section name="attributes" displayIfRecord="
+(count(mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup/mrc:MD_AttributeGroup/mrc:attribute/*) > 0)
+">
+          <field xpath="/mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup"/>
+        </section>
+
+        <section name="aboutTheMetadataRecord">
           <field xpath="/mdb:MD_Metadata/mdb:metadataIdentifier"/>
-          <field xpath="/mdb:MD_Metadata/mdb:defaultLocale" or="defaultLocale"
-                 in="/mdb:MD_Metadata"/>
-          <field xpath="/mdb:MD_Metadata/mdb:otherLocale" or="otherLocale"
-                 in="/mdb:MD_Metadata"/>
           <field xpath="/mdb:MD_Metadata/mdb:contact" or="contact" in="/mdb:MD_Metadata"/>
           <field xpath="/mdb:MD_Metadata/mdb:parentMetadata" or="parentMetadata"
                  in="/mdb:MD_Metadata"/>
           <field xpath="/mdb:MD_Metadata/mdb:metadataScope" or="metadataScope"
                  in="/mdb:MD_Metadata"/>
-          <field xpath="/mdb:MD_Metadata/mdb:alternativeMetadataReference" or="alternativeMetadataReference"
-                 in="/mdb:MD_Metadata"/>
-          <field xpath="/mdb:MD_Metadata/mdb:metadataLinkage" or="metadataLinkage"
-                 in="/mdb:MD_Metadata"/>
           <field xpath="/mdb:MD_Metadata/mdb:dateInfo"/>
-          <field xpath="/mdb:MD_Metadata/mdb:metadataStandard"/>
-          <field xpath="/mdb:MD_Metadata/mdb:metadataProfile"/>
+          <field name="metadataStandard" xpath="/mdb:MD_Metadata/mdb:metadataStandard/cit:CI_Citation/cit:title"/>
+          <field name="metadataProfile" xpath="/mdb:MD_Metadata/mdb:metadataProfile/cit:CI_Citation/cit:title"/>
+          <field name="metadataProfileVersion" xpath="/mdb:MD_Metadata/mdb:metadataProfile/cit:CI_Citation/cit:edition"/>
+          <field name="metadataProfileDate" xpath="/mdb:MD_Metadata/mdb:metadataProfile/cit:CI_Citation/cit:date/cit:CI_Date/cit:date"/>
         </section>
       </tab>
-      <tab id="metadataConstraints" toggle="true">
-        <section xpath="/mdb:MD_Metadata/mdb:metadataConstraints" or="metadataConstraints"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="metadataMaintenance" toggle="true">
-        <section xpath="/mdb:MD_Metadata/mdb:metadataMaintenance" or="metadataMaintenance"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <tab id="applicationSchemaInfo" toggle="true">
-        <section xpath="/mdb:MD_Metadata/mdb:applicationSchemaInfo" or="applicationSchemaInfo"
-                 in="/mdb:MD_Metadata"/>
-      </tab>
-      <!-- mdb:metadataExtensionInfo-->
     </view>
 
     <view name="xml" displayIfServiceInfo="count(session[profile='Administrator'])=1">
