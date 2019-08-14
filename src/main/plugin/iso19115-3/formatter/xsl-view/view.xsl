@@ -640,45 +640,40 @@
                 match="mrd:distributionFormat[position() > 1]"
                 priority="100"/>
 
-  <!-- delwp specific stuff -->
+  <!-- mcp specific stuff -->
 
   <xsl:template mode="render-field"
-                match="mrc:attributeGroup[descendant::mcp:MD_Attribute]"
+                match="mcp:DP_DataParameter"
                 priority="100">
 
-    <xsl:variable name="headers">
-      <xsl:for-each-group select="descendant::mcp:MD_Attribute/mcp:*" group-by="name()">
-        <xsl:copy-of select="."/>
-      </xsl:for-each-group>
-    </xsl:variable>
+      <h4 class="view-header"><xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/></h4>
 
-    <dl class="gn-format">
-      <dt>
-        <!-- <xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/> -->
-      </dt>
-      <dd>
-        <table class="table table-bordered table-striped">
-          <xsl:for-each select="descendant::mcp:MD_Attribute">
-            <xsl:if test="position()=1">
-              <tr>
-                <xsl:for-each select="$headers/*">
-                  <th>
-                    <xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>
-                  </th>
-                </xsl:for-each>
-              </tr>
-            </xsl:if>
+      <dl class="gn-format">
+        <dt>
+        </dt>
+        <dd>
+         <xsl:for-each select="descendant::*[mcp:DP_Term]">
+          <p><xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>&#160;-&#160;<b><i><xsl:value-of select="descendant::mcp:term/gco:CharacterString"/></i></b></p>
+
+          <table class="table table-bordered table-striped">
             <tr>
-              <xsl:for-each select="*">
-                <td>
-                  <xsl:value-of select="*"/> 
-                </td>
-              </xsl:for-each>
+             <xsl:for-each select="descendant::*[name()!='mcp:term' and (gco:* or *[@codeListValue])]">
+               <th>
+                 <xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>
+               </th>
+             </xsl:for-each>
+            </tr>
+            <tr>
+             <xsl:for-each select="descendant::*[name()!='mcp:term' and (gco:* or *[@codeListValue])]">
+               <td style="padding-left: 2px !important;">
+                 <xsl:value-of select="*/@codeListValue|gco:*"/> 
+               </td>
+             </xsl:for-each>
             </tr>      
-          </xsl:for-each>
-        </table>
-      </dd>
-    </dl>
+          </table>
+         </xsl:for-each>
+        </dd>
+      </dl>
   </xsl:template>
 
   <!-- Date -->

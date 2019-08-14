@@ -830,9 +830,9 @@
 
         <section name="otherDatasetDetails">
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:status"/>
-          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:credit"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:credit[count(*)>0]"/>
           <field name="format" xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title"/>
-          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:supplementalInformation"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:supplementalInformation[not(@gco:nilReason)]"/>
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceMaintenance/mmi:MD_MaintenanceInformation/mmi:maintenanceAndUpdateFrequency"/>
         </section>
 
@@ -863,11 +863,17 @@
           <field xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement"/>
         </section>
 
-        <section name="attributes" displayIfRecord="
+        <section xpath="/mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup//mcp:DP_DataParameter" displayIfRecord="
 (count(mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup/mrc:MD_AttributeGroup/mrc:attribute/*) > 0)
 ">
-          <field xpath="/mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup"/>
         </section>
+<!--
+        <section name="dataParameters" displayIfRecord="
+(count(mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup/mrc:MD_AttributeGroup/mrc:attribute/*) > 0)
+">
+          <field xpath="/mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup//mcp:DP_DataParameter"/>
+        </section>
+-->
 
         <section name="aboutTheMetadataRecord">
           <field xpath="/mdb:MD_Metadata/mdb:metadataIdentifier"/>
