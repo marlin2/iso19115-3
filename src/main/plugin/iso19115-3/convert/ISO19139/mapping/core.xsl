@@ -358,7 +358,6 @@
           <xsl:apply-templates select="gmd:extent[not(child::mcpold:EX_Extent)] | srvold:extent" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:extent[child::mcpold:EX_Extent]" mode="mcpextent"/>
           <!-- map aggregationInfo to additionalDocumentation -->
-          <xsl:message><xsl:value-of select="concat('SSSS ',$mapAggregationInfoToAdditionalDocumentation)"/></xsl:message>
           <xsl:if test="$mapAggregationInfoToAdditionalDocumentation">
             <xsl:apply-templates select="gmd:aggregationInfo" mode="mcpto19115-3"/>
           </xsl:if>

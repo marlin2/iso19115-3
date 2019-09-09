@@ -46,7 +46,6 @@
                 exclude-result-prefixes="#all">
 
   <xsl:template match="gmd:aggregationInfo" mode="mcpto19115-3">
-    <xsl:message>XXXX</xsl:message>
     <xsl:for-each select="gmd:MD_AggregateInformation/gmd:aggregateDataSetName/gmd:CI_Citation">
                 <mri:additionalDocumentation>
                   <cit:CI_Citation>
@@ -59,6 +58,9 @@
                           
                           <cit:date>
                             <xsl:choose>
+                              <xsl:when test="gmd:date/@gcoold:nilReason">
+                                <xsl:attribute name="gco:nilReason">missing</xsl:attribute>
+                              </xsl:when>
                               <xsl:when test="gmd:date/gcoold:Date">
                             <gco:Date><xsl:value-of select="gmd:date/gcoold:Date"/></gco:Date>
                               </xsl:when>
@@ -69,7 +71,7 @@
                           </cit:date>
                           <xsl:variable name="dateType" select="gmd:dateType/gmd:CI_DateTypeCode/@codeListValue"/>
                           <cit:dateType>
-                            <cit:CI_DateTypeCode codeList="codeListLocation#CI_DateTypeCode" codeListValue="{$dateType}"><xsl:value-of select="$dateType"/></cit:CI_DateTypeCode>
+                            <cit:CI_DateTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/codelists.xml#CI_DateTypeCode" codeListValue="{$dateType}"><xsl:value-of select="$dateType"/></cit:CI_DateTypeCode>
                           </cit:dateType>
                         </cit:CI_Date>
                       </cit:date>
