@@ -18,6 +18,7 @@
   <!-- Define if parent identifier should be defined using a uuidref
       attribute or a CI_Citation with a title. -->
   <xsl:param name="isParentIdentifierDefinedWithUUIDAttribute" select="true()" as="xs:boolean"/>
+  <xsl:param name="mapAggregationInfoToAdditionalDocumentation" select="true()" as="xs:boolean"/>
   <!--
     root element templates
   -->
@@ -356,6 +357,11 @@
           <xsl:apply-templates select="gmd:topicCategory" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:extent[not(child::mcpold:EX_Extent)] | srvold:extent" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:extent[child::mcpold:EX_Extent]" mode="mcpextent"/>
+          <!-- map aggregationInfo to additionalDocumentation -->
+          <xsl:message><xsl:value-of select="concat('SSSS ',$mapAggregationInfoToAdditionalDocumentation)"/></xsl:message>
+          <xsl:if test="$mapAggregationInfoToAdditionalDocumentation">
+            <xsl:apply-templates select="gmd:aggregationInfo" mode="mcpto19115-3"/>
+          </xsl:if>
           <xsl:apply-templates select="gmd:resourceMaintenance" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:graphicOverview" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:resourceFormat" mode="from19139to19115-3"/>
@@ -363,7 +369,9 @@
           <xsl:apply-templates select="gmd:resourceSpecificUsage" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:resourceConstraints[not(mcpold:MD_Commons)]" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:resourceConstraints[mcpold:MD_Commons]" mode="mcpcommons"/>
-          <xsl:apply-templates select="gmd:aggregationInfo" mode="from19139to19115-3"/>
+          <xsl:if test="not($mapAggregationInfoToAdditionalDocumentation)">
+            <xsl:apply-templates select="gmd:aggregationInfo" mode="from19139to19115-3"/>
+          </xsl:if>
           <xsl:call-template name="collectiveTitle"/>
           <xsl:apply-templates select="gmd:language" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:characterSet" mode="from19139to19115-3"/>
@@ -677,6 +685,7 @@
   <xsl:include href="mcpcontacts.xsl"/>
   <xsl:include href="mcpcommons.xsl"/>
   <xsl:include href="mcpextent.xsl"/>
+  <xsl:include href="mcpaggregationinfo.xsl"/>
 
   <!--
     Empty High-Priority Templates to prevent
