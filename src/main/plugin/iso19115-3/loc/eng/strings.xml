@@ -101,7 +101,7 @@
   <resourceLineageTab>Lineage</resourceLineageTab>
   <distribution>Distribution</distribution>
   <dataParameters>Parameters</dataParameters>
-  <distributionFormat>Format</distributionFormat>
+  <distributionFormat>Distribution Format</distributionFormat>
   <distributionFormatNoTitle></distributionFormatNoTitle>
   <publications>Publications</publications>
   <publication>Publication</publication>
@@ -113,7 +113,7 @@
 
   <!-- viewer stuff -->
   <details>Details</details>
-  <identifiersAndKeywords>Identifiers and Keywords</identifiersAndKeywords>   
+  <identifiersAndKeywords>Identifiers and Keywords</identifiersAndKeywords>
   <resolution>Resolution</resolution>
   <spatial>Spatial</spatial>
   <aboutTheMetadataRecord>About the Metadata Record</aboutTheMetadataRecord>
