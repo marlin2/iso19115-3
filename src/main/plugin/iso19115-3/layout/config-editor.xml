@@ -857,7 +857,8 @@
         </section>
 
         <section name="resourceLineage" displayIfRecord="
-(count(mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/*) > 0)
+(count(mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement[not(@gco:nilReason)]) > 0) or
+(count(mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:processStep/mrl:LI_ProcessStep/mrl:description[not(@gco:nilReason)]) > 0)
 ">
           <field xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:processStep/mrl:LI_ProcessStep/mrl:description"/>
           <field xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement"/>
