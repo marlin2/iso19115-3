@@ -5525,8 +5525,12 @@
   </element>
   <element name="cit:title" id="66285.0"
            context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:title">
-	  <label>Title</label>
-		<description>Title of the publication.</description>
+	  <label>Reference</label>
+		<description>Publication Reference</description>
+		<help>
+			<![CDATA[<p>Please enter the full publcation reference eg.</p>
+               <p>Peel, D.,Patterson, T., Smith., J., Double, M., and  How, J. (In prep). A Method for Satellite Tag Data Interpolation.</p>]]>
+		</help>
   </element>
   <element name="cit:date" id="66286.0"
            context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:date/cit:CI_Date/cit:date">
@@ -5560,8 +5564,23 @@
   </element>
   <element name="mcc:code" id="66292.0"
            context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:code">
-	  <label>Author ID (eg. ORCID)</label>
-		<description>Author Identifier eg. ORCID.</description>
+	  <label>Digital Identifier</label>
+		<description>Digital Identifier relating to author or publication</description>
+		<help>
+			<![CDATA[<p>Author identifiers from the ORCID organisation can be used - see <a href="https://orcid.org/about">https://orcid.org/about</a>. ORCIDs should be entered as an identifier eg. 0000-0002-1825-0097. There is no need to enter the orcid.org URL</p>
+               <p>Digital Object Identifiers for the publication can be used - see <a href="https://www.doi.org">https://www.doi.org</a>. DOIs should be entered as an identifier eg. doi:10.2991/jnmp.2006.13.4.1. There is no need to enter the doi.org URL</p>]]>
+		</help>
+    <_condition>optional</_condition>
+  </element>
+  <element name="mcc:codeSpace" id="66400.0"
+           context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:codeSpace">
+	  <label>Type of Digital Identifier</label>
+		<description>Type of Digital Identifier. ORCIDs and DOIs are supported.</description>
+		<helper>
+			<option value="doi">doi</option>
+			<option value="orcid">orcid</option>
+		</helper>
+    <_condition>optional</_condition>
   </element>
   <element name="dq_attributeaccuracy_explanation" id="66293.0">
     <label></label>

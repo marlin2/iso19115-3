@@ -752,6 +752,12 @@
                         <mcc:code>
                           <gco:CharacterString></gco:CharacterString>
                         </mcc:code>
+                        <mcc:codeSpace>
+                          <gco:CharacterString>doi</gco:CharacterString>
+                        </mcc:codeSpace>
+                        <!-- supporting doi, orcids at present -->
+                        <!-- doi: prepend https://doi.org, 
+                             orcid: prepend https://orcid.org -->
                       </mcc:MD_Identifier>
                     </cit:identifier>
                   </cit:CI_Citation>
