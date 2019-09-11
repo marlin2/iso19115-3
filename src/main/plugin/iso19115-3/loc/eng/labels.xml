@@ -1201,8 +1201,7 @@
   </element>
   <element name="mri:additionalDocumentation" id="91.0">
     <label>Publication</label>
-    <description iso="true">Publications that describe usage of data
-    </description>
+    <description>Publications that describe usage of, or relate to, the resource/data</description>
     <_condition>optional</_condition>
   </element>
   <element name="mri:identifiedIssues" id="92.0">
@@ -5567,8 +5566,8 @@
 	  <label>Digital Identifier</label>
 		<description>Digital Identifier relating to author or publication</description>
 		<help>
-			<![CDATA[<p>Author identifiers from the ORCID organisation can be used - see <a href="https://orcid.org/about">https://orcid.org/about</a>. ORCIDs should be entered as an identifier eg. 0000-0002-1825-0097. There is no need to enter the orcid.org URL</p>
-               <p>Digital Object Identifiers for the publication can be used - see <a href="https://www.doi.org">https://www.doi.org</a>. DOIs should be entered as an identifier eg. doi:10.2991/jnmp.2006.13.4.1. There is no need to enter the doi.org URL</p>]]>
+			<![CDATA[<p>Author identifiers from the ORCID organisation can be provided - see <a href="https://orcid.org/about">https://orcid.org/about</a>. ORCIDs should be entered as an identifier eg. 0000-0002-1825-0097. Multiple ORCIDs should be entered comma separated. There is no need to enter the orcid.org URL</p>
+               <p>Digital Object Identifier for the publication can be provided - see <a href="https://www.doi.org">https://www.doi.org</a>. DOI should be entered as an identifier eg. doi:10.2991/jnmp.2006.13.4.1. There is no need to enter the doi.org URL</p>]]>
 		</help>
     <_condition>optional</_condition>
   </element>

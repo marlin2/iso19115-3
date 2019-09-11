@@ -842,6 +842,12 @@
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceMaintenance/mmi:MD_MaintenanceInformation/mmi:maintenanceAndUpdateFrequency"/>
         </section>
 
+        <section name="publications" displayIfRecord="
+(count(mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/*) > 0)
+">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation"/>
+        </section>
+
         <section name="spatial">
           <field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo" in="/mdb:MD_Metadata"/>
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicElement/gex:EX_GeographicBoundingBox"/>
@@ -874,13 +880,6 @@
 (count(mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup/mrc:MD_AttributeGroup/mrc:attribute/*) > 0)
 ">
         </section>
-<!--
-        <section name="dataParameters" displayIfRecord="
-(count(mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup/mrc:MD_AttributeGroup/mrc:attribute/*) > 0)
-">
-          <field xpath="/mdb:MD_Metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup//mcp:DP_DataParameter"/>
-        </section>
--->
 
         <section name="aboutTheMetadataRecord">
           <field xpath="/mdb:MD_Metadata/mdb:metadataIdentifier"/>

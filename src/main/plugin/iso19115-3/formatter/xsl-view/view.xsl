@@ -608,6 +608,39 @@
   </xsl:template>
 
   <xsl:template mode="render-field"
+                match="mri:additionalDocumentation"
+                priority="500">
+    <dl class="gn-keyword">
+      <dt>
+        <xsl:apply-templates mode="render-value" select="*/cit:title"/>
+      </dt>
+      <dd>
+        <div>
+          <ul>
+            <xsl:variable name="codespace" select="*/cit:identifier/*/mcc:codeSpace/gco:CharacterString"/>
+            <xsl:for-each select="tokenize(*/cit:identifier/*/mcc:code/gco:CharacterString,',')">
+              <li>
+                <xsl:variable name="url" select="
+                     if ($codespace = 'doi') then concat('https://doi.org/',.)
+                     else if ($codespace = 'orcid') then concat('https://orcid.org/',.)
+                     else ."/>
+                <xsl:choose>
+                  <xsl:when test="starts-with($url,'http')">
+                    <a href="{$url}"><xsl:value-of select="$url"/></a>
+                  </xsl:when>
+                  <xsl:otherwise>
+                   <xsl:value-of select="$url"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </li>
+            </xsl:for-each>
+          </ul>
+        </div>
+      </dd>
+    </dl>
+  </xsl:template>
+
+  <xsl:template mode="render-field"
                 match="mrd:distributionFormat[1]"
                 priority="100">
     <dl class="gn-format">
