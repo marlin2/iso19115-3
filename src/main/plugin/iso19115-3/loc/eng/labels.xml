@@ -5569,7 +5569,7 @@
 			<![CDATA[<p>Author identifiers from the ORCID organisation can be provided - see <a href="https://orcid.org/about">https://orcid.org/about</a>. ORCIDs should be entered as an identifier eg. 0000-0002-1825-0097. Multiple ORCIDs should be entered comma separated. There is no need to enter the orcid.org URL</p>
                <p>Digital Object Identifier for the publication can be provided - see <a href="https://www.doi.org">https://www.doi.org</a>. DOI should be entered as an identifier eg. doi:10.2991/jnmp.2006.13.4.1. There is no need to enter the doi.org URL</p>]]>
 		</help>
-    <_condition>optional</_condition>
+    <condition>optional</condition>
   </element>
   <element name="mcc:codeSpace" id="66400.0"
            context="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:additionalDocumentation/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:codeSpace">
@@ -5579,7 +5579,7 @@
 			<option value="doi">doi</option>
 			<option value="orcid">orcid</option>
 		</helper>
-    <_condition>optional</_condition>
+    <condition>optional</condition>
   </element>
   <element name="dq_attributeaccuracy_explanation" id="66293.0">
     <label></label>
