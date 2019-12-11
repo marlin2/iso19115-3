@@ -408,6 +408,28 @@
             </xsl:if>
           </xsl:if>
 
+          
+
+          <xsl:if test="name()='gcx:Anchor' and $thesaurusIdentifier!=''">
+          <!-- expecting something like 
+                    <gcx:Anchor 
+                      xlink:href="http://localhost:8080/geonetwork/srv/en/xml.keyword.get?thesaurus=register.theme.urn:marine.csiro.au:marlin:keywords:standardDataType&id=urn:marine.csiro.au:marlin:keywords:standardDataTypes:concept:3510">CMAR Vessel Data: ADCP</gcx:Anchor>
+           -->
+
+             <xsl:variable name="keywordId">
+               <xsl:for-each select="tokenize(@xlink:href,'&amp;')">
+                 <xsl:if test="starts-with(string(.),'id=')">
+                   <xsl:value-of select="substring-after(string(.),'id=')"/>
+                 </xsl:if>
+               </xsl:for-each>
+             </xsl:variable>
+
+             <xsl:if test="normalize-space($keywordId)!=''">
+               <Field name="{$thesaurusIdentifier}" string="{replace($keywordId,'%23','#')}" store="true" index="true"/>
+               <Field name="keywordId" string="{replace($keywordId,'%23','#')}" store="true" index="true"/>
+             </xsl:if>
+          </xsl:if>
+
           <xsl:choose>
             <xsl:when test="contains($thesaurusIdentifier,'sourceregister')">
               <Field name="source" string="{string(.)}" store="true" index="true"/>
