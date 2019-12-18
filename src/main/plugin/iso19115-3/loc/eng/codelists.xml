@@ -1216,6 +1216,13 @@
       <label>Data Source</label>
       <description>Keyword identifies data source eg. model, or aggregated/derived data.</description>
     </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- MCP -->
+    <entry>
+      <code>dataParameter</code>
+      <label>Data Parameter</label>
+      <description>Keyword identifies data parameter name used in resource eg. salinity.</description>
+    </entry>
   </codelist>
   <codelist name="mmi:MD_MaintenanceFrequencyCode">
     <entry>

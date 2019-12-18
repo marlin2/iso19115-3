@@ -160,4 +160,57 @@
     </mcc:MD_Identifier>
   </xsl:template>
 
+  <xsl:template match="mcp:dataParameters" mode="fromMCPDataParamsToKeywords">
+    <xsl:if test="count(descendant::mcp:parameterName) > 0">
+      <mri:descriptiveKeywords>
+        <mri:MD_Keywords>
+          <xsl:apply-templates select="descendent::mcp:parameterName/mcp:DP_Term" mode="fromMCPDataParamsToKeywords"/> 
+          <xsl:call-template name="addKeywordType">
+            <xsl:with-param name="type" select="'dataParameter'"/>
+          </xsl:call-template>
+        </mri:MD_Keywords>
+      </mri:descriptiveKeywords>
+    </xsl:if>
+    <xsl:if test="count(descendant::mcp:parameterDeterminationInstrument) > 0">
+      <mri:descriptiveKeywords>
+        <mri:MD_Keywords>
+          <xsl:apply-templates select="descendent::mcp:parameterDeterminationInstrument/mcp:DP_Term" mode="fromMCPDataParamsToKeywords"/> 
+          <xsl:call-template name="addKeywordType">
+            <xsl:with-param name="type" select="'instrument'"/>
+          </xsl:call-template>
+        </mri:MD_Keywords>
+      </mri:descriptiveKeywords>
+    </xsl:if>
+    <xsl:if test="count(descendant::mcp:platform) > 0">
+      <mri:descriptiveKeywords>
+        <mri:MD_Keywords>
+          <xsl:apply-templates select="descendent::mcp:platform/mcp:DP_Term" mode="fromMCPDataParamsToKeywords"/> 
+          <xsl:call-template name="addKeywordType">
+            <xsl:with-param name="type" select="'platform'"/>
+          </xsl:call-template>
+        </mri:MD_Keywords>
+      </mri:descriptiveKeywords>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template mode="fromMCPDataParamsToKeywords" match="mcp:DP_Term">
+    <mri:keyword>
+      <xsl:choose>
+        <xsl:when test="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL">
+          <gcx:Anchor xlink:href="{mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL}"><xsl:value-of select="mcp:term/gcoold:CharacterString"/></gcx:Anchor>
+        </xsl:when>
+        <xsl:otherwise>
+          <gco:CharacterString><xsl:value-of select="mcp:term/gcoold:CharacterString"/></gco:CharacterString>
+        </xsl:otherwise>
+      </xsl:choose>
+    </mri:keyword>
+  </xsl:template>
+
+  <xsl:template name="addKeywordType">
+    <xsl:param name="type"/>
+    <mri:type>
+      <mri:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="{$type}"><xsl:value-of select="$type"/></mri:MD_KeywordTypeCode>
+    </mri:type>
+  </xsl:template>
+
 </xsl:stylesheet>

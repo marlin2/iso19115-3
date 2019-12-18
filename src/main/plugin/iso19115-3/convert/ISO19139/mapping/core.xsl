@@ -365,6 +365,9 @@
           <xsl:apply-templates select="gmd:graphicOverview" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:resourceFormat" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:descriptiveKeywords" mode="from19139to19115-3"/>
+          <xsl:if test="mcpold:dataParameters">
+            <xsl:apply-templates select="mcpold:dataParameters" mode="fromMCPDataParamsToKeywords"/>
+          </xsl:if>
           <xsl:apply-templates select="gmd:resourceSpecificUsage" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:resourceConstraints[not(mcpold:MD_Commons)]" mode="from19139to19115-3"/>
           <xsl:apply-templates select="gmd:resourceConstraints[mcpold:MD_Commons]" mode="mcpcommons"/>

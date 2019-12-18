@@ -442,7 +442,7 @@
             <xsl:when test="contains($thesaurusIdentifier,'gcmd_keywords')">
               <Field name="gcmd" string="{string(.)}" store="true" index="true"/>
               <xsl:variable name="gcmdlast" select="tokenize(string(.),'\|')[last()]"/>
-              <Field name="gcmd_reverse" string="{concat($gcmdlast,' ',string(.))}" store="true" index="true"/>
+              <Field name="gcmd_reverse" string="{concat($gcmdlast,' (',string(.),')')}" store="true" index="true"/>
             </xsl:when>
             <xsl:when test="contains($thesaurusIdentifier,'awavea-keywords')">
               <Field name="awavea" string="{string(.)}" store="true" index="true"/>
