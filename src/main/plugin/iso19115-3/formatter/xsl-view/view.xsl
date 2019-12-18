@@ -681,16 +681,23 @@
                 match="mrc:attributeGroup"
                 priority="100">
 
-      <h4 class="view-header"><xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/></h4>
+      <h4 class="view-header">Data Parameters</h4>
 
       <dl class="gn-format">
         <dt>
         </dt>
         <dd>
          <xsl:for-each select="descendant::*[mrc:MD_SampleDimension]">
-          <p><xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>&#160;-&#160;<b><i><xsl:value-of select="descendant::mrc:name//mcc:code/*"/></i></b></p>
-          <xsl:variable name="vocabUrl" select="descendant::mrc:name//mcc:code/*[@xlink:href]"/>
-          <p><a href="{$vocabUrl}"><xsl:value-of select="$vocabUrl"/></a></p>
+          <xsl:variable name="dpname" select="descendant::mrc:name//mcc:code/*"/>
+          <xsl:variable name="vocabUrl" select="descendant::mrc:name//mcc:code/*/@xlink:href"/>
+          <xsl:choose>
+            <xsl:when test="normalize-space($vocabUrl) = ''">
+              <p>Name: &#160;<b><i><xsl:value-of select="$dpname"/></i></b></p>
+            </xsl:when>
+            <xsl:otherwise>
+              <p>Name: &#160;<b><i><a href="{$vocabUrl}"><xsl:value-of select="$dpname"/></a></i></b></p>
+            </xsl:otherwise>
+          </xsl:choose>
 
           <table class="table table-bordered table-striped">
             <tr>
@@ -700,13 +707,13 @@
             </tr>
             <tr>
               <td style="padding-left: 2px !important;">
-                <xsl:value-of select="mrc:units/gml:BaseUnit/gml:name"/> 
+                <xsl:value-of select="descendant::mrc:units/gml:BaseUnit/gml:name"/> 
               </td>
               <td style="padding-left: 2px !important;">
-                <xsl:value-of select="mrc:otherProperty//mac:platform/mac:MI_Platform/mac:identifier//mcc:code/*"/> 
+                <xsl:value-of select="descendant::mrc:otherProperty//mac:platform/mac:MI_Platform/mac:identifier//mcc:code/*"/> 
               </td>
               <td style="padding-left: 2px !important;">
-                <xsl:value-of select="mrc:otherProperty//mac:platform/mac:MI_Platform/mac:instrument//mac:identifier//mcc:code/*"/> 
+                <xsl:value-of select="descendant::mrc:otherProperty//mac:platform/mac:MI_Platform/mac:instrument//mac:identifier//mcc:code/*"/> 
               </td>
             </tr>      
           </table>

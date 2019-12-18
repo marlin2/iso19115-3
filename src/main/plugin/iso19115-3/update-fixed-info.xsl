@@ -302,7 +302,7 @@
               <mrc:attributeGroup>
                 <mrc:MD_AttributeGroup>
                   <mrc:contentType>
-                    <mrc:MD_CoverageContentTypeCode codeList="concat($codelistloc,'#MD_CoverageContentTypeCode')" codeListValue="physicalMeasurement" />
+                    <mrc:MD_CoverageContentTypeCode codeList="{concat($codelistloc,'#MD_CoverageContentTypeCode')}" codeListValue="physicalMeasurement" />
                   </mrc:contentType>
                   <xsl:for-each select="$equipPresent/dp/*">
       	            <xsl:copy-of select="."/>
