@@ -13,6 +13,7 @@
   xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0"
   xmlns:dqm="http://standards.iso.org/iso/19157/-2/dqm/1.0"
   xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
+  xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
   xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
   xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
   xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
@@ -269,7 +270,6 @@
       <xsl:apply-templates select="mdb:referenceSystemInfo"/>
       <xsl:apply-templates select="mdb:metadataExtensionInfo"/>
       <xsl:apply-templates select="mdb:identificationInfo"/>
-      <xsl:apply-templates select="mdb:contentInfo"/>
 
       <!-- Add/Overwrite data parameters if we have an equipment keyword that matches one in our mapping -->
       <!-- if we have an equipment thesaurus with a match keyword then we process -->
@@ -294,23 +294,28 @@
       </xsl:variable>
 
       <!-- Now copy the constructed data parameters into the record -->
-      <xsl:if test="count($equipPresent/dp/*) > 0">
-        <mdb:contentInfo>
-          <mrc:MD_CoverageDescription>
-            <mrc:attributeDescription gco:nilReason="inapplicable" />
-            <mrc:attributeGroup>
-              <mrc:MD_AttributeGroup>
-                <mrc:contentType>
-                  <mrc:MD_CoverageContentTypeCode codeList="concat($codelistloc,'#MD_CoverageContentTypeCode')" codeListValue="physicalMeasurement" />
-                </mrc:contentType>
-                <xsl:for-each select="$equipPresent/dp/*">
-      	          <xsl:copy-of select="."/>
-                </xsl:for-each>
-              </mrc:MD_AttributeGroup>
-            </mrc:attributeGroup>
-          </mrc:MD_CoverageDescription>
-        </mdb:contentInfo>
-      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="count($equipPresent/dp/*) > 0">
+          <mdb:contentInfo>
+            <mrc:MD_CoverageDescription>
+              <mrc:attributeDescription gco:nilReason="inapplicable" />
+              <mrc:attributeGroup>
+                <mrc:MD_AttributeGroup>
+                  <mrc:contentType>
+                    <mrc:MD_CoverageContentTypeCode codeList="concat($codelistloc,'#MD_CoverageContentTypeCode')" codeListValue="physicalMeasurement" />
+                  </mrc:contentType>
+                  <xsl:for-each select="$equipPresent/dp/*">
+      	            <xsl:copy-of select="."/>
+                  </xsl:for-each>
+                </mrc:MD_AttributeGroup>
+              </mrc:attributeGroup>
+            </mrc:MD_CoverageDescription>
+          </mdb:contentInfo>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="mdb:contentInfo"/>
+        </xsl:otherwise>
+      </xsl:choose>
 
       <xsl:apply-templates select="mdb:distributionInfo"/>
       <xsl:apply-templates select="mdb:dataQualityInfo"/>
@@ -431,26 +436,26 @@
 					<mrc:name>
 						<mcc:MD_Identifier>
               <mcc:code>
-                <gcx:Anchor xlink:href="$tokens[8]"><xsl:value-of select="$tokens[7]"/></gcx:Anchor>
+                <gcx:Anchor xlink:href="{$tokens[8]}"><xsl:value-of select="$tokens[7]"/></gcx:Anchor>
               </mcc:code>
             </mcc:MD_Identifier>
           </mrc:name>
 					<mrc:units>
-            <gml:BaseUnit gml:id="generate-id()">
-              <gml:identifier codeSpace="$tokens[10]"><xsl:value-of select="$tokens[10]"/></gml:identifier>
+            <gml:BaseUnit gml:id="{generate-id()}">
+              <gml:identifier codeSpace="{$tokens[10]}"><xsl:value-of select="$tokens[10]"/></gml:identifier>
               <gml:name><xsl:value-of select="$tokens[9]"/></gml:name>
               <gml:unitsSystem />
             </gml:BaseUnit>
           </mrc:units>
-				  <mrc:maxValue gco:nilReason="missing">
-				  <mrc:minValue gco:nilReason="missing">
+				  <mrc:maxValue gco:nilReason="missing"/>
+				  <mrc:minValue gco:nilReason="missing"/>
           <mrc:otherProperty>
             <gco:Record xsi:type="mac:MI_AcquisitionInformation_PropertyType">
               <mac:MI_AcquisitionInformation>
                 <mac:scope>
                   <mcc:MD_Scope>
                     <mcc:level>
-                      <mcc:MD_ScopeCode codeList="{concat($codelistloc,#MD_ScopeCode)}" codeListValue="collectionHardware" />
+                      <mcc:MD_ScopeCode codeList="{concat($codelistloc,'#MD_ScopeCode')}" codeListValue="collectionHardware" />
                     </mcc:level>
                   </mcc:MD_Scope>
                 </mac:scope>
@@ -475,7 +480,7 @@
                             </mcc:code>
                           </mcc:MD_Identifier>
                         </mac:identifier>
-                        <mac:type gco:nilReason="notApplicable" />
+                        <mac:type gco:nilReason="inapplicable" />
                       </mac:MI_Instrument>
                     </mac:instrument>
                   </mac:MI_Platform>
