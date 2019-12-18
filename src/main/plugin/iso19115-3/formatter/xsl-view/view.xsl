@@ -676,7 +676,7 @@
   <!-- mcp specific stuff -->
 
   <xsl:template mode="render-field"
-                match="mcp:DP_DataParameter"
+                match="mrc:attributeGroup"
                 priority="100">
 
       <h4 class="view-header"><xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/></h4>
@@ -685,23 +685,27 @@
         <dt>
         </dt>
         <dd>
-         <xsl:for-each select="descendant::*[mcp:DP_Term]">
-          <p><xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>&#160;-&#160;<b><i><xsl:value-of select="descendant::mcp:term/gco:CharacterString"/></i></b></p>
+         <xsl:for-each select="descendant::*[mrc:MD_SampleDimension]">
+          <p><xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>&#160;-&#160;<b><i><xsl:value-of select="descendant::mrc:name//mcc:code/*"/></i></b></p>
+          <xsl:variable name="vocabUrl" select="descendant::mrc:name//mcc:code/*[@xlink:href]"/>
+          <p><a href="{$vocabUrl}"><xsl:value-of select="$vocabUrl"/></a></p>
 
           <table class="table table-bordered table-striped">
             <tr>
-             <xsl:for-each select="descendant::*[name()!='mcp:term' and (gco:* or *[@codeListValue])]">
-               <th>
-                 <xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>
-               </th>
-             </xsl:for-each>
+              <th>Units</th>
+              <th>Platform</th>
+              <th>Instrument</th>
             </tr>
             <tr>
-             <xsl:for-each select="descendant::*[name()!='mcp:term' and (gco:* or *[@codeListValue])]">
-               <td style="padding-left: 2px !important;">
-                 <xsl:value-of select="*/@codeListValue|gco:*"/> 
-               </td>
-             </xsl:for-each>
+              <td style="padding-left: 2px !important;">
+                <xsl:value-of select="mrc:units/gml:BaseUnit/gml:name"/> 
+              </td>
+              <td style="padding-left: 2px !important;">
+                <xsl:value-of select="mrc:otherProperty//mac:platform/mac:MI_Platform/mac:identifier//mcc:code/*"/> 
+              </td>
+              <td style="padding-left: 2px !important;">
+                <xsl:value-of select="mrc:otherProperty//mac:platform/mac:MI_Platform/mac:instrument//mac:identifier//mcc:code/*"/> 
+              </td>
             </tr>      
           </table>
          </xsl:for-each>

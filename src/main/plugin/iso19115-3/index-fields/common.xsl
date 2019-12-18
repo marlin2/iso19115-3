@@ -21,7 +21,6 @@
                 xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
                 xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
                 xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
-                xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
                 xmlns:geonet="http://www.fao.org/geonetwork"
                 xmlns:util="java:org.fao.geonet.util.XslUtil"
                 xmlns:joda="java:org.fao.geonet.domain.ISODate"
@@ -773,6 +772,10 @@
       <xsl:copy-of select="gn-fn-iso19115-3:index-field('lineage', ., $langId)"/>
     </xsl:for-each>
 
+
+    <xsl:for-each select="$metadata/mdb:contentInfo/mrc:MD_CoverageDescription/mrc:attributeGroup/mrc:MD_AttributeGroup/mrc:attribute/mrc:MD_SampleDimension">
+      <Field  name="dataParam" string="{string(mrc:name/*/mcc:code/*)}" store="true" index="true"/>
+    </xsl:for-each>
 
 
 
