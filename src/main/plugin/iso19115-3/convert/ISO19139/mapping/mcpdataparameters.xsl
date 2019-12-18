@@ -40,13 +40,12 @@
                 xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
                 xmlns:gml="http://www.opengis.net/gml/3.2"
-                xmlns:mcpold="http://schemas.aodn.org.au/mcp-2.0"
-                xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
+                xmlns:mcp="http://schemas.aodn.org.au/mcp-2.0"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
                 exclude-result-prefixes="#all">
 
-  <xsl:template match="mcpold:dataParameters" mode="from19139to19115-3">
+  <xsl:template match="mcp:dataParameters" mode="from19139to19115-3">
     <mdb:contentInfo>
       <mrc:MD_CoverageDescription>
         <mrc:attributeDescription gco:nilReason="inapplicable"/>
@@ -55,14 +54,83 @@
             <mrc:contentType>
               <mrc:MD_CoverageContentTypeCode codeList='http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#MD_CoverageContentTypeCode' codeListValue='physicalMeasurement'/>
             </mrc:contentType>
-            <xsl:for-each select="*/mcpold:dataParameter">
+            <xsl:for-each select="*/mcp:dataParameter/mcp:DP_DataParameter">
               <mrc:attribute>
                 <mrc:MD_SampleDimension>
-                  <mrc:otherProperty>
-                    <gco:Record xsi:type="mcp:DP_DataParameter_PropertyType">
-                      <xsl:apply-templates select="mcpold:DP_DataParameter" mode="mcpdp"/>
-                    </gco:Record>
-                  </mrc:otherProperty>
+                  <xsl:for-each select="mcp:parameterName/mcp:DP_Term">
+                    <mrc:name>
+                      <xsl:apply-templates mode="mcpdp" select="."/>
+                    </mrc:name>
+                  </xsl:for-each>
+                  <!-- FIXME: mrc:units is 0..1 so this will generate an invalid metadata record! -->
+                  <xsl:for-each select="mcp:parameterUnits/mcp:DP_Term">
+                    <mrc:units>
+                      <gml:BaseUnit gml:id="{generate-id()}">
+                        <gml:identifier>
+                          <xsl:if test="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL">
+                            <xsl:attribute name="codeSpace">
+                              <xsl:value-of select="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL"/>
+                          </xsl:if>
+                        </gml:identifier>
+                        <gml:name>
+                          <xsl:value-of select="mcp:term/gcoold:CharacterString"/>
+                        </gml:name>
+                        <gml:unitsSystem/>
+                      </gml:BaseUnit>
+                    </mrc:units>
+                  </xsl:for-each>
+                  <xsl:if test="string(number(mcp:parameterMaximumValue/*)) != 'NaN'">
+                    <mrc:maxValue>
+                      <gco:Real><xsl:value-of select="mcp:parameterMaximumValue/*"/></gco:Real>
+                    </mrc:maxValue> 
+                  </xsl:if>
+                  <xsl:if test="string(number(mcp:parameterMinimumValue/*)) != 'NaN'">
+                    <mrc:minValue>
+                      <gco:Real><xsl:value-of select="mcp:parameterMinimumValue/*"/></gco:Real>
+                    </mrc:minValue> 
+                  </xsl:if>
+                  <xsl:if test="mcp:platform or mcp:parameterDeterminationInstrument">
+                    <mrc:otherProperty>
+                      <gco:Record xsi:type="mac:MI_AcquisitionInformation_PropertyType">
+                        <mac:MI_AcquisitionInformation>
+                          <mac:scope>
+                            <mcc:MD_Scope>
+                              <mcc:level>
+                                <mcc:MD_ScopeCode codeList="codeListLocation#MD_ScopeCode" codeListValue="collectionHardware"/>
+                              </mcc:level>
+                            </mcc:MD_Scope>
+                          </mac:scope>
+                          <mac:platform>
+                            <mac:MI_Platform>
+                              <mac:identifier>
+                                <xsl:apply-templates mode="mcpdp" select="mcp:platform/mcp:DP_Term"/>
+                              </mac:identifier>
+                              <mac:description>
+                                <gco:CharacterString>Platform used to capture data</gco:CharacterString>
+                              </mac:description>
+                              <xsl:choose>
+                                <xsl:when test="mcp:parameterDeterminationInstrument">
+                                  <mac:instrument>
+                                    <mac:MI_Instrument>
+                                      <mac:identifier>
+                                        <xsl:apply-templates mode="mcpdp" select="mcp:parameterDeterminationInstrument/mcp:DP_Term"/>
+                                      </mac:identifier>
+                                      <mac:type gco:nilReason="notApplicable"/>
+                                    </mac:MI_Instrument>
+                                  </mac:instrument>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                  <mac:instrument gco:nilReason="unknown"/>
+                                </xsl:otherwise>
+                              </xsl:choose>
+                            </mac:MI_Platform>
+                          </mac:platform>
+                        </mac:MI_AcquisitionInformation>
+                      </gco:Record>
+                    </mrc:otherProperty>
+                   </xsl:if>
                 </mrc:MD_SampleDimension>
               </mrc:attribute>
             </xsl:for-each>
@@ -72,36 +140,24 @@
     </mdb:contentInfo>
   </xsl:template>
 
-  <xsl:template match="mcpold:*" mode="mcpdp">
-    <xsl:variable name="localname" select="local-name()"/>
-    <xsl:element name="{concat('mcp:',$localname)}">
-      <xsl:apply-templates select="@*|node()" mode="mcpdp"/>
-    </xsl:element>
+  <xsl:template mode="mcpdp" match="mcp:DP_Term">
+    <mcc:MD_Identifier>
+      <mcc:code>
+        <xsl:choose>
+          <xsl:when test="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL">
+            <gcx:Anchor xlink:href="{mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL}"><xsl:value-of select="mcp:term/gcoold:CharacterString"/></gcx:Anchor>
+          </xsl:when>
+          <xsl:otherwise>
+            <gco:CharacterString><xsl:value-of select="mcp:term/gcoold:CharacterString"/></gco:CharacterString>
+          </xsl:otherwise>
+        </xsl:choose>
+      </mcc:code>
+      <xsl:if test="mcp:localDefinition/gcoold:CharacterString">
+        <mcc:description>
+          <gco:CharacterString><xsl:value-of select="mcp:localDefinition/gcoold:CharacterString"/></gco:CharacterString>
+        </mcc:description>
+      </xsl:if>
+    </mcc:MD_Identifier>
   </xsl:template>
 
-  <xsl:template match="gmd:URL" mode="mcpdp">
-    <xsl:element name="gco:CharacterString">
-      <xsl:copy-of select="@*|text()"/>
-    </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="gcoold:*" mode="mcpdp">
-    <xsl:variable name="localname" select="local-name()"/>
-    <xsl:element name="{concat('gco:',$localname)}">
-      <xsl:copy-of select="@*|text()"/>
-    </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="@gcoold:*" mode="mcpdp">
-    <xsl:variable name="localname" select="local-name()"/>
-    <xsl:attribute name="{concat('gco:',$localname)}">
-      <xsl:value-of select="."/>
-    </xsl:attribute>
-  </xsl:template>
-
-  <xsl:template match="@*|node()" mode="mcpdp">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()" mode="mcpdp"/>
-    </xsl:copy>
-  </xsl:template>
 </xsl:stylesheet>

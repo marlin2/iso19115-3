@@ -66,6 +66,15 @@
     </xsl:for-each>
   </xsl:template>
 
+  <!-- Replace gml30:uom with uom on gml30:CoordinateSystemAxis -->
+  <xsl:template match="gml30:CoordinateSystemAxis[@gml30:uom!='']" mode="from19139to19115-3" priority="50">
+    <xsl:element name="gml:{local-name(.)}" namespace="http://www.opengis.net/gml/3.2">
+      <xsl:apply-templates select="@*[local-name()!='uom']" mode="from19139to19115-3"/>
+      <xsl:attribute name="uom"><xsl:value-of select="@gml30:uom"/></xsl:attribute>
+      <xsl:apply-templates mode="from19139to19115-3"/>
+    </xsl:element>
+  </xsl:template>
+
   <xsl:template match="gml30:*" mode="from19139to19115-3">
     <xsl:element name="gml:{local-name(.)}" namespace="http://www.opengis.net/gml/3.2">
       <xsl:apply-templates select="@*" mode="from19139to19115-3"/>
