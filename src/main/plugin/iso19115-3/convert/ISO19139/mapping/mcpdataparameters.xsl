@@ -164,7 +164,7 @@
     <xsl:if test="count(descendant::mcp:parameterName) > 0">
       <mri:descriptiveKeywords>
         <mri:MD_Keywords>
-          <xsl:apply-templates select="descendent::mcp:parameterName/mcp:DP_Term" mode="fromMCPDataParamsToKeywords"/> 
+          <xsl:apply-templates select="descendant::mcp:parameterName/mcp:DP_Term" mode="fromMCPDataParamsToKeywords"/> 
           <xsl:call-template name="addKeywordType">
             <xsl:with-param name="type" select="'dataParameter'"/>
           </xsl:call-template>
@@ -174,7 +174,9 @@
     <xsl:if test="count(descendant::mcp:parameterDeterminationInstrument) > 0">
       <mri:descriptiveKeywords>
         <mri:MD_Keywords>
-          <xsl:apply-templates select="descendent::mcp:parameterDeterminationInstrument/mcp:DP_Term" mode="fromMCPDataParamsToKeywords"/> 
+          <xsl:for-each-group select="descendant::mcp:parameterDeterminationInstrument/mcp:DP_Term" group-by="mcp:term/*">
+            <xsl:apply-templates select="." mode="fromMCPDataParamsToKeywords"/> 
+          </xsl:for-each-group>
           <xsl:call-template name="addKeywordType">
             <xsl:with-param name="type" select="'instrument'"/>
           </xsl:call-template>
@@ -184,7 +186,9 @@
     <xsl:if test="count(descendant::mcp:platform) > 0">
       <mri:descriptiveKeywords>
         <mri:MD_Keywords>
-          <xsl:apply-templates select="descendent::mcp:platform/mcp:DP_Term" mode="fromMCPDataParamsToKeywords"/> 
+          <xsl:for-each-group select="descendant::mcp:platform/mcp:DP_Term" group-by="mcp:term/*">
+            <xsl:apply-templates select="." mode="fromMCPDataParamsToKeywords"/> 
+          </xsl:for-each-group>
           <xsl:call-template name="addKeywordType">
             <xsl:with-param name="type" select="'platform'"/>
           </xsl:call-template>
