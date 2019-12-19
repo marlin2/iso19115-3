@@ -416,7 +416,75 @@
       <xsl:apply-templates select="mri:resourceMaintenance"/>
       <xsl:apply-templates select="mri:graphicOverview"/>
       <xsl:apply-templates select="mri:resourceFormat"/>
-      <xsl:apply-templates select="mri:descriptiveKeywords"/>
+      <xsl:apply-templates select="mri:descriptiveKeywords[descendant::mri:type/mri:MD_KeywordTypeCode[not(@codeListValue='platform') and not(@codeListValue='dataParameter') and not(@codeListValue='instrument')]]"/>
+      <xsl:variable name="equipPresent">
+       <xsl:for-each select="mri:descriptiveKeywords/mri:MD_Keywords[normalize-space(mri:thesaurusName/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:code/gcx:Anchor)=$equipThesaurus]/mri:keyword/gcx:Anchor">
+        <xsl:element name="dp">
+           <xsl:variable name="currentKeyword" select="text()"/>
+           <!-- <xsl:message>Automatically created dp from <xsl:value-of select="$currentKeyword"/></xsl:message> -->
+           <xsl:for-each select="$mapping/map/equipment">
+              <xsl:variable name="tokens" select="tokenize(string(),',')"/>
+              <!-- <xsl:message>Checking <xsl:value-of select="$tokens[2]"/></xsl:message> -->
+              <xsl:if test="$currentKeyword=$tokens[2]">
+                 <!-- <xsl:message>KW MATCHED TOKEN: <xsl:value-of select="$tokens[2]"/></xsl:message> -->
+                 <xsl:call-template name="fillOutDataParameters">
+ 										<xsl:with-param name="tokens" select="$tokens"/> 
+                 </xsl:call-template>
+              </xsl:if>
+           </xsl:for-each>
+        </xsl:element>
+		   </xsl:for-each>
+      </xsl:variable>
+
+      <!-- Now construct data parameter keywords and put them into the record -->
+      <!-- data parameter -->
+      <xsl:if test="count($equipPresent/dp/mrc:attribute//mrc:name) > 0">
+        <mri:descriptiveKeywords>
+          <mri:MD_Keywords>
+            <xsl:for-each-group select="$equipPresent/dp/mrc:attribute//mrc:name//mcc:code/*" group-by="text()">
+              <mri:keyword>
+                <xsl:copy-of select="."/>
+              </mri:keyword>
+            </xsl:for-each-group> 
+          </mri:MD_Keywords> 
+          <mri:type>
+            <mri:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="dataParameter">dataParameter</mri:MD_KeywordTypeCode>
+          </mri:type>
+        </mri:descriptiveKeywords>
+      </xsl:if>
+
+      <!-- platform -->
+      <xsl:if test="count($equipPresent/dp/mrc:attribute//mrc:otherProperty//mac:platform/mac:MI_Platform/mac:identifier//mcc:code) > 0">
+        <mri:descriptiveKeywords>
+          <mri:MD_Keywords>
+            <xsl:for-each-group select="$equipPresent/dp/mrc:attribute//mrc:otherProperty//mac:platform/mac:MI_Platform/mac:identifier//mcc:code/*" group-by="text()">
+              <mri:keyword>
+                <xsl:copy-of select="."/>
+              </mri:keyword>
+            </xsl:for-each-group> 
+          </mri:MD_Keywords> 
+          <mri:type>
+            <mri:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="platform">platform</mri:MD_KeywordTypeCode>
+          </mri:type>
+        </mri:descriptiveKeywords>
+      </xsl:if>
+
+      <!-- instrument -->
+      <xsl:if test="count($equipPresent/dp/mrc:attribute//mrc:otherProperty//mac:platform//mac:instrument//mcc:code) > 0">
+        <mri:descriptiveKeywords>
+          <mri:MD_Keywords>
+            <xsl:for-each-group select="$equipPresent/dp/mrc:attribute//mrc:otherProperty//mac:platform//mac:instrument//mcc:code/*" group-by="text()">
+              <mri:keyword>
+                <xsl:copy-of select="."/>
+              </mri:keyword>
+            </xsl:for-each-group> 
+          </mri:MD_Keywords> 
+          <mri:type>
+            <mri:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="instrument">instrument</mri:MD_KeywordTypeCode>
+          </mri:type>
+        </mri:descriptiveKeywords>
+      </xsl:if>
+
       <xsl:apply-templates select="mri:resourceSpecificUsage"/>
       <xsl:apply-templates select="mri:resourceConstraints"/>
       <xsl:apply-templates select="mri:associatedResource"/>
