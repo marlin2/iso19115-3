@@ -52,7 +52,7 @@
         <mrc:attributeGroup> 
           <mrc:MD_AttributeGroup>
             <mrc:contentType>
-              <mrc:MD_CoverageContentTypeCode codeList='http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#MD_CoverageContentTypeCode' codeListValue='physicalMeasurement'/>
+              <mrc:MD_CoverageContentTypeCode codeList='http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_CoverageContentTypeCode' codeListValue='physicalMeasurement'/>
             </mrc:contentType>
             <xsl:for-each select="*/mcp:dataParameter/mcp:DP_DataParameter">
               <mrc:attribute>
@@ -164,7 +164,9 @@
     <xsl:if test="count(descendant::mcp:parameterName) > 0">
       <mri:descriptiveKeywords>
         <mri:MD_Keywords>
-          <xsl:apply-templates select="descendant::mcp:parameterName/mcp:DP_Term" mode="fromMCPDataParamsToKeywords"/> 
+          <xsl:for-each-group select="descendant::mcp:parameterName/mcp:DP_Term" group-by="mcp:term/*">
+            <xsl:apply-templates select="." mode="fromMCPDataParamsToKeywords"/> 
+          </xsl:for-each-group>
           <xsl:call-template name="addKeywordType">
             <xsl:with-param name="type" select="'dataParameter'"/>
           </xsl:call-template>

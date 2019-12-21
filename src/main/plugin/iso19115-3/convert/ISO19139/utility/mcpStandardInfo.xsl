@@ -64,7 +64,7 @@
             <gco:Date>2019-05-30</gco:Date>
           </cit:date>
           <cit:dateType>
-            <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            <cit:CI_DateTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="creation" />
           </cit:dateType>
         </cit:CI_Date>
       </cit:date>
@@ -77,7 +77,7 @@
       <cit:citedResponsibleParty>
         <cit:CI_Responsibility>
           <cit:role>
-            <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="custodian" />
+            <cit:CI_RoleCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian" />
           </cit:role>
           <cit:party>
             <cit:CI_Organisation>

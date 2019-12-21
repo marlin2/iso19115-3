@@ -63,7 +63,7 @@
         <xsl:param name="codeListName"/>
         <xsl:param name="codeListValue"/>
         <!-- The correct codeList Location goes here -->
-        <xsl:variable name="codeListLocation" select="'codeListLocation'"/>
+        <xsl:variable name="codeListLocation" select="'http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml'"/>
         <xsl:if test="string-length($codeListValue) > 0">
             <xsl:element name="{$elementName}">
                 <xsl:element name="{$codeListName}">
