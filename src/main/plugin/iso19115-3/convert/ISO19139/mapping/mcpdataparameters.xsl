@@ -54,7 +54,7 @@
             <mrc:contentType>
               <mrc:MD_CoverageContentTypeCode codeList='http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_CoverageContentTypeCode' codeListValue='physicalMeasurement'/>
             </mrc:contentType>
-            <xsl:for-each select="*/mcp:dataParameter/mcp:DP_DataParameter">
+            <xsl:for-each-group select="*/mcp:dataParameter/mcp:DP_DataParameter" group-by="mcp:parameterName/mcp:DP_Term/mcp:term/*">
               <mrc:attribute>
                 <mrc:MD_SampleDimension>
                   <xsl:for-each select="mcp:parameterName/mcp:DP_Term">
@@ -133,7 +133,7 @@
                    </xsl:if>
                 </mrc:MD_SampleDimension>
               </mrc:attribute>
-            </xsl:for-each>
+            </xsl:for-each-group>
           </mrc:MD_AttributeGroup>
         </mrc:attributeGroup> 
       </mrc:MD_CoverageDescription>
