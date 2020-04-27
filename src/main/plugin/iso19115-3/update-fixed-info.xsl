@@ -16,7 +16,6 @@
   xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
   xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
   xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
-  xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:gn-fn-iso19115-3="http://geonetwork-opensource.org/xsl/functions/profiles/iso19115-3"
   xmlns:xlink="http://www.w3.org/1999/xlink"

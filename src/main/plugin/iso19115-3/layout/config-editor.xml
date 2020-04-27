@@ -474,10 +474,10 @@
             </template>
           </action>
 
-          <!-- DQ_NonQuantitativeAttributeAccuracy -->
+          <!-- DQ_NonQuantitativeAttributeCorrectness -->
           <field name="nonQuantitativeAttributeAccuracy" templateModeOnly="true" 
-                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeAccuracy/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]"
-                 if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
+                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeCorrectness/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]"
+                 if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeCorrectness/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
                 <key label="explanation" xpath="mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString" use="textarea" tooltip="dq_attributeaccuracy_explanation"/>
@@ -514,11 +514,11 @@
 
           <action type="add" name="nonQuantitativeAttributeAccuracy" or="report"
                   in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
-                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeAccuracy)=0">
+                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeCorrectness)=0">
             <template>
               <snippet>
                <mdq:report>
-               <mdq:DQ_NonQuantitativeAttributeAccuracy>
+               <mdq:DQ_NonQuantitativeAttributeCorrectness>
                 <mdq:result>
                   <mdq:DQ_ConformanceResult>
                     <mdq:specification>
@@ -532,7 +532,7 @@
                     <mdq:pass gco:nilReason="inapplicable"/>
                   </mdq:DQ_ConformanceResult>
                 </mdq:result>
-               </mdq:DQ_NonQuantitativeAttributeAccuracy>
+               </mdq:DQ_NonQuantitativeAttributeCorrectness>
                </mdq:report>
               </snippet>
             </template>
