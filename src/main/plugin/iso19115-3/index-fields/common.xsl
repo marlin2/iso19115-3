@@ -1024,7 +1024,9 @@
     <xsl:param name="lang"/>
     <xsl:param name="langId"/>
 
-    <xsl:copy-of select="gn-fn-iso19115-3:index-field('orgName', cit:name, $langId)"/>
+    <xsl:if test="cit:name">
+      <xsl:copy-of select="gn-fn-iso19115-3:index-field('orgName', cit:name, $langId)"/>
+    </xsl:if>
     <xsl:variable name="role" select="../../cit:role/*/@codeListValue"/>
     <xsl:variable name="email" select="cit:contactInfo/cit:CI_Contact/
                                 cit:address/cit:CI_Address/
