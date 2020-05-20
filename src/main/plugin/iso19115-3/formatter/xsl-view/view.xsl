@@ -573,8 +573,9 @@
         <div>
           <ul>
             <li>
-              <xsl:apply-templates mode="render-value"
-                                   select="*/mri:keyword/*"/>
+              <xsl:for-each select="*/mri:keyword">
+                <xsl:apply-templates mode="render-value" select="."/><xsl:if test="position() != last()">, </xsl:if>
+              </xsl:for-each>
             </li>
           </ul>
         </div>
