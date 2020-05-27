@@ -514,6 +514,14 @@
           <li style="list-style-type: none;"><a href="{mco:reference//cit:linkage/gco:CharacterString}" target="_blank">License Text</a></li>
         </ul>
       </dd>
+      <xsl:if test="mco:otherConstraints/gco:CharacterString!=''">
+        <dt>
+          <xsl:value-of select="tr:node-label(tr:create($schema), 'mco:otherConstraints', null)"/>
+        </dt>
+        <dd>
+          <xsl:apply-templates mode="render-value" select="mco:otherConstraints"/>
+        </dd>
+      </xsl:if>
     </dl>
   </xsl:template>
 

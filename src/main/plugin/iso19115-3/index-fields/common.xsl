@@ -609,11 +609,16 @@
 
       <!-- FIXME: Additional constraints have been created in the mco schema -->
       <xsl:for-each select="mri:resourceConstraints">
-        <xsl:for-each select="//mco:otherConstraints">
+        <xsl:for-each select=".//mco:otherConstraints">
           <xsl:copy-of select="gn-fn-iso19115-3:index-field('otherConstr', ., $langId)"/>
         </xsl:for-each>
-        <xsl:for-each select="//mco:useLimitation">
+        <xsl:for-each select=".//mco:useLimitation">
           <xsl:copy-of select="gn-fn-iso19115-3:index-field('conditionApplyingToAccessAndUse', ., $langId)"/>
+        </xsl:for-each>
+        <xsl:for-each select=".//mco:MD_LegalConstraints[mco:graphic/mcc:MD_BrowseGraphic[mcc:linkage]]">
+          <Field name="licenseGraphic" 
+                 string="{concat(mco:graphic//cit:linkage/*,'|',mco:reference//cit:title/*,'|',mco:reference//cit:linkage/*,'|',mco:otherConstraints/*)}"
+                 store="true" index="false"/>
         </xsl:for-each>
       </xsl:for-each>
 
