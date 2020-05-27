@@ -896,7 +896,7 @@
       </tab>
     </view>
 
-    <view name="xml" displayIfServiceInfo="count(session[profile='Administrator'])=1">
+    <view name="xml" displayIfServiceInfo="count(session[profile='Administrator' or profile='Reviewer'])=1">
       <tab id="xml" default="true"/>
     </view>
   </views>
