@@ -168,12 +168,13 @@
       <xsl:variable name="isRevisionDateAvailable"
                     select="mdb:dateInfo/*[cit:dateType/*/@codeListValue = 'revision']"/>
 
+     
       <!-- Add creation date if it does not exist-->
       <xsl:if test="not($isCreationDateAvailable)">
         <mdb:dateInfo>
           <cit:CI_Date>
             <cit:date>
-              <gco:DateTime><xsl:value-of select="/root/env/changeDate"/></gco:DateTime>
+              <gco:DateTime><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]')"/></gco:DateTime>
             </cit:date>
             <cit:dateType>
               <cit:CI_DateTypeCode codeList="{concat($codelistloc,'#CI_DateTypeCode')}" codeListValue="creation"/>
