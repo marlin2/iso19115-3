@@ -133,7 +133,7 @@
     <div class="alert alert-info"
         itemprop="description"
         itemscope="itemscope"
-        itemtype="http://schema.org/description">
+        itemtype="http://schema.org/description" style="white-space: pre-wrap;">
       <xsl:for-each select="mdb:identificationInfo/*/mri:abstract">
         <xsl:call-template name="get-iso19115-3-localised">
           <xsl:with-param name="langId" select="$langId"/>
