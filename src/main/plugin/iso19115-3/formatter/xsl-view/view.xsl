@@ -200,10 +200,10 @@
 
           <!-- Link -->
           <xsl:variable name="url"
-                        select="concat($nodeUrl, 'api/records/', $metadataUuid)"/>
+                        select="concat($nodeUrl, 'api/records/', $metadataUuid, '/formatters/xml')"/>
           <a itemprop="url"
               itemscope="itemscope"
-              itemtype="http://schema.org/url" href="{url}">
+              itemtype="http://schema.org/url" href="{$url}" target="_blank">
             <xsl:value-of select="$url"/>
           </a>
         </td>
