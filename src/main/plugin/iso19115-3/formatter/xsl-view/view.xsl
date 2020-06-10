@@ -97,7 +97,9 @@
   </xsl:template>
 
   <xsl:template mode="getMetadataHierarchyLevel" match="mdb:MD_Metadata">
-    <xsl:value-of select="mdb:metadataScope/*/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue"/>
+    <xsl:value-of select="if (mdb:metadataScope/*/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue) then 
+                            mdb:metadataScope/*/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue
+                          else 'dataset'"/>
   </xsl:template>
 
   <xsl:template mode="getOverviews" match="mdb:MD_Metadata">
