@@ -48,9 +48,9 @@
     <for name="gco:Angle" use="number"/>
     <for name="gco:Boolean" use="checkbox"/>
 
-		<!-- NOTE: for directiveAttributes on gco:Date/gco:DateTime 
+		<!-- NOTE: for directiveAttributes on gco:Date/gco:DateTime
 		           refer to iso19115-3/layout/layout.xsl -->
-    <for name="gco:Date" use="data-gn-date-picker"/> 
+    <for name="gco:Date" use="data-gn-date-picker"/>
     <for name="gco:DateTime" use="data-gn-date-picker"/>
 
 
@@ -184,7 +184,7 @@
       <name>cit:abstract</name>
     </expanded>
     <!-- All fields in ISO could be multilingual.
-    Define element to exlcude. 
+    Define element to exlcude.
     TODO: it may be relevant to have parent defined
     to restrict the list.
     -->
@@ -224,8 +224,8 @@
         <!-- <directive data-gn-validation-report=""/> -->
         <!-- <directive data-gn-suggestion-list=""/> -->
         <!-- relative csiroDocUrl in gnGlobalSettings which is set to
-             https://confluence.csiro.au/display/DataCentreShared/ -->
-        <directive data-gn-need-help="Editing" data-csiro="true"/>
+             https://confluence.csiro.au/pages/viewpage.action? -->
+        <directive data-gn-need-help="pageId=252711796" data-csiro="true"/>
       </sidePanel>
 
       <tab id="resourceCitation" default="true" mode="flat">
@@ -279,7 +279,7 @@
         <section>
           <text ref="custodianIsMandatory" if="count(mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:pointOfContact/cit:CI_Responsibility[cit:role/cit:CI_RoleCode/@codeListValue='custodian']/cit:*) = 1"/>
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:pointOfContact" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification"/>
-          <!-- always display an add action that will add a new 
+          <!-- always display an add action that will add a new
                resourceContactInfo block with just the role and
                party in it -->
           <action type="add" name="resourceContactInfo" or="pointOfContact" if="true()" in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification">
@@ -411,8 +411,8 @@
         <section name=" ">
 
           <!-- DQ_CompletenessOmission -->
-          <field name="completenessOmission" templateModeOnly="true" 
-                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]" 
+          <field name="completenessOmission" templateModeOnly="true"
+                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]"
                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_CompletenessOmission/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
@@ -475,7 +475,7 @@
           </action>
 
           <!-- DQ_NonQuantitativeAttributeCorrectness -->
-          <field name="nonQuantitativeAttributeAccuracy" templateModeOnly="true" 
+          <field name="nonQuantitativeAttributeAccuracy" templateModeOnly="true"
                  xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeCorrectness/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]"
                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_NonQuantitativeAttributeCorrectness/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
@@ -539,8 +539,8 @@
           </action>
 
           <!-- DQ_ConceptualConsistency -->
-          <field name="conceptualConsistency" templateModeOnly="true" 
-                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]" 
+          <field name="conceptualConsistency" templateModeOnly="true"
+                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]"
                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_ConceptualConsistency/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
@@ -603,8 +603,8 @@
           </action>
 
           <!-- DQ_AbsoluteExternalPositionalAccuracy -->
-          <field name="absoluteExternalPositionalAccuracy" templateModeOnly="true" 
-                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]" 
+          <field name="absoluteExternalPositionalAccuracy" templateModeOnly="true"
+                 xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy/mdq:result[count(mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0]"
                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:report/mdq:DQ_AbsoluteExternalPositionalAccuracy/mdq:result/mdq:DQ_ConformanceResult/mdq:explanation/gco:CharacterString)>0" del="../..">
             <template>
               <values>
@@ -713,7 +713,7 @@
                                   <gco:CharacterString></gco:CharacterString>
                                 </cit:name>
                               </cit:CI_Individual>
-                            </cit:individual> 
+                            </cit:individual>
                           </cit:CI_Organisation>
                         </cit:party>
                       </cit:CI_Responsibility>
@@ -756,7 +756,7 @@
                           <gco:CharacterString>doi</gco:CharacterString>
                         </mcc:codeSpace>
                         <!-- supporting doi, orcids at present -->
-                        <!-- doi: prepend https://doi.org, 
+                        <!-- doi: prepend https://doi.org,
                              orcid: prepend https://orcid.org -->
                       </mcc:MD_Identifier>
                     </cit:identifier>
