@@ -262,12 +262,13 @@
               <xsl:with-param name="parentElement" select="gmd:name"/>
             </xsl:call-template>
           </cit:title>
+          <!-- No need for the rest of this stuff
           <cit:alternateTitle>
             <xsl:call-template name="characterStringSubstitutions">
               <xsl:with-param name="parentElement" select="gmd:specification"/>
             </xsl:call-template>
           </cit:alternateTitle>
-          <!-- 19115(2006) does not have concept of a format specification date -->
+          <!- - 19115(2006) does not have concept of a format specification date - ->
           <cit:date gco:nilReason="unknown"/>
           <cit:edition>
             <xsl:call-template name="characterStringSubstitutions">
@@ -283,6 +284,7 @@
               </mcc:code>
             </mcc:MD_Identifier>
           </cit:identifier>
+          -->
         </xsl:element>
       </xsl:element>
       <xsl:apply-templates mode="from19139to19115-3"/>
