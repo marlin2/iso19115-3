@@ -16,7 +16,6 @@
   xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
   xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
   xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
-  xmlns:mcp="http://schemas.aodn.org.au/mcp-3.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:gn-fn-iso19115-3="http://geonetwork-opensource.org/xsl/functions/profiles/iso19115-3"
   xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -169,12 +168,13 @@
       <xsl:variable name="isRevisionDateAvailable"
                     select="mdb:dateInfo/*[cit:dateType/*/@codeListValue = 'revision']"/>
 
+     
       <!-- Add creation date if it does not exist-->
       <xsl:if test="not($isCreationDateAvailable)">
         <mdb:dateInfo>
           <cit:CI_Date>
             <cit:date>
-              <gco:DateTime><xsl:value-of select="/root/env/changeDate"/></gco:DateTime>
+              <gco:DateTime><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]')"/></gco:DateTime>
             </cit:date>
             <cit:dateType>
               <cit:CI_DateTypeCode codeList="{concat($codelistloc,'#CI_DateTypeCode')}" codeListValue="creation"/>

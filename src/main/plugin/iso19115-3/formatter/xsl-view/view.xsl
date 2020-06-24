@@ -97,7 +97,9 @@
   </xsl:template>
 
   <xsl:template mode="getMetadataHierarchyLevel" match="mdb:MD_Metadata">
-    <xsl:value-of select="mdb:metadataScope/*/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue"/>
+    <xsl:value-of select="if (mdb:metadataScope/*/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue) then 
+                            mdb:metadataScope/*/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue
+                          else 'dataset'"/>
   </xsl:template>
 
   <xsl:template mode="getOverviews" match="mdb:MD_Metadata">
@@ -133,7 +135,7 @@
     <div class="alert alert-info"
         itemprop="description"
         itemscope="itemscope"
-        itemtype="http://schema.org/description">
+        itemtype="http://schema.org/description" style="white-space: pre-wrap;">
       <xsl:for-each select="mdb:identificationInfo/*/mri:abstract">
         <xsl:call-template name="get-iso19115-3-localised">
           <xsl:with-param name="langId" select="$langId"/>
@@ -200,10 +202,10 @@
 
           <!-- Link -->
           <xsl:variable name="url"
-                        select="concat($nodeUrl, 'api/records/', $metadataUuid)"/>
+                        select="concat($nodeUrl, 'api/records/', $metadataUuid, '/formatters/xml')"/>
           <a itemprop="url"
               itemscope="itemscope"
-              itemtype="http://schema.org/url" href="{url}">
+              itemtype="http://schema.org/url" href="{$url}" target="_blank">
             <xsl:value-of select="$url"/>
           </a>
         </td>
@@ -514,6 +516,14 @@
           <li style="list-style-type: none;"><a href="{mco:reference//cit:linkage/gco:CharacterString}" target="_blank">License Text</a></li>
         </ul>
       </dd>
+      <xsl:if test="mco:otherConstraints/gco:CharacterString!=''">
+        <dt>
+          <xsl:value-of select="tr:node-label(tr:create($schema), 'mco:otherConstraints', null)"/>
+        </dt>
+        <dd>
+          <xsl:apply-templates mode="render-value" select="mco:otherConstraints"/>
+        </dd>
+      </xsl:if>
     </dl>
   </xsl:template>
 
@@ -573,8 +583,9 @@
         <div>
           <ul>
             <li>
-              <xsl:apply-templates mode="render-value"
-                                   select="*/mri:keyword/*"/>
+              <xsl:for-each select="*/mri:keyword">
+                <xsl:apply-templates mode="render-value" select="."/><xsl:if test="position() != last()">, </xsl:if>
+              </xsl:for-each>
             </li>
           </ul>
         </div>
