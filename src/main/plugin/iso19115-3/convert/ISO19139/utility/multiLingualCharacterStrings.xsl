@@ -29,11 +29,12 @@
             The hasCharacterString variable was generalized to include situations where substitutions are
             being used gor gco:CharacterString, e.g. gmx:FileName.
         -->
-        <xsl:variable name="hasChildNode" select="count($nodeWithStringToWrite/*) = 1"/>
-        <xsl:if test="$nodeWithStringToWrite">
+        <xsl:if test="count($nodeWithStringToWrite) > 1"><xsl:message>XXX Found <xsl:value-of select="count($nodeWithStringToWrite)"/> with <xsl:value-of select="name($nodeWithStringToWrite[1])"/></xsl:message></xsl:if>
+        <xsl:for-each select="$nodeWithStringToWrite">
+            <xsl:variable name="hasChildNode" select="count(*) = 1"/>
             <xsl:element name="{$elementName}">
                 <!-- Deal with attributes (may be in the old gco namespace -->
-                <xsl:apply-templates select="$nodeWithStringToWrite/@*[name() != 'xsi:type']"
+                <xsl:apply-templates select="./@*[name() != 'xsi:type']"
                                      mode="from19139to19115-3"/>
                 <xsl:if test="$isMultilingual">
                     <xsl:attribute name="xsi:type" select="'lan:PT_FreeText_PropertyType'"/>
@@ -43,7 +44,7 @@
                             This could be any substitution for gco:CharacterString.
                             Get correct namespace and preserve name for substitutions
                         -->
-                    <xsl:for-each select="$nodeWithStringToWrite/*">
+                    <xsl:for-each select="*">
                         <xsl:variable name="nameSpacePrefix">
                             <xsl:call-template name="getNamespacePrefix"/>
                         </xsl:variable>
@@ -53,10 +54,10 @@
                     </xsl:for-each>
                 </xsl:if>
                 <xsl:if test="$isMultilingual">
-                    <xsl:apply-templates select="$nodeWithStringToWrite/gmd:PT_FreeText"/>
+                    <xsl:apply-templates select="gmd:PT_FreeText"/>
                 </xsl:if>
             </xsl:element>
-        </xsl:if>
+        </xsl:for-each>
     </xsl:template>
     <xsl:template name="writeCodelistElement">
         <xsl:param name="elementName"/>
