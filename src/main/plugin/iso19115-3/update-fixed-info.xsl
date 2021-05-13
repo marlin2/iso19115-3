@@ -200,8 +200,21 @@
       <xsl:for-each select="mdb:dateInfo">
         <xsl:variable name="currentDateType" select="*/cit:dateType/*/@codeListValue"/>
 
-        <!-- Update revision date-->
         <xsl:choose>
+          <!-- Update creation date if changed -->
+          <xsl:when test="$currentDateType = 'creation' and /root/env/created">
+            <mdb:dateInfo>
+              <cit:CI_Date>
+                <cit:date>
+                  <gco:DateTime><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]')"/></gco:DateTime>
+                </cit:date>
+                <cit:dateType>
+                  <cit:CI_DateTypeCode codeList="{concat($codelistloc,'#CI_DateTypeCode')}" codeListValue="creation"/>
+                </cit:dateType>
+              </cit:CI_Date>
+            </mdb:dateInfo>
+          </xsl:when>
+          <!-- Update revision date -->
           <xsl:when test="$currentDateType = 'revision' and /root/env/changeDate">
             <mdb:dateInfo>
               <cit:CI_Date>
